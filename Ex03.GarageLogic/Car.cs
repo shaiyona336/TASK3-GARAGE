@@ -3,7 +3,7 @@
 
 namespace Ex03.GarageLogic
 {
-    sealed class Car
+    sealed class Car : Vehicle
     {
         enum colorsOfCars
         {
