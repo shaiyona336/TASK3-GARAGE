@@ -3,7 +3,16 @@
 
 namespace Ex03.GarageLogic
 {
-    internal class Car
+    sealed class Car
     {
+        enum colorsOfCars
+        {
+            YELLOW,
+            WHITE,
+            RED,
+            BLACK,
+        }
+        private colorsOfCars color;
+        private int numberOfDoors;
     }
 }

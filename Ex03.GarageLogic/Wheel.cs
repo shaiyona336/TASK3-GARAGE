@@ -3,7 +3,10 @@
 
 namespace Ex03.GarageLogic
 {
-    internal class Wheel
+    sealed class Wheel
     {
+        private string nameCreator;
+        private float airPressureInWheel;
+        private float maximumAirPressureInWheel;
     }
 }

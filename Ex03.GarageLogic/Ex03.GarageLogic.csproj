@@ -37,8 +37,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Car.cs" />
+    <Compile Include="ElectricEngine.cs" />
+    <Compile Include="Engine.cs" />
+    <Compile Include="FuelEngin.cs" />
     <Compile Include="Garage.cs" />
-    <Compile Include="Motorcycle.cs" />
+    <Compile Include="GarageVehicleWithInformation.cs" />
+    <Compile Include="MotorCycle.cs" />
     <Compile Include="Truck.cs" />
     <Compile Include="Vehicle.cs" />
     <Compile Include="Wheel.cs" />

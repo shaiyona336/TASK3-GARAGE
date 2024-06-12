@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 
+
 namespace Ex03.GarageLogic
 {
-    sealed class Garage
+    abstract class Engine
     {
-        List<GarageVehicleWithInformation> m_vehiclesInGarage;
+        abstract protected float getEnergy();
+
     }
 }

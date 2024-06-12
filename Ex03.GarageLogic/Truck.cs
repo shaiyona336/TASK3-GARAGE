@@ -3,7 +3,10 @@
 
 namespace Ex03.GarageLogic
 {
-    internal class Truck
+    sealed class Truck
     {
+
+        private bool isTransferDangerousMaterials;
+        private float cargoVolume;
     }
 }

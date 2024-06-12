@@ -3,7 +3,18 @@
 
 namespace Ex03.GarageLogic
 {
-    internal class Motorcycle
+    sealed class MotorCycle
     {
+        enum typeOfLicense
+        {
+            A,
+            A1,
+            AA,
+            B1,
+        }
+
+        private typeOfLicense typeLicense;
+        private int engineVolume;
+
     }
 }
