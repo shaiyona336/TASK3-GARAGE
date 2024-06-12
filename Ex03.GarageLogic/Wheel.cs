@@ -8,5 +8,11 @@ namespace Ex03.GarageLogic
         private string nameCreator;
         private float airPressureInWheel;
         private float maximumAirPressureInWheel;
+
+
+        public void addAirPressureToWheels(int howMuchPressureToAdd)
+        {
+            airPressureInWheel = WorkOnCar.addResourceToResource(airPressureInWheel, howMuchPressureToAdd);
+        }
     }
 }
