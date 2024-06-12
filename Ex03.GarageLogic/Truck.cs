@@ -3,7 +3,7 @@
 
 namespace Ex03.GarageLogic
 {
-    sealed class Truck
+    sealed class Truck : Vehicle
     {
 
         private bool isTransferDangerousMaterials;

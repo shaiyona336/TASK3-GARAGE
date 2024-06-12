@@ -3,7 +3,7 @@
 
 namespace Ex03.GarageLogic
 {
-    sealed class MotorCycle
+    sealed class MotorCycle : Vehicle
     {
         enum typeOfLicense
         {
