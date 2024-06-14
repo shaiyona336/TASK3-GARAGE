@@ -10,6 +10,10 @@ namespace Ex03.GarageLogic
         private string licensePlate;
         private List<Wheel> wheels;
 
+
+        abstract public void setCarInitialState(string stringAttribute);
+
+
         public void setModelName(string setModelName)
         {
             modelName = setModelName;
@@ -24,6 +28,8 @@ namespace Ex03.GarageLogic
         {
             return licensePlate;
         }
+
+        abstract public string getAttributes();
 
 
         public void setWheelsPressure (int setAirPressure)

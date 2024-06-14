@@ -15,7 +15,7 @@ namespace Ex03.GarageLogic
         private colorsOfCars m_color;
         private int m_numberOfDoors;
         private Engine m_engine;
-        int m_indexSetupAttribute = 0; //with attribute by the order of get attributes do i now set
+        int m_indexSetupAttribute = 0; //with attribute by the order of get attributes does the function need now to set
 
 
         public override float getEnergy()
@@ -61,13 +61,14 @@ namespace Ex03.GarageLogic
         }
 
 
-        public string getAttributes()
+        public override string getAttributes()
         {
+            m_indexSetupAttribute = 0;
             return ("model name::string\\license plate::string\\air pressure wheels::int\\color(yellow,white,red,black)::string\\number of doors::int\\fuel or electric car: (0 for fuel)::bool");
         }
 
 
-        public void setCarInitialState(string stringAttribute)
+        public override void setCarInitialState(string stringAttribute)
         {
             switch (m_indexSetupAttribute)
             {
@@ -83,9 +84,8 @@ namespace Ex03.GarageLogic
                 default:
                     //TODO : EXCEPTION SENT TOO MANY ATTRIBUTES
                     break;
-
-
             }
+            m_indexSetupAttribute++;
         }
         public void setCarInitialState(int i_intAttribute)
         {
@@ -102,18 +102,20 @@ namespace Ex03.GarageLogic
             {
                 //TODO : EXCEPTION SENT TOO MANY ATTRIBUTES
             }
+            m_indexSetupAttribute++;
         }
 
-        public void setCarInitialState(bool boolAttribute)
+        public void setCarInitialState(bool i_boolAttribute)
         {
             if (m_indexSetupAttribute == 5)
             {
-
+                setEngineByBool(i_boolAttribute);
             }
             else
             {
                 //TODO : EXCEPTION SENT TOO MANY ATTRIBUTES
             }
+            m_indexSetupAttribute++;
         }
 
     }
