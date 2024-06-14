@@ -12,8 +12,19 @@ namespace Ex03.GarageLogic
             FIXED,
             PAYED
         }
+        private Vehicle vehicle;
         private string nameOfOwner;
         private string phoneOfOwner;
         private carStatus statusCar;
+
+        public Vehicle getVehicle()
+        {
+            return vehicle;
+        }
+
+        public void setCarStatusInProgress()
+        {
+            statusCar = carStatus.INPROGRESS;
+        }
     }
 }

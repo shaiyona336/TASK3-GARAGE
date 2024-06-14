@@ -12,15 +12,15 @@ namespace Ex03.GarageLogic
             RED,
             BLACK,
         }
-        private colorsOfCars color;
-        private int numberOfDoors;
-        private Engine engine;
-        int indexSetupAttribute = 0; //with attribute by the order of get attributes do i now set
+        private colorsOfCars m_color;
+        private int m_numberOfDoors;
+        private Engine m_engine;
+        int m_indexSetupAttribute = 0; //with attribute by the order of get attributes do i now set
 
 
         public override float getEnergy()
         {
-            return engine.getEnergy();
+            return m_engine.getEnergy();
         }
 
 
@@ -28,14 +28,13 @@ namespace Ex03.GarageLogic
         {
             if (isFuel == true)
             {
-                engine = new FuelEngine();
+                m_engine = new FuelEngine();
             }
             else
             {
-                engine = new ElectricEngine();
+                m_engine = new ElectricEngine();
             }
         }
-
 
         private colorsOfCars stringColorToEnum(string i_color)
         {
@@ -70,7 +69,7 @@ namespace Ex03.GarageLogic
 
         public void setCarInitialState(string stringAttribute)
         {
-            switch (indexSetupAttribute)
+            switch (m_indexSetupAttribute)
             {
                 case (0):
                     this.setModelName(stringAttribute);
@@ -79,10 +78,10 @@ namespace Ex03.GarageLogic
                     this.setLicensePlate(stringAttribute);
                     break;
                 case (3):
-                    color = stringColorToEnum(stringAttribute);
+                    m_color = stringColorToEnum(stringAttribute);
                     break;
                 case (5):
-                    color = stringColorToEnum(stringAttribute);
+                    m_color = stringColorToEnum(stringAttribute);
                     break;
                 default:
                     //TODO : EXCEPTION SENT TOO MANY ATTRIBUTES
@@ -93,14 +92,14 @@ namespace Ex03.GarageLogic
         }
         public void setCarInitialState(int i_intAttribute)
         {
-            if (indexSetupAttribute == 2)
+            if (m_indexSetupAttribute == 2)
             {
                 this.setWheelsPressure(i_intAttribute);
 
             }
-            else if (indexSetupAttribute == 4)
+            else if (m_indexSetupAttribute == 4)
             {
-                numberOfDoors = i_intAttribute;
+                m_numberOfDoors = i_intAttribute;
             }
             else
             {
@@ -110,7 +109,7 @@ namespace Ex03.GarageLogic
 
         public void setCarInitialState(bool boolAttribute)
         {
-            if (indexSetupAttribute == 4)
+            if (m_indexSetupAttribute == 4)
             {
 
             }
