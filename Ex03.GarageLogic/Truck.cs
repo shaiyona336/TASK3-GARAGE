@@ -14,9 +14,25 @@ namespace Ex03.GarageLogic
             return engine.getEnergy();
         }
 
-        public string getAttributes()
+        public override string getAttributes()
         {
             return ("model name::string\\license plate::string\\air pressure wheels::int\\is the truck transfer dangerous materials(write yes if it does)::string\\cargo volume::float\\fuel or electric car: (0 for fuel)");
+        }
+
+
+        public override void setCarInitialState(string i_intAttribute)
+        {
+
+        }
+
+        public override void setCarInitialState(int i_stringAttribute)
+        {
+
+        }
+
+        public override void setCarInitialState(bool i_boolAttribute)
+        {
+
         }
 
     }

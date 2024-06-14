@@ -27,9 +27,14 @@ namespace Ex03.GarageLogic
                 i_newCar = new Car();
                 i_newCarWithInformation = new GarageVehicleWithInformation();
                 i_newCarWithInformation.setVehicle(i_newCar);
-                i_argumentsToFillToInitializeVehicle = i_newCar.getAttributes();
+                if (m_vehiclesInGarage == null)
+                {
+                    m_vehiclesInGarage = new List<GarageVehicleWithInformation>();
+                }
                 m_vehiclesInGarage.Insert(0, i_newCarWithInformation);
+                i_argumentsToFillToInitializeVehicle = i_newCar.getAttributes();
             }
+
             return i_argumentsToFillToInitializeVehicle;
         }
 
@@ -68,11 +73,14 @@ namespace Ex03.GarageLogic
         private GarageVehicleWithInformation isCarLicenseInGarage(string carLicense) //return vehicle with information or null if not found
         {
             GarageVehicleWithInformation vehicleSameLicense = null;
-            foreach (var i_vehicle in m_vehiclesInGarage)
+            if (m_vehiclesInGarage != null)
             {
-                if (i_vehicle.getVehicle().getLicensePlate() == carLicense)
+                foreach (var i_vehicle in m_vehiclesInGarage)
                 {
-                    vehicleSameLicense = i_vehicle;
+                    if (i_vehicle.getVehicle().getLicensePlate() == carLicense)
+                    {
+                        vehicleSameLicense = i_vehicle;
+                    }
                 }
             }
             return vehicleSameLicense;
@@ -80,7 +88,7 @@ namespace Ex03.GarageLogic
     }
 }
 
-    }
+    
 
 
        
