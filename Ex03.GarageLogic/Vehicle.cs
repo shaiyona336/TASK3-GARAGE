@@ -20,6 +20,11 @@ namespace Ex03.GarageLogic
             licensePlate = setLicensePlate;
         }
 
+        public string getLicensePlate()
+        {
+            return licensePlate;
+        }
+
 
         public void setWheelsPressure (int setAirPressure)
         {

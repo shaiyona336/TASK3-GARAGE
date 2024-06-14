@@ -13,14 +13,14 @@ namespace Ex03.GarageLogic
             B1,
         }
 
-        private typeOfLicense typeLicense;
-        private int engineVolume;
-        private Engine engine;
+        private typeOfLicense m_typeLicense;
+        private int m_engineVolume;
+        private Engine m_engine;
 
 
         public override float getEnergy()
         {
-            return engine.getEnergy();
+            return m_engine.getEnergy();
         }
 
         public string getAttributes()
