@@ -28,11 +28,8 @@ namespace Ex03.GarageLogic
                 i_newCarWithInformation = new GarageVehicleWithInformation();
                 i_newCarWithInformation.setVehicle(i_newCar);
                 i_argumentsToFillToInitializeVehicle = i_newCar.getAttributes();
-
                 m_vehiclesInGarage.Insert(0, i_newCarWithInformation);
-
             }
-
             return i_argumentsToFillToInitializeVehicle;
         }
 
@@ -59,14 +56,13 @@ namespace Ex03.GarageLogic
 
         public void setLastEnteredVehicle(int intAttribute)
         {
-            m_indexSetupAttribute++;
-
+            m_vehiclesInGarage[0].getVehicle().setCarInitialState(intAttribute);
+            //no need to incress m_indexSetupAttribute because the attributes that the function initiallize is for each specific car not name/phone of owner or status car
         }
 
         public void setLastEnteredVehicle(bool boolAttribute)
         {
-            m_indexSetupAttribute++;
-
+            m_vehiclesInGarage[0].getVehicle().setCarInitialState(boolAttribute);
         }
 
         private GarageVehicleWithInformation isCarLicenseInGarage(string carLicense) //return vehicle with information or null if not found
