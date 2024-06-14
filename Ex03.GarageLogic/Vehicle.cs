@@ -8,8 +8,9 @@ namespace Ex03.GarageLogic
     {
         private string modelName;
         private string licensePlate;
-        private float energyLeft;
         private List<Wheel> wheels;
-        private Engine engine;
+        
+
+        abstract public float getEnergy();
     }
 }

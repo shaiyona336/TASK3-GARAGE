@@ -6,7 +6,7 @@ namespace Ex03.GarageLogic
 {
     abstract class Engine
     {
-        abstract protected float getEnergy();
+        abstract public float getEnergy();
 
     }
 }
