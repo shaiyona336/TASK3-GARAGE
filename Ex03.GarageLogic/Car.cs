@@ -80,9 +80,6 @@ namespace Ex03.GarageLogic
                 case (3):
                     m_color = stringColorToEnum(stringAttribute);
                     break;
-                case (5):
-                    m_color = stringColorToEnum(stringAttribute);
-                    break;
                 default:
                     //TODO : EXCEPTION SENT TOO MANY ATTRIBUTES
                     break;
@@ -109,7 +106,7 @@ namespace Ex03.GarageLogic
 
         public void setCarInitialState(bool boolAttribute)
         {
-            if (m_indexSetupAttribute == 4)
+            if (m_indexSetupAttribute == 5)
             {
 
             }

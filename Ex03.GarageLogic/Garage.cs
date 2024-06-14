@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Ex03.GarageLogic
 {
-    sealed class Garage
+    public sealed class Garage
     {
         List<GarageVehicleWithInformation> m_vehiclesInGarage;
 

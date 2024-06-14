@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Ex03.GarageLogic
 {
-    abstract class Vehicle
+    public abstract class Vehicle
     {
         private string modelName;
         private string licensePlate;

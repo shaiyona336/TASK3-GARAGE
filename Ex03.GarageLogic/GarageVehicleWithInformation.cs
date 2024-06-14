@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Ex03.GarageLogic
 {
-    internal class GarageVehicleWithInformation
+    public class GarageVehicleWithInformation
     {
         enum carStatus
         {
