@@ -12,6 +12,10 @@ namespace Ex03.GarageLogic
 
 
         abstract public void setCarInitialState(string stringAttribute);
+        abstract public void setCarInitialState(int i_intAttribute);
+        abstract public void setCarInitialState(bool i_intAttribute);
+
+
 
 
         public void setModelName(string setModelName)

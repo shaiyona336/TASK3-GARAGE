@@ -64,7 +64,7 @@ namespace Ex03.GarageLogic
         public override string getAttributes()
         {
             m_indexSetupAttribute = 0;
-            return ("model name::string\\license plate::string\\air pressure wheels::int\\color(yellow,white,red,black)::string\\number of doors::int\\fuel or electric car: (0 for fuel)::bool");
+            return ("model name::string||license plate::string||air pressure wheels::int||color(yellow,white,red,black)::string||number of doors::int||fuel or electric car: (0 for fuel)::bool");
         }
 
 
@@ -87,7 +87,7 @@ namespace Ex03.GarageLogic
             }
             m_indexSetupAttribute++;
         }
-        public void setCarInitialState(int i_intAttribute)
+        public override void setCarInitialState(int i_intAttribute)
         {
             if (m_indexSetupAttribute == 2)
             {
@@ -105,7 +105,7 @@ namespace Ex03.GarageLogic
             m_indexSetupAttribute++;
         }
 
-        public void setCarInitialState(bool i_boolAttribute)
+        public override void setCarInitialState(bool i_boolAttribute)
         {
             if (m_indexSetupAttribute == 5)
             {
