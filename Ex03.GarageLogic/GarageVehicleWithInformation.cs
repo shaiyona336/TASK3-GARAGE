@@ -12,19 +12,53 @@ namespace Ex03.GarageLogic
             FIXED,
             PAYED
         }
-        private Vehicle vehicle;
-        private string nameOfOwner;
-        private string phoneOfOwner;
-        private carStatus statusCar;
+        private Vehicle m_vehicle;
+        private string m_nameOfOwner;
+        private string m_phoneOfOwner;
+        private carStatus m_statusCar;
 
         public Vehicle getVehicle()
         {
-            return vehicle;
+            return m_vehicle;
+        }
+
+        public void setStatusCar(string i_statusCar)
+        {
+            switch (i_statusCar)
+            {
+                case ("INPROGRESS"):
+                    m_statusCar = carStatus.INPROGRESS;
+                    break;
+                case ("FIXED"):
+                    m_statusCar = carStatus.FIXED;
+                    break;
+                case ("PAYED"):
+                    m_statusCar = carStatus.PAYED;
+                    break;
+                default:
+                    //TODO : exception no such status
+                    break;
+            }
+        }
+
+        public void setVehicle(Vehicle i_vehicle)
+        {
+            m_vehicle = i_vehicle;
+        }
+
+        public void setNameOfOwner(string i_nameOfOwner)
+        {
+            m_nameOfOwner = i_nameOfOwner;
+        }
+
+        public void setPhoneOfOwner(string i_phoneOfOwner)
+        {
+            m_phoneOfOwner = i_phoneOfOwner;
         }
 
         public void setCarStatusInProgress()
         {
-            statusCar = carStatus.INPROGRESS;
+            m_statusCar = carStatus.INPROGRESS;
         }
     }
 }
