@@ -46,13 +46,13 @@ namespace Ex03.GarageLogic
                     i_colorToReturn = i_colorToReturn = colorsOfCars.YELLOW;
                     break;
                 case ("white"):
-                    i_colorToReturn = i_colorToReturn = colorsOfCars.YELLOW;
+                    i_colorToReturn = i_colorToReturn = colorsOfCars.WHITE;
                     break;
                 case ("red"):
-                    i_colorToReturn = i_colorToReturn = colorsOfCars.YELLOW;
+                    i_colorToReturn = i_colorToReturn = colorsOfCars.RED;
                     break;
                 case ("black"):
-                    i_colorToReturn = i_colorToReturn = colorsOfCars.YELLOW;
+                    i_colorToReturn = i_colorToReturn = colorsOfCars.BLACK;
                     break;
                 default: //TODO: EXCEPTION NO SUCH COLOR
                     break;
@@ -81,9 +81,6 @@ namespace Ex03.GarageLogic
                 case (3):
                     color = stringColorToEnum(stringAttribute);
                     break;
-                //case (4):
-                    //numberOfDoors = intAttribute;
-                    //break;
                 case (5):
                     color = stringColorToEnum(stringAttribute);
                     break;
