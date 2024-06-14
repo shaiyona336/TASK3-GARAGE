@@ -19,7 +19,7 @@ namespace Ex03.GarageLogic
         private float maximumFuel;
 
 
-        protected override float getEnergy()
+        public override float getEnergy()
         {
             return statusFuel;
         }
@@ -44,14 +44,14 @@ namespace Ex03.GarageLogic
                     typeOfFuelCorrectFormat = typeOfFuel.Octan98;
                     break;
                 default:
-                    //need to throw exception unvalid fuel type
+                    //TODO: throw exception invalid fuel
                     break;
             }
             if (typeOfFuelCorrectFormat == typeFuel)
             {
                 statusFuel = WorkOnCar.addResourceToResource(statusFuel, howMuchFuelToAdd);
             }
-            //potentially need to throw exception wrong fuel type been tried to be added
+            //TODO: wrong fuel type tried to be added
         }
     }
 }

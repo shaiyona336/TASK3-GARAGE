@@ -8,8 +8,30 @@ namespace Ex03.GarageLogic
     {
         private string modelName;
         private string licensePlate;
-        private float energyLeft;
         private List<Wheel> wheels;
-        private Engine engine;
+
+        public void setModelName(string setModelName)
+        {
+            modelName = setModelName;
+        }
+
+        public void setLicensePlate(string setLicensePlate)
+        {
+            licensePlate = setLicensePlate;
+        }
+
+
+        public void setWheelsPressure (int setAirPressure)
+        {
+            foreach (Wheel wheel in wheels)
+            {
+                wheel.addAirPressureToWheels(setAirPressure);
+                break;
+            }
+        }
+
+
+
+        abstract public float getEnergy();
     }
 }

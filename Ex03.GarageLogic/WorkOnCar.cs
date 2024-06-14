@@ -13,7 +13,7 @@ namespace Ex03.GarageLogic
             {
                 addTo = addTo + howMuchToAdd;
             }
-            //potentially need to throw exception
+            //TODO: throw exception
             return addTo;
         }
 
@@ -23,7 +23,7 @@ namespace Ex03.GarageLogic
             {
                 addTo = addTo + howMuchToAdd;
             }
-            //potentially need to throw exception
+            //TODO: throw exception
             return addTo;
         }
     }
