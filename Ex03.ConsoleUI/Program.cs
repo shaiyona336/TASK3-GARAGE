@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.ExceptionServices;
 using Ex03.GarageLogic;
 
 namespace Ex03.ConsoleUI
@@ -26,6 +27,7 @@ namespace Ex03.ConsoleUI
             int i_intInputAttribute;
             float i_floatInputAttribute;
             bool i_booleanInputAttribute = false;
+
             string i_withCarToEnter;
             string i_whatTypeOfLicensesToShow;
             List<String> allLicenses;
@@ -46,11 +48,12 @@ namespace Ex03.ConsoleUI
 
 
 
+
             while (i_userInput != "Q")
             {
                 Console.WriteLine("enter: insert(insert new vehicle), show all licenses, change vehicle status, add air pressure, add fuel to car, "); //TODO : fix message
                 i_userInput = Console.ReadLine();
-                switch(i_userInput)
+                switch (i_userInput)
                 {
                     case ("insert"):
                         Console.WriteLine("enter license for car: ");
@@ -87,23 +90,26 @@ namespace Ex03.ConsoleUI
                                 switch (i_withTypeOfAttribute)
                                 {
                                     case ("int"):
-                                        if (!int.TryParse(i_stringInputAttribute, out i_intInputAttribute))
+                                        if (!int.TryParse(i_stringInputAttribute, out int i_intInputAttribute))
                                         {
-                                            //TODO : exception cannot convert to int
+                                            throw new FormatException("Cannot convert to int");
+                                            //TODO : exception cannot convert to int (done?)
                                         }
                                         i_garage.setLastEnteredVehicle(i_intInputAttribute);
                                         break;
                                     case ("float"):
-                                        if (!float.TryParse(i_stringInputAttribute, out i_floatInputAttribute))
+                                        if (!float.TryParse(i_stringInputAttribute, out float i_floatInputAttribute))
                                         {
-                                            //TODO : exception cannot convert to int
+                                            throw new FormatException("Cannot convert to float");
+                                            //TODO : exception cannot convert to int (done?)
                                         }
                                         i_garage.setLastEnteredVehicle(i_floatInputAttribute);
                                         break;
                                     case ("bool"):
-                                        if (!bool.TryParse(i_stringInputAttribute, out i_booleanInputAttribute))
+                                        if (!bool.TryParse(i_stringInputAttribute, out bool i_booleanInputAttribute))
                                         {
-                                            //TODO : exception cannot convert to boolean
+                                            throw new FormatException("Cannot convert to bool");
+                                            //TODO : exception cannot convert to boolean (done?)
                                         }
                                         i_garage.setLastEnteredVehicle(i_booleanInputAttribute);
                                         break;
@@ -125,10 +131,20 @@ namespace Ex03.ConsoleUI
                     case ("show all licenses"):
                         Console.WriteLine("what type of licenses(INPROGRESS,FIXED,PAYED,ANY): ");
                         i_whatTypeOfLicensesToShow = Console.ReadLine();
-                        allLicenses = i_garage.showAllLicenses(i_whatTypeOfLicensesToShow); //TODO : need to handle exception
-                        foreach (string i_licenses in allLicenses)
+                        switch (i_whatTypeOfLicensesToShow)
                         {
-                            Console.WriteLine(i_licenses);
+                            case "A":
+                            case "A1":
+                            case "AA":
+                            case "B1":
+                                allLicenses = i_garage.showAllLicenses(i_whatTypeOfLicensesToShow); //TODO : need to handle exception (done?)
+                                foreach (string i_licenses in allLicenses)
+                                {
+                                    Console.WriteLine(i_licenses);
+                                }
+                                break;
+                            default:
+                                throw new ArgumentException($"No valid license type matches \"{i_whatTypeOfLicensesToShow}\"");
                         }
                         break;
                     case ("change vehicle status"): // i_newDesireStatusCar
@@ -156,8 +172,14 @@ namespace Ex03.ConsoleUI
                     
 
                 }
-                
+
             }
+
+            try {; }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            } //Maybe do it like this?
 
         }
     }
