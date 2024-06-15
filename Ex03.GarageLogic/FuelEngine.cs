@@ -49,7 +49,7 @@ namespace Ex03.GarageLogic
             }
             if (typeOfFuelCorrectFormat == typeFuel)
             {
-                statusFuel = WorkOnCar.addResourceToResource(statusFuel, howMuchFuelToAdd);
+                statusFuel = WorkOnCar.addResourceToResource(statusFuel, howMuchFuelToAdd, maximumFuel);
             }
             //TODO: wrong fuel type tried to be added
         }

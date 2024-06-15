@@ -5,14 +5,20 @@ namespace Ex03.GarageLogic
 {
     public sealed class Wheel
     {
-        private string nameCreator;
-        private float airPressureInWheel;
-        private float maximumAirPressureInWheel;
+        private string m_nameCreator;
+        private float m_airPressureInWheel;
+        private float m_maximumAirPressureInWheel;
 
 
-        public void addAirPressureToWheels(int howMuchPressureToAdd)
+        public void setMaximumAirPressureInWheel(float i_maximumAirPressureInWheel)
         {
-            airPressureInWheel = WorkOnCar.addResourceToResource(airPressureInWheel, howMuchPressureToAdd);
+            m_maximumAirPressureInWheel = i_maximumAirPressureInWheel;
+        }
+
+
+        public void addAirPressureToWheels(int i_howMuchPressureToAdd)
+        {
+            m_airPressureInWheel = WorkOnCar.addResourceToResource(m_airPressureInWheel, i_howMuchPressureToAdd, m_maximumAirPressureInWheel);
         }
 
     }

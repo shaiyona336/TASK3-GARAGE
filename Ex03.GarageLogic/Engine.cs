@@ -8,5 +8,8 @@ namespace Ex03.GarageLogic
     {
         abstract public float getEnergy();
 
+
+
+
     }
 }

@@ -38,18 +38,6 @@ namespace Ex03.GarageLogic
         }
 
 
-        private void setEngineByBool(bool isFuel)
-        {
-            if (isFuel == true)
-            {
-                m_engine = new FuelEngine();
-            }
-            else
-            {
-                m_engine = new ElectricEngine();
-            }
-        }
-
         private colorsOfCars stringColorToEnum(string i_color)
         {
             colorsOfCars i_colorToReturn = colorsOfCars.BLACK;
@@ -78,7 +66,7 @@ namespace Ex03.GarageLogic
         public override string getAttributes()
         {
             m_indexSetupAttribute = 0;
-            return ("model name::string||license plate::string||air pressure wheels::int||color(yellow,white,red,black)::string||number of doors::int||fuel or electric car: (0 for fuel)::bool");
+            return ("model name::string||air pressure wheels::int||color(yellow,white,red,black)::string||number of doors::int||fuel or electric car::bool");
         }
 
 
@@ -89,45 +77,48 @@ namespace Ex03.GarageLogic
                 case (0):
                     this.setModelName(stringAttribute);
                     break;
-                case (1):
-                    this.setLicensePlate(stringAttribute);
-                    break;
-                case (3):
+                case (2):
                     m_color = stringColorToEnum(stringAttribute);
                     break;
                 default:
-                    //TODO : EXCEPTION SENT TOO MANY ATTRIBUTES
+                    //TODO : SENT WRONG ATTRIBUTE
                     break;
             }
             m_indexSetupAttribute++;
         }
         public override void setCarInitialState(int i_intAttribute)
         {
-            if (m_indexSetupAttribute == 2)
+            if (m_indexSetupAttribute == 1)
             {
-                this.setWheelsPressure(i_intAttribute);
-
+                setInitialWheelsPressure(i_intAttribute);
             }
-            else if (m_indexSetupAttribute == 4)
+            else if (m_indexSetupAttribute == 3)
             {
                 m_numberOfDoors = i_intAttribute;
             }
             else
             {
-                //TODO : EXCEPTION SENT TOO MANY ATTRIBUTES
+                //TODO : SENT WRONG ATTRIBUTE
             }
             m_indexSetupAttribute++;
         }
 
+
+        public override void setCarInitialState(float i_intAttribute)
+        {
+            //TODO : class dont use this kind of attribute
+        }
+
+
         public override void setCarInitialState(bool i_boolAttribute)
         {
-            if (m_indexSetupAttribute == 5)
+            if (m_indexSetupAttribute == 4)
             {
-                setEngineByBool(i_boolAttribute);
+                m_engine = WorkOnCar.setEngineByBool(i_boolAttribute);
             }
             else
             {
-                //TODO : EXCEPTION SENT TOO MANY ATTRIBUTES
+                //TODO : SENT WRONG ATTRIBUTE
             }
             m_indexSetupAttribute++;
         }
