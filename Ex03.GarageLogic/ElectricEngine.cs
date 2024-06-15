@@ -6,19 +6,25 @@ namespace Ex03.GarageLogic
 {
     sealed class ElectricEngine : Engine
     {
-        private float statusBattery; //hours for battery
-        private float maximumForBattery; //how many hours can electric car drive by with maximum battery
+        private float m_statusBattery; //hours for battery
+        private float m_maximumForBattery; //how many hours can electric car drive by with maximum battery
 
 
         public override float getEnergy()
         {
-            return statusBattery;
+            return m_statusBattery;
         }
 
 
         public void chargeBattery(int howManyHoursToAddToBattery)
         {
-            statusBattery = WorkOnCar.addResourceToResource(statusBattery, howManyHoursToAddToBattery, maximumForBattery);
+            m_statusBattery = WorkOnCar.addResourceToResource(m_statusBattery, howManyHoursToAddToBattery, m_maximumForBattery);
+        }
+
+
+        public override void setMaximumEnergy(float i_maximumEnergy)
+        {
+            m_maximumForBattery = i_maximumEnergy;
         }
 
     }

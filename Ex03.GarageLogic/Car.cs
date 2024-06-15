@@ -66,7 +66,7 @@ namespace Ex03.GarageLogic
         public override string getAttributes()
         {
             m_indexSetupAttribute = 0;
-            return ("model name::string||air pressure wheels::int||color(yellow,white,red,black)::string||number of doors::int||fuel or electric car::bool");
+            return ("model name::string||air pressure wheels::int||color(yellow,white,red,black)::string||number of doors::int||fuel or electric car::bool||maximum energy::float");
         }
 
 
@@ -104,9 +104,17 @@ namespace Ex03.GarageLogic
         }
 
 
-        public override void setCarInitialState(float i_intAttribute)
+        public override void setCarInitialState(float i_floatAttribute)
         {
-            //TODO : class dont use this kind of attribute
+            if (m_indexSetupAttribute == 5)
+            {
+                m_engine.setMaximumEnergy(i_floatAttribute);
+            }
+            else
+            {
+                //TODO : SENT WRONG ATTRIBUTE
+            }
+           m_indexSetupAttribute++;
         }
 
 

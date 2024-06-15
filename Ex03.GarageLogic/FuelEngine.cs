@@ -14,14 +14,14 @@ namespace Ex03.GarageLogic
             Octan98,
 
         }
-        private typeOfFuel typeFuel = typeOfFuel.Soler;
-        private float statusFuel;
-        private float maximumFuel;
+        private typeOfFuel m_typeFuel = typeOfFuel.Soler;
+        private float m_statusFuel;
+        private float m_maximumFuel;
 
 
         public override float getEnergy()
         {
-            return statusFuel;
+            return m_statusFuel;
         }
 
 
@@ -47,12 +47,18 @@ namespace Ex03.GarageLogic
                     //TODO: throw exception invalid fuel
                     break;
             }
-            if (typeOfFuelCorrectFormat == typeFuel)
+            if (typeOfFuelCorrectFormat == m_typeFuel)
             {
-                statusFuel = WorkOnCar.addResourceToResource(statusFuel, howMuchFuelToAdd, maximumFuel);
+                m_statusFuel = WorkOnCar.addResourceToResource(m_statusFuel, howMuchFuelToAdd, m_maximumFuel);
             }
             //TODO: wrong fuel type tried to be added
         }
+
+        public override void setMaximumEnergy(float i_maximumEnergy)
+        {
+            m_maximumFuel = i_maximumEnergy;
+        }
+
     }
 }
 

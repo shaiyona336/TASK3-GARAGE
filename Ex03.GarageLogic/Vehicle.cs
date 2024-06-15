@@ -44,7 +44,6 @@ namespace Ex03.GarageLogic
             foreach (Wheel wheel in wheels)
             {
                 wheel.setMaximumAirPressureInWheel(i_setMaximumAirPressure);
-                break;
             }
         }
 
@@ -55,7 +54,6 @@ namespace Ex03.GarageLogic
             foreach (Wheel wheel in wheels)
             {
                 wheel.addAirPressureToWheels(setAirPressure);
-                break;
             }
         }
 
