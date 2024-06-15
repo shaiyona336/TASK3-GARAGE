@@ -7,7 +7,7 @@ namespace Ex03.GarageLogic
     abstract class Engine
     {
         abstract public float getEnergy();
-
+        abstract public void setMaximumEnergy(float i_maximumEnergy);
 
 
 

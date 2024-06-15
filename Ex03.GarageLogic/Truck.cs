@@ -31,7 +31,7 @@ namespace Ex03.GarageLogic
 
         public override string getAttributes()
         {
-            return ("model name::string||air pressure wheels::int||is the truck transfer dangerous materials::bool||cargo volume::float||fuel or electric car: (0 for fuel)::bool");
+            return ("model name::string||air pressure wheels::int||is the truck transfer dangerous materials::bool||cargo volume::float||fuel or electric car::bool||maximum energy::float");
         }
 
 
@@ -80,6 +80,10 @@ namespace Ex03.GarageLogic
             if (m_indexSetupAttribute == 3)
             {
                 setCargoVolume(i_floatAttribute);
+            }
+            else if (m_indexSetupAttribute == 5)
+            {
+                m_engine.setMaximumEnergy(i_floatAttribute);
             }
             else
             {

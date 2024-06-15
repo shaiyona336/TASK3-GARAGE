@@ -23,6 +23,7 @@ namespace Ex03.ConsoleUI
             //input attribute
             string i_stringInputAttribute;
             int i_intInputAttribute;
+            float i_floatInputAttribute;
             bool i_booleanInputAttribute;
             string i_withCarToEnter;
 
@@ -72,6 +73,13 @@ namespace Ex03.ConsoleUI
                                             //TODO : exception cannot convert to int
                                         }
                                         i_garage.setLastEnteredVehicle(i_intInputAttribute);
+                                        break;
+                                    case ("float"):
+                                        if (!float.TryParse(i_stringInputAttribute, out i_floatInputAttribute))
+                                        {
+                                            //TODO : exception cannot convert to int
+                                        }
+                                        i_garage.setLastEnteredVehicle(i_floatInputAttribute);
                                         break;
                                     case ("bool"):
                                         if (!bool.TryParse(i_stringInputAttribute, out i_booleanInputAttribute))
