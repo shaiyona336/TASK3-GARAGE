@@ -33,13 +33,13 @@ namespace Ex03.ConsoleUI
             string i_licenseCarToChangeStatus;
             string i_newDesireStatusCar;
             string i_licenseCarToAddPressure;
-            
+
 
             while (i_userInput != "Q")
             {
                 Console.WriteLine("enter: insert(insert new vehicle), show all licenses, change vehicle status, add air pressure, "); //TODO : fix message
                 i_userInput = Console.ReadLine();
-                switch(i_userInput)
+                switch (i_userInput)
                 {
                     case ("insert"):
                         Console.WriteLine("enter license for car: ");
@@ -110,10 +110,20 @@ namespace Ex03.ConsoleUI
                     case ("show all licenses"):
                         Console.WriteLine("what type of licenses(INPROGRESS,FIXED,PAYED,ANY): ");
                         i_whatTypeOfLicensesToShow = Console.ReadLine();
-                        allLicenses = i_garage.showAllLicenses(i_whatTypeOfLicensesToShow); //TODO : need to handle exception
-                        foreach (string i_licenses in allLicenses)
+                        switch (i_whatTypeOfLicensesToShow)
                         {
-                            Console.WriteLine(i_licenses);
+                            case "A":
+                            case "A1":
+                            case "AA":
+                            case "B1":
+                                allLicenses = i_garage.showAllLicenses(i_whatTypeOfLicensesToShow); //TODO : need to handle exception (done?)
+                                foreach (string i_licenses in allLicenses)
+                                {
+                                    Console.WriteLine(i_licenses);
+                                }
+                                break;
+                            default:
+                                throw new ArgumentException($"No valid license type matches \"{i_whatTypeOfLicensesToShow}\"");
                         }
                         break;
                     case ("change vehicle status"): // i_newDesireStatusCar
@@ -130,8 +140,14 @@ namespace Ex03.ConsoleUI
                         break;
 
                 }
-                
+
             }
+
+            try {; }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            } //Maybe do it like this?
 
         }
     }

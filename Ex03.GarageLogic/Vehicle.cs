@@ -18,21 +18,33 @@ namespace Ex03.GarageLogic
         abstract public void setCarInitialState(bool i_intAttribute);
 
 
-      
+
         public void setAirPressureInWheelToMaximum()
         {
-            if (wheels.Count != 0)
-                {
-                    foreach (Wheel wheel in wheels)
-                {
-                    wheel.setAirPressureInWheelToMaximum();
-                }
-                   }
-                else
-                    {
-                        //TODO : exception no wheels in vehicle
-                    }
-          }
+            foreach (Wheel wheel in wheels)
+            {
+                wheel.setAirPressureInWheelToMaximum();
+            }
+
+            //Note: The method will work fine like this.
+            //If there are no wheels inside the "wheels" list, it just won't do anything.
+
+
+            ////Old code:
+            //if (wheels.Count != 0)
+            //{
+            //    foreach (Wheel wheel in wheels)
+            //    {
+            //        wheel.setAirPressureInWheelToMaximum();
+            //    }
+            //}
+            //else
+            //{
+            //    //TODO : exception no wheels in vehicle (no need for exception here)
+            //}
+
+
+        }
 
 
         public void initializeWheels(int numberOfWheels)
@@ -77,7 +89,7 @@ namespace Ex03.GarageLogic
 
 
 
-        public void addWheelsPressure (int setAirPressure)
+        public void addWheelsPressure(int setAirPressure)
         {
             foreach (Wheel wheel in wheels)
             {
