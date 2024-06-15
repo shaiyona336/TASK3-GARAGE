@@ -22,6 +22,42 @@ namespace Ex03.GarageLogic
             return m_vehicle;
         }
 
+        public bool isCarCorrectStatusToShow(string i_carStatus)
+        {
+            bool i_flag = false;
+            
+            switch(i_carStatus)
+            {
+                case ("INPROGRESS"):
+                    if (m_statusCar == carStatus.INPROGRESS)
+                    {
+                        i_flag = true;
+                    }
+                    break;
+                case ("FIXED"):
+                    if (m_statusCar == carStatus.FIXED)
+                    {
+                        i_flag = true;
+                    }
+                    break;
+                case ("PAYED"):
+                    if (m_statusCar == carStatus.PAYED)
+                    {
+                        i_flag = true;
+                    }
+                    break;
+                case ("ANY"):
+                    i_flag = true;
+                    break;
+                default:
+                    //TODO : exception no such car status
+                    break;
+            }
+
+            return i_flag;
+                 
+        }
+
         public void setStatusCar(string i_statusCar)
         {
             switch (i_statusCar)

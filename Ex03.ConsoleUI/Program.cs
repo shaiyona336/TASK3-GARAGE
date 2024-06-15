@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Ex03.GarageLogic;
 
 namespace Ex03.ConsoleUI
@@ -26,10 +27,12 @@ namespace Ex03.ConsoleUI
             float i_floatInputAttribute;
             bool i_booleanInputAttribute;
             string i_withCarToEnter;
+            string i_whatTypeOfLicensesToShow;
+            List<String> allLicenses;
 
             while (i_userInput != "Q")
             {
-                Console.WriteLine("enter: insert(insert new car), "); //TODO : fix message
+                Console.WriteLine("enter: insert(insert new car), show all licenses, "); //TODO : fix message
                 i_userInput = Console.ReadLine();
                 switch(i_userInput)
                 {
@@ -94,6 +97,15 @@ namespace Ex03.ConsoleUI
                                 }
 
                             }
+                        }
+                        break;
+                    case ("show all licenses"):
+                        Console.WriteLine("what type of licenses(INPROGRESS,FIXED,PAYED,ANY): ");
+                        i_whatTypeOfLicensesToShow = Console.ReadLine();
+                        allLicenses = i_garage.showAllLicenses(i_whatTypeOfLicensesToShow);
+                        foreach (string i_licenses in allLicenses)
+                        {
+                            Console.WriteLine(i_licenses);
                         }
                         break;
                 }
