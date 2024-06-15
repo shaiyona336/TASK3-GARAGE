@@ -17,14 +17,33 @@ namespace Ex03.GarageLogic
         //    return allLicensesToShow;
         //}
 
-        public List<String> showAllLicenses(string typeOfCarStatusToShow)
+        public void changeStatusToCar(string i_licenseCarToChangeStatusTo, string i_newStatusOfCar)
+        {
+            GarageVehicleWithInformation i_carWithInformationWithSameLicense = isCarLicenseInGarage(i_licenseCarToChangeStatusTo);
+            if (i_carWithInformationWithSameLicense == null)
+            {
+                //TODO :throw exception no car with such license found
+            }
+            else
+            {
+                if (i_newStatusOfCar != "INPROGRESS" && i_newStatusOfCar != "FIXED" && i_newStatusOfCar != "PAYED")
+                {
+                    //TODO : throw exception no such status to change to
+                }
+                i_carWithInformationWithSameLicense.setStatusCar(i_newStatusOfCar);
+            }
+        }
+
+
+
+        public List<String> showAllLicenses(string i_typeOfCarStatusToShow)
         {
             List<String> allLicensesToShow;
 
             allLicensesToShow = new List<string>();
             foreach (GarageVehicleWithInformation carWithInformation in m_vehiclesInGarage)
             {
-                if (carWithInformation.isCarCorrectStatusToShow(typeOfCarStatusToShow))
+                if (carWithInformation.isCarCorrectStatusToShow(i_typeOfCarStatusToShow))
                 {
                     allLicensesToShow.Add(carWithInformation.getVehicle().getLicensePlate());
                 }

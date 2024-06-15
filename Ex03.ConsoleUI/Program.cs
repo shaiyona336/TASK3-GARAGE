@@ -29,10 +29,12 @@ namespace Ex03.ConsoleUI
             string i_withCarToEnter;
             string i_whatTypeOfLicensesToShow;
             List<String> allLicenses;
+            string i_licenseCarToChangeStatus;
+            string i_newDesireStatusCar;
 
             while (i_userInput != "Q")
             {
-                Console.WriteLine("enter: insert(insert new car), show all licenses, "); //TODO : fix message
+                Console.WriteLine("enter: insert(insert new vehicle), show all licenses, change vehicle status, "); //TODO : fix message
                 i_userInput = Console.ReadLine();
                 switch(i_userInput)
                 {
@@ -102,12 +104,20 @@ namespace Ex03.ConsoleUI
                     case ("show all licenses"):
                         Console.WriteLine("what type of licenses(INPROGRESS,FIXED,PAYED,ANY): ");
                         i_whatTypeOfLicensesToShow = Console.ReadLine();
-                        allLicenses = i_garage.showAllLicenses(i_whatTypeOfLicensesToShow);
+                        allLicenses = i_garage.showAllLicenses(i_whatTypeOfLicensesToShow); //TODO : need to handle exception
                         foreach (string i_licenses in allLicenses)
                         {
                             Console.WriteLine(i_licenses);
                         }
                         break;
+                    case ("change vehicle status"): // i_newDesireStatusCar
+                        Console.WriteLine("enter licenses of car to change status to: ");
+                        i_licenseCarToChangeStatus = Console.ReadLine();
+                        Console.WriteLine("enter new status: ");
+                        i_newDesireStatusCar = Console.ReadLine();
+                        i_garage.changeStatusToCar(i_licenseCarToChangeStatus, i_newDesireStatusCar); //TODO : need to handle exception
+                        break;
+
                 }
                 
             }
