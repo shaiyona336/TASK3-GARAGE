@@ -1,0 +1,49 @@
+insert
+567
+car
+shai
+052
+FIXED
+abc
+5
+yellow
+5
+false
+8
+insert
+432
+truck
+shai
+052
+PAYED
+hfg
+6
+true
+3
+true
+Octan95
+7
+insert
+444
+car
+shai
+052
+FIXED
+ppp
+3
+yellow
+3
+true
+Octan98
+2
+show all licenses
+FIXED
+change vehicle status
+432
+FIXED
+show all licenses
+FIXED
+add fuel to car
+432
+1
+Octan95
