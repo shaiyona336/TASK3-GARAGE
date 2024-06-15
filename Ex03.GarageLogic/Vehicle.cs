@@ -8,7 +8,7 @@ namespace Ex03.GarageLogic
     {
         private string modelName;
         private string licensePlate;
-        private List<Wheel> wheels;
+        protected List<Wheel> wheels;
 
 
         abstract public void setCarInitialState(string stringAttribute);

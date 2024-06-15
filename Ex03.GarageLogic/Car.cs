@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 
 
 namespace Ex03.GarageLogic
@@ -16,6 +18,18 @@ namespace Ex03.GarageLogic
         private int m_numberOfDoors;
         private Engine m_engine;
         int m_indexSetupAttribute = 0; //with attribute by the order of get attributes does the function need now to set
+        private const int numberOfWheels = 4;
+
+
+        public Car()
+        {
+            base.wheels = new List<Wheel>();
+            for (int wheelIndex = 0; wheelIndex < numberOfWheels; wheelIndex++)
+            {
+                Wheel wheel = new Wheel();
+                base.wheels.Add(wheel);
+            }
+        }
 
 
         public override float getEnergy()
