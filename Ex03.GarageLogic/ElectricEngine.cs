@@ -18,7 +18,7 @@ namespace Ex03.GarageLogic
 
         public void chargeBattery(int howManyHoursToAddToBattery)
         {
-            statusBattery = WorkOnCar.addResourceToResource(statusBattery, howManyHoursToAddToBattery);
+            statusBattery = WorkOnCar.addResourceToResource(statusBattery, howManyHoursToAddToBattery, maximumForBattery);
         }
 
     }

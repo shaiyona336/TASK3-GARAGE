@@ -24,6 +24,7 @@ namespace Ex03.ConsoleUI
             string i_stringInputAttribute;
             int i_intInputAttribute;
             bool i_booleanInputAttribute;
+            string i_withCarToEnter;
 
             while (i_userInput != "Q")
             {
@@ -34,7 +35,9 @@ namespace Ex03.ConsoleUI
                     case ("insert"):
                         Console.WriteLine("enter license for car: ");
                         i_licenseCar = Console.ReadLine();
-                        i_attributesToEnter = i_garage.addVehicleToGarage(i_licenseCar,"car");
+                        Console.WriteLine("with car to enter: ");
+                        i_withCarToEnter = Console.ReadLine();
+                        i_attributesToEnter = i_garage.addVehicleToGarage(i_licenseCar, i_withCarToEnter);
                         if (i_attributesToEnter == "car already in garage, moved to status: in-progress")
                         {
                             Console.WriteLine(i_attributesToEnter);
@@ -51,6 +54,8 @@ namespace Ex03.ConsoleUI
                             i_garage.setLastEnteredVehicle(i_nameOfOwnerLastAddedCar);
                             i_garage.setLastEnteredVehicle(i_phoneOfOwnerLastAddedCar);
                             i_garage.setLastEnteredVehicle(i_carStatusLastAddedCar);
+                            i_garage.setLastEnteredVehicle(i_licenseCar);
+
 
                             i_attributesToEnterArray = i_attributesToEnter.Split(new string[] { "||" }, StringSplitOptions.None);
                             foreach (string attribute in i_attributesToEnterArray)

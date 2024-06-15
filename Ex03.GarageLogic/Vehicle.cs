@@ -13,6 +13,7 @@ namespace Ex03.GarageLogic
 
         abstract public void setCarInitialState(string stringAttribute);
         abstract public void setCarInitialState(int i_intAttribute);
+        abstract public void setCarInitialState(float i_intAttribute);
         abstract public void setCarInitialState(bool i_intAttribute);
 
 
@@ -34,6 +35,19 @@ namespace Ex03.GarageLogic
         }
 
         abstract public string getAttributes();
+
+
+
+
+        public void setInitialWheelsPressure(int i_setMaximumAirPressure)
+        {
+            foreach (Wheel wheel in wheels)
+            {
+                wheel.setMaximumAirPressureInWheel(i_setMaximumAirPressure);
+                break;
+            }
+        }
+
 
 
         public void setWheelsPressure (int setAirPressure)

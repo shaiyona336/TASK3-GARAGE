@@ -24,7 +24,7 @@ namespace Ex03.GarageLogic
             {
                 m_indexSetupAttribute = 0;
                 //TODO : add options for types of vehicles to create
-                i_newCar = new Car();
+                i_newCar = getVehicleFromString(typeOfCar);
                 i_newCarWithInformation = new GarageVehicleWithInformation();
                 i_newCarWithInformation.setVehicle(i_newCar);
                 if (m_vehiclesInGarage == null)
@@ -36,6 +36,29 @@ namespace Ex03.GarageLogic
             }
 
             return i_argumentsToFillToInitializeVehicle;
+        }
+
+
+        private Vehicle getVehicleFromString(string i_withCar)
+        {
+            Vehicle i_newCar = null;
+
+            switch (i_withCar)
+            {
+                case ("car"):
+                    i_newCar = new Car();
+                    break;
+                case ("truck"):
+                    i_newCar = new Truck();
+                    break;
+                case ("Motorcycle"):
+                    i_newCar = new MotorCycle();
+                    break;
+                default:
+                    //TODO : exception no such car
+                    break;
+            }
+            return i_newCar;
         }
 
         public void setLastEnteredVehicle(string stringAttribute)
@@ -51,6 +74,9 @@ namespace Ex03.GarageLogic
                 case (2):
                     m_vehiclesInGarage[0].setStatusCar(stringAttribute);
                     break;
+                case (3):
+                    m_vehiclesInGarage[0].getVehicle().setLicensePlate(stringAttribute);
+                    break;
                 default:
                     m_vehiclesInGarage[0].getVehicle().setCarInitialState(stringAttribute);
                     //TODO : EXCEPTION SENT TOO MANY ATTRIBUTES
@@ -59,10 +85,16 @@ namespace Ex03.GarageLogic
             m_indexSetupAttribute++;
         }
 
+
         public void setLastEnteredVehicle(int intAttribute)
         {
             m_vehiclesInGarage[0].getVehicle().setCarInitialState(intAttribute);
             //no need to incress m_indexSetupAttribute because the attributes that the function initiallize is for each specific car not name/phone of owner or status car
+        }
+
+        public void setLastEnteredVehicle(float floatAttribute)
+        {
+            m_vehiclesInGarage[0].getVehicle().setCarInitialState(floatAttribute);
         }
 
         public void setLastEnteredVehicle(bool boolAttribute)
