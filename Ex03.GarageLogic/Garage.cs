@@ -9,6 +9,29 @@ namespace Ex03.GarageLogic
         int m_indexSetupAttribute = 0; //with attribute for the last entered vehicle does the function needs now
 
 
+        //public List<String> showAllLicenses()
+        //{
+        //    List<String> allLicensesToShow;
+
+        //    allLicensesToShow = showAllLicenses("ANY");
+        //    return allLicensesToShow;
+        //}
+
+        public List<String> showAllLicenses(string typeOfCarStatusToShow)
+        {
+            List<String> allLicensesToShow;
+
+            allLicensesToShow = new List<string>();
+            foreach (GarageVehicleWithInformation carWithInformation in m_vehiclesInGarage)
+            {
+                if (carWithInformation.isCarCorrectStatusToShow(typeOfCarStatusToShow))
+                {
+                    allLicensesToShow.Add(carWithInformation.getVehicle().getLicensePlate());
+                }
+            }
+            return allLicensesToShow;
+        }
+
 
         public string addVehicleToGarage(string i_licenseCar, string typeOfCar)
         {

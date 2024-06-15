@@ -20,6 +20,7 @@ namespace Ex03.GarageLogic
 
         protected void initializeWheels(int numberOfWheels)
         {
+            wheels = new List<Wheel>();
             for (int wheelIndex = 0; wheelIndex < numberOfWheels; wheelIndex++)
             {
                 Wheel wheel = new Wheel();
