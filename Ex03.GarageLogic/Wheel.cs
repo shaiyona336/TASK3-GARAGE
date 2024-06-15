@@ -21,7 +21,7 @@ namespace Ex03.GarageLogic
 
         public void addAirPressureToWheels(int i_howMuchPressureToAdd)
         {
-            m_airPressureInWheel = WorkOnCar.addResourceToResource(m_airPressureInWheel, i_howMuchPressureToAdd, m_maximumAirPressureInWheel);
+            WorkOnCar.addResourceToResource(ref m_airPressureInWheel, i_howMuchPressureToAdd, m_maximumAirPressureInWheel);
         }
 
     }

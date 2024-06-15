@@ -17,6 +17,26 @@ namespace Ex03.GarageLogic
         //    return allLicensesToShow;
         //}
 
+        public void addElectricity(string i_licenseCarToAddAirPressureTo, float i_howMuchElectricityToAdd)
+        {
+
+        }
+
+        public void addFuel(string i_licenseCarToAddAirPressureTo, float i_howMuchFuelToAdd, string typeOfFuel)
+        {
+            GarageVehicleWithInformation i_carWithInformationWithSameLicense = isCarLicenseInGarage(i_licenseCarToAddAirPressureTo);
+            if (i_carWithInformationWithSameLicense == null || !(i_carWithInformationWithSameLicense.getVehicle().isFuel()))
+            {
+                //TODO :throw exception no car with such license found
+            }
+            else
+            {
+                i_carWithInformationWithSameLicense.getVehicle().addFuelOrElectricity(i_howMuchFuelToAdd, typeOfFuel);
+            }
+        }
+
+
+
         public void FillFullAirPressureInWheels(string i_licenseCarToAddAirPressureTo)
         {
             GarageVehicleWithInformation i_carWithInformationWithSameLicense = isCarLicenseInGarage(i_licenseCarToAddAirPressureTo);
@@ -30,8 +50,6 @@ namespace Ex03.GarageLogic
             }
 
          }
-
-
 
         public void changeStatusToCar(string i_licenseCarToChangeStatusTo, string i_newStatusOfCar)
         {
@@ -139,7 +157,6 @@ namespace Ex03.GarageLogic
                     break;
                 default:
                     m_vehiclesInGarage[0].getVehicle().setCarInitialState(stringAttribute);
-                    //TODO : EXCEPTION SENT TOO MANY ATTRIBUTES
                     break;
             }
             m_indexSetupAttribute++;

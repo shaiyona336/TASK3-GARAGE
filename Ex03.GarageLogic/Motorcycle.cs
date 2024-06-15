@@ -32,9 +32,20 @@ namespace Ex03.GarageLogic
             return m_engine.getEnergy();
         }
 
+        public override void addFuelOrElectricity(float howMuchFuelToAdd, string typeOfEnergy)
+        {
+            m_engine.addEnergy(howMuchFuelToAdd, typeOfEnergy);
+        }
+
+        public override bool isFuel()
+        {
+            return WorkOnCar.isFuel(m_engine);
+        }
+
+
         public override string getAttributes()
         {
-            return ("model name::string||air pressure wheels::int||type of license(A,A1,AA,B1)::string||engine volume::int||fuel or electric car::bool||maximum energy::float");
+            return ("model name::string||air pressure wheels::int||type of license(A,A1,AA,B1)::string||engine volume::int||is car on fuel::bool||maximum energy::float");
         }
 
         
@@ -65,15 +76,18 @@ namespace Ex03.GarageLogic
         }
 
 
-        public override void setCarInitialState(string stringAttribute)
+        public override void setCarInitialState(string i_stringAttribute)
         {
             switch (m_indexSetupAttribute)
             {
                 case (0):
-                    this.setModelName(stringAttribute);
+                    this.setModelName(i_stringAttribute);
                     break;
                 case (2):
-                    m_typeLicense = stringColorToEnum(stringAttribute);
+                    m_typeLicense = stringColorToEnum(i_stringAttribute);
+                    break;
+                case (5):
+                    (m_engine as FuelEngine).setTypeOfFuel(i_stringAttribute);
                     break;
                 default:
                     //TODO : SENT WRONG ATTRIBUTE
@@ -101,7 +115,7 @@ namespace Ex03.GarageLogic
 
         public override void setCarInitialState(float i_floatAttribute)
         {
-            if (m_indexSetupAttribute == 5)
+            if (m_indexSetupAttribute == 4)
             {
                 m_engine.setMaximumEnergy(i_floatAttribute);
             }
@@ -115,7 +129,7 @@ namespace Ex03.GarageLogic
 
         public override void setCarInitialState(bool i_boolAttribute)
         {
-            if (m_indexSetupAttribute == 4)
+            if (m_indexSetupAttribute == 6)
             {
                 m_engine = WorkOnCar.setEngineByBool(i_boolAttribute);
             }
