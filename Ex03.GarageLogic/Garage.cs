@@ -8,6 +8,8 @@ namespace Ex03.GarageLogic
         List<GarageVehicleWithInformation> m_vehiclesInGarage;
         int m_indexSetupAttribute = 0; //with attribute for the last entered vehicle does the function needs now
 
+
+
         public string addVehicleToGarage(string i_licenseCar, string typeOfCar)
         {
             string i_argumentsToFillToInitializeVehicle = "car already in garage, moved to status: in-progress"; //default value if car is in the garage, if it is not, it will be changed to the arugments that we need to add to the new car
