@@ -22,8 +22,8 @@ namespace Ex03.GarageLogic
             }
             else //if car not in garage, insert him
             {
-                //TODO : add options for types of vehicles to create
                 m_indexSetupAttribute = 0;
+                //TODO : add options for types of vehicles to create
                 i_newCar = new Car();
                 i_newCarWithInformation = new GarageVehicleWithInformation();
                 i_newCarWithInformation.setVehicle(i_newCar);
