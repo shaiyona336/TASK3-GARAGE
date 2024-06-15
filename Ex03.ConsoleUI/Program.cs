@@ -25,18 +25,30 @@ namespace Ex03.ConsoleUI
             string i_stringInputAttribute;
             int i_intInputAttribute;
             float i_floatInputAttribute;
-            bool i_booleanInputAttribute;
+            bool i_booleanInputAttribute = false;
             string i_withCarToEnter;
             string i_whatTypeOfLicensesToShow;
             List<String> allLicenses;
             string i_licenseCarToChangeStatus;
             string i_newDesireStatusCar;
             string i_licenseCarToAddPressure;
-            
+            string i_licenseCarToAddFuel;
+            string i_howMuchFuelToAdd;
+            float i_valueHowMuchFuelToAdd;
+            string i_typeOfFuel;
+            string i_licenseCarToCharge;
+            string i_howMuchElectricityToAdd;
+            float i_valueHowMuchElectricityToAdd;
+
+            string typeOfFuel;
+
+
+
+
 
             while (i_userInput != "Q")
             {
-                Console.WriteLine("enter: insert(insert new vehicle), show all licenses, change vehicle status, add air pressure, "); //TODO : fix message
+                Console.WriteLine("enter: insert(insert new vehicle), show all licenses, change vehicle status, add air pressure, add fuel to car, "); //TODO : fix message
                 i_userInput = Console.ReadLine();
                 switch(i_userInput)
                 {
@@ -99,6 +111,13 @@ namespace Ex03.ConsoleUI
                                         i_garage.setLastEnteredVehicle(i_stringInputAttribute);
                                         break;
                                 }
+                                if (i_messageWithAttributeToEnter == "is car on fuel" && i_booleanInputAttribute == true) //need to send type of fuel only for fuel engine
+                                {
+                                    Console.WriteLine("enter type of fuel for car: ");
+                                    typeOfFuel = Console.ReadLine();
+                                    i_garage.setLastEnteredVehicle(typeOfFuel);
+                                }
+                                
 
                             }
                         }
@@ -124,6 +143,17 @@ namespace Ex03.ConsoleUI
                         i_licenseCarToAddPressure = Console.ReadLine();
                         i_garage.FillFullAirPressureInWheels(i_licenseCarToAddPressure); //TODO : need to handle exception
                         break;
+                    case ("add fuel to car"):
+                        Console.WriteLine("enter licenses of car to add pressure to: ");
+                        i_licenseCarToAddFuel = Console.ReadLine();
+                        Console.WriteLine("enter how much fuel would you like to add: ");
+                        i_howMuchFuelToAdd = Console.ReadLine();
+                        float.TryParse(i_howMuchFuelToAdd, out i_valueHowMuchFuelToAdd); //TODO : need to put this lines in try
+                        Console.WriteLine("enter what type of fuel do you want to use: ");
+                        i_typeOfFuel = Console.ReadLine();
+                        i_garage.addFuel(i_licenseCarToAddFuel, i_valueHowMuchFuelToAdd, i_typeOfFuel); //TODO : need to handle exception
+                        break;
+                    
 
                 }
                 

@@ -6,7 +6,7 @@ namespace Ex03.GarageLogic
 {
     sealed class FuelEngine : Engine
     {
-        enum typeOfFuel
+        public enum typeOfFuel
         {
             Soler,
             Octan95,
@@ -24,12 +24,38 @@ namespace Ex03.GarageLogic
             return m_statusFuel;
         }
 
+        public void setTypeOfFuel(string i_typeOfFuel)
+        {
+            typeOfFuel typeOfFuelRightFormat = typeOfFuel.Soler;
+            
+            switch(i_typeOfFuel)
+            {
+                case ("Soler"):
+                    typeOfFuelRightFormat = typeOfFuel.Soler; 
+                    break;
+                case ("Octan95"):
+                    typeOfFuelRightFormat = typeOfFuel.Octan95;
+                    break;
+                case ("Octan96"):
+                    typeOfFuelRightFormat = typeOfFuel.Octan96;
+                    break;
+                case ("Octan98"):
+                    typeOfFuelRightFormat = typeOfFuel.Octan98;
+                    break;
+                default:
+                    //TODO : wrong type of fuel
+                    break;
+            }
 
-        public void addFuel(int howMuchFuelToAdd, string typeOfFuelFunctionMethodRequestToAdd)
+            m_typeFuel = typeOfFuelRightFormat;
+        }
+
+
+        public override void addEnergy(float howMuchFuelToAdd, string typeOfEnergy)
         {
             typeOfFuel typeOfFuelCorrectFormat = typeOfFuel.Soler;
 
-            switch (typeOfFuelFunctionMethodRequestToAdd)
+            switch (typeOfEnergy)
             {
                 case ("Soler"):
                     typeOfFuelCorrectFormat = typeOfFuel.Soler;
@@ -49,7 +75,7 @@ namespace Ex03.GarageLogic
             }
             if (typeOfFuelCorrectFormat == m_typeFuel)
             {
-                m_statusFuel = WorkOnCar.addResourceToResource(m_statusFuel, howMuchFuelToAdd, m_maximumFuel);
+                WorkOnCar.addResourceToResource(ref m_statusFuel, howMuchFuelToAdd, m_maximumFuel);
             }
             //TODO: wrong fuel type tried to be added
         }

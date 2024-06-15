@@ -8,6 +8,7 @@ namespace Ex03.GarageLogic
     {
         abstract public float getEnergy();
         abstract public void setMaximumEnergy(float i_maximumEnergy);
+        abstract public void addEnergy(float howMuchToAdd,string typeOfEnergy);
 
 
 

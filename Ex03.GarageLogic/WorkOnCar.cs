@@ -7,24 +7,39 @@ namespace Ex03.GarageLogic
     internal class WorkOnCar
     {
 
-        public static int addResourceToResource(int addTo, int howMuchToAdd, int maximumAirPressureInWheel)
+        public static bool isFuel(Engine i_engine)
         {
-            if (addTo + howMuchToAdd <= maximumAirPressureInWheel)
+            bool i_flag = false;
+            if (i_engine is FuelEngine)
             {
-                addTo = addTo + howMuchToAdd;
+                i_flag = true;
             }
-            //TODO: throw exception
-            return addTo;
+            return i_flag;
         }
 
-        public static float addResourceToResource(float addTo, int howMuchToAdd, float maximumAirPressureInWheel)
+        public static void addResourceToResource(ref int addTo, int howMuchToAdd, int maximumAirPressureInWheel)
         {
             if (addTo + howMuchToAdd <= maximumAirPressureInWheel)
             {
                 addTo = addTo + howMuchToAdd;
             }
-            //TODO: throw exception
-            return addTo;
+            else
+            {
+                //TODO: throw exception
+            }
+        }
+
+        public static void addResourceToResource(ref float addTo, float howMuchToAdd, float maximumAirPressureInWheel)
+        {
+            if (addTo + howMuchToAdd <= maximumAirPressureInWheel)
+            {
+                addTo = addTo + howMuchToAdd;
+            }
+            else
+            {
+                //TODO: throw exception
+            }
+
         }
 
 

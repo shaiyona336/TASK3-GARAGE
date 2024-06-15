@@ -33,7 +33,16 @@ namespace Ex03.GarageLogic
         }
 
 
-        
+        public override bool isFuel()
+        {
+            return WorkOnCar.isFuel(m_engine);
+        }
+
+
+        public override void addFuelOrElectricity(float howMuchFuelToAdd, string typeOfEnergy)
+        {
+            m_engine.addEnergy(howMuchFuelToAdd, typeOfEnergy);
+        }
 
 
 
@@ -65,19 +74,22 @@ namespace Ex03.GarageLogic
         public override string getAttributes()
         {
             m_indexSetupAttribute = 0;
-            return ("model name::string||air pressure wheels::int||color(yellow,white,red,black)::string||number of doors::int||fuel or electric car::bool||maximum energy::float");
+            return ("model name::string||air pressure wheels::int||color(yellow,white,red,black)::string||number of doors::int||is car on fuel::bool||maximum energy::float");
         }
 
 
-        public override void setCarInitialState(string stringAttribute)
+        public override void setCarInitialState(string i_stringAttribute)
         {
             switch (m_indexSetupAttribute)
             {
                 case (0):
-                    this.setModelName(stringAttribute);
+                    this.setModelName(i_stringAttribute);
                     break;
                 case (2):
-                    m_color = stringColorToEnum(stringAttribute);
+                    m_color = stringColorToEnum(i_stringAttribute);
+                    break;
+                case (5):
+                    (m_engine as FuelEngine).setTypeOfFuel(i_stringAttribute);
                     break;
                 default:
                     //TODO : SENT WRONG ATTRIBUTE
@@ -105,7 +117,7 @@ namespace Ex03.GarageLogic
 
         public override void setCarInitialState(float i_floatAttribute)
         {
-            if (m_indexSetupAttribute == 5)
+            if (m_indexSetupAttribute == 6)
             {
                 m_engine.setMaximumEnergy(i_floatAttribute);
             }

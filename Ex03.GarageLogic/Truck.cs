@@ -24,9 +24,20 @@ namespace Ex03.GarageLogic
             return m_engine.getEnergy();
         }
 
+        public override void addFuelOrElectricity(float howMuchFuelToAdd, string typeOfEnergy)
+        {
+            m_engine.addEnergy(howMuchFuelToAdd, typeOfEnergy);
+        }
+
+
+        public override bool isFuel()
+        {
+            return WorkOnCar.isFuel(m_engine);
+        }
+
         public override string getAttributes()
         {
-            return ("model name::string||air pressure wheels::int||is the truck transfer dangerous materials::bool||cargo volume::float||fuel or electric car::bool||maximum energy::float");
+            return ("model name::string||air pressure wheels::int||is the truck transfer dangerous materials::bool||cargo volume::float||is car on fuel::bool||maximum energy::float");
         }
 
         
@@ -50,6 +61,9 @@ namespace Ex03.GarageLogic
             {
                 case (0):
                     this.setModelName(i_stringAttribute);
+                    break;
+                case (5):
+                    (m_engine as FuelEngine).setTypeOfFuel(i_stringAttribute);
                     break;
                 default:
                     //TODO : SENT WRONG ATTRIBUTE
@@ -77,7 +91,7 @@ namespace Ex03.GarageLogic
             {
                 setCargoVolume(i_floatAttribute);
             }
-            else if (m_indexSetupAttribute == 5)
+            else if (m_indexSetupAttribute == 6)
             {
                 m_engine.setMaximumEnergy(i_floatAttribute);
             }
