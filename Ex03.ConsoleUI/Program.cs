@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.ExceptionServices;
 using Ex03.GarageLogic;
 
 namespace Ex03.ConsoleUI
@@ -23,9 +24,9 @@ namespace Ex03.ConsoleUI
             string i_messageWithAttributeToEnter;
             //input attribute
             string i_stringInputAttribute;
-            int i_intInputAttribute;
-            float i_floatInputAttribute;
-            bool i_booleanInputAttribute;
+            //int i_intInputAttribute;
+            //float i_floatInputAttribute;
+            //bool i_booleanInputAttribute;
             string i_withCarToEnter;
             string i_whatTypeOfLicensesToShow;
             List<String> allLicenses;
@@ -75,23 +76,26 @@ namespace Ex03.ConsoleUI
                                 switch (i_withTypeOfAttribute)
                                 {
                                     case ("int"):
-                                        if (!int.TryParse(i_stringInputAttribute, out i_intInputAttribute))
+                                        if (!int.TryParse(i_stringInputAttribute, out int i_intInputAttribute))
                                         {
-                                            //TODO : exception cannot convert to int
+                                            throw new FormatException("Cannot convert to int");
+                                            //TODO : exception cannot convert to int (done?)
                                         }
                                         i_garage.setLastEnteredVehicle(i_intInputAttribute);
                                         break;
                                     case ("float"):
-                                        if (!float.TryParse(i_stringInputAttribute, out i_floatInputAttribute))
+                                        if (!float.TryParse(i_stringInputAttribute, out float i_floatInputAttribute))
                                         {
-                                            //TODO : exception cannot convert to int
+                                            throw new FormatException("Cannot convert to float");
+                                            //TODO : exception cannot convert to int (done?)
                                         }
                                         i_garage.setLastEnteredVehicle(i_floatInputAttribute);
                                         break;
                                     case ("bool"):
-                                        if (!bool.TryParse(i_stringInputAttribute, out i_booleanInputAttribute))
+                                        if (!bool.TryParse(i_stringInputAttribute, out bool i_booleanInputAttribute))
                                         {
-                                            //TODO : exception cannot convert to boolean
+                                            throw new FormatException("Cannot convert to bool");
+                                            //TODO : exception cannot convert to boolean (done?)
                                         }
                                         i_garage.setLastEnteredVehicle(i_booleanInputAttribute);
                                         break;
