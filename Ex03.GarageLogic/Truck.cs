@@ -29,6 +29,7 @@ namespace Ex03.GarageLogic
             return ("model name::string||air pressure wheels::int||is the truck transfer dangerous materials::bool||cargo volume::float||fuel or electric car::bool||maximum energy::float");
         }
 
+        
 
         private void setIsTransferDangerousMaterials(bool i_isTransferDangerousMaterials)
         {

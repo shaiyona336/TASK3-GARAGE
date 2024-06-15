@@ -22,6 +22,12 @@ namespace Ex03.GarageLogic
             return m_vehicle;
         }
 
+        public void FillWheelsPressure()
+        {
+            m_vehicle.setAirPressureInWheelToMaximum();
+        }
+
+
         public bool isCarCorrectStatusToShow(string i_carStatus)
         {
             bool i_flag = false;
