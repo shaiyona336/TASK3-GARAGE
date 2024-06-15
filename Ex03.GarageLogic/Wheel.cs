@@ -9,7 +9,10 @@ namespace Ex03.GarageLogic
         private float m_airPressureInWheel;
         private float m_maximumAirPressureInWheel;
 
-
+        public void setAirPressureInWheelToMaximum()
+        {
+            m_airPressureInWheel = m_maximumAirPressureInWheel;
+        }
         public void setMaximumAirPressureInWheel(float i_maximumAirPressureInWheel)
         {
             m_maximumAirPressureInWheel = i_maximumAirPressureInWheel;

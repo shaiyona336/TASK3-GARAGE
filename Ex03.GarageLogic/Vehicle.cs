@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ex03.GarageLogic;
+using System;
 using System.Collections.Generic;
 
 
@@ -17,8 +18,24 @@ namespace Ex03.GarageLogic
         abstract public void setCarInitialState(bool i_intAttribute);
 
 
+      
+        public void setAirPressureInWheelToMaximum()
+        {
+            if (wheels.Count != 0)
+                {
+                    foreach (Wheel wheel in wheels)
+                {
+                    wheel.setAirPressureInWheelToMaximum();
+                }
+                   }
+                else
+                    {
+                        //TODO : exception no wheels in vehicle
+                    }
+          }
 
-        protected void initializeWheels(int numberOfWheels)
+
+        public void initializeWheels(int numberOfWheels)
         {
             wheels = new List<Wheel>();
             for (int wheelIndex = 0; wheelIndex < numberOfWheels; wheelIndex++)
@@ -60,7 +77,7 @@ namespace Ex03.GarageLogic
 
 
 
-        public void setWheelsPressure (int setAirPressure)
+        public void addWheelsPressure (int setAirPressure)
         {
             foreach (Wheel wheel in wheels)
             {

@@ -17,6 +17,22 @@ namespace Ex03.GarageLogic
         //    return allLicensesToShow;
         //}
 
+        public void FillFullAirPressureInWheels(string i_licenseCarToAddAirPressureTo)
+        {
+            GarageVehicleWithInformation i_carWithInformationWithSameLicense = isCarLicenseInGarage(i_licenseCarToAddAirPressureTo);
+            if (i_carWithInformationWithSameLicense == null)
+            {
+                //TODO :throw exception no car with such license found
+            }
+            else
+            {
+                i_carWithInformationWithSameLicense.FillWheelsPressure();
+            }
+
+         }
+
+
+
         public void changeStatusToCar(string i_licenseCarToChangeStatusTo, string i_newStatusOfCar)
         {
             GarageVehicleWithInformation i_carWithInformationWithSameLicense = isCarLicenseInGarage(i_licenseCarToChangeStatusTo);

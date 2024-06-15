@@ -33,6 +33,10 @@ namespace Ex03.GarageLogic
         }
 
 
+        
+
+
+
         private colorsOfCars stringColorToEnum(string i_color)
         {
             colorsOfCars i_colorToReturn = colorsOfCars.BLACK;

@@ -31,10 +31,12 @@ namespace Ex03.ConsoleUI
             List<String> allLicenses;
             string i_licenseCarToChangeStatus;
             string i_newDesireStatusCar;
+            string i_licenseCarToAddPressure;
+            
 
             while (i_userInput != "Q")
             {
-                Console.WriteLine("enter: insert(insert new vehicle), show all licenses, change vehicle status, "); //TODO : fix message
+                Console.WriteLine("enter: insert(insert new vehicle), show all licenses, change vehicle status, add air pressure, "); //TODO : fix message
                 i_userInput = Console.ReadLine();
                 switch(i_userInput)
                 {
@@ -116,6 +118,11 @@ namespace Ex03.ConsoleUI
                         Console.WriteLine("enter new status: ");
                         i_newDesireStatusCar = Console.ReadLine();
                         i_garage.changeStatusToCar(i_licenseCarToChangeStatus, i_newDesireStatusCar); //TODO : need to handle exception
+                        break;
+                    case ("add air pressure"):
+                        Console.WriteLine("enter licenses of car to add pressure to: ");
+                        i_licenseCarToAddPressure = Console.ReadLine();
+                        i_garage.FillFullAirPressureInWheels(i_licenseCarToAddPressure); //TODO : need to handle exception
                         break;
 
                 }
