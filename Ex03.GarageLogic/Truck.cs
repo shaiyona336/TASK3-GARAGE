@@ -15,12 +15,7 @@ namespace Ex03.GarageLogic
 
         public Truck()
         {
-            base.wheels = new List<Wheel>();
-            for (int wheelIndex = 0; wheelIndex < m_numberOfWheels; wheelIndex++)
-            {
-                Wheel wheel = new Wheel();
-                base.wheels.Add(wheel);
-            }
+            initializeWheels(m_numberOfWheels);
         }
 
 

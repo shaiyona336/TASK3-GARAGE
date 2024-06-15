@@ -18,6 +18,16 @@ namespace Ex03.GarageLogic
 
 
 
+        protected void initializeWheels(int numberOfWheels)
+        {
+            for (int wheelIndex = 0; wheelIndex < numberOfWheels; wheelIndex++)
+            {
+                Wheel wheel = new Wheel();
+                wheels.Add(wheel);
+            }
+        }
+
+
 
         public void setModelName(string setModelName)
         {

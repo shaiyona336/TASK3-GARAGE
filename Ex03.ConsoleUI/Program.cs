@@ -36,7 +36,7 @@ namespace Ex03.ConsoleUI
                     case ("insert"):
                         Console.WriteLine("enter license for car: ");
                         i_licenseCar = Console.ReadLine();
-                        Console.WriteLine("with car to enter: ");
+                        Console.WriteLine("with type vehicle to enter (car/truck/motorcycle): ");
                         i_withCarToEnter = Console.ReadLine();
                         i_attributesToEnter = i_garage.addVehicleToGarage(i_licenseCar, i_withCarToEnter);
                         if (i_attributesToEnter == "car already in garage, moved to status: in-progress")
