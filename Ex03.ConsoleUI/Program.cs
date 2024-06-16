@@ -152,6 +152,28 @@ namespace Ex03.ConsoleUI
             }
         }
 
+        //private static void showAllLicenses(Garage i_Garage)
+        //{
+        //    Console.WriteLine("what type of licenses(INPROGRESS,FIXED,PAYED,ANY): ");
+        //    string typeOfLicenses = Console.ReadLine();
+
+        //    switch (typeOfLicenses)
+        //    {
+        //        case "A":
+        //        case "A1":
+        //        case "AA":
+        //        case "B1":
+        //            List<string> allLicenses = i_Garage.showAllLicenses(typeOfLicenses); //TODO : need to handle exception (done?)
+        //            foreach (string license in allLicenses)
+        //            {
+        //                Console.WriteLine(license);
+        //            }
+        //            break;
+        //        default:
+        //            throw new ArgumentException($"No valid license type matches \"{typeOfLicenses}\"");
+        //    }
+        //}
+
         private static void changeVehicleStatus(Garage i_Garage)
         {
             Console.WriteLine("enter license of car to change status to: ");
@@ -170,7 +192,6 @@ namespace Ex03.ConsoleUI
 
         private static void addFuel(Garage i_Garage)
         {
-
             Console.WriteLine("enter license of car to add fuel to: ");
             string licenseCar = Console.ReadLine();
             Console.WriteLine("enter how much fuel would you like to add: ");
