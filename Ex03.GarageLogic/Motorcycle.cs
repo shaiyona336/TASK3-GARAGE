@@ -37,6 +37,11 @@ namespace Ex03.GarageLogic
             m_engine.addEnergy(howMuchFuelToAdd, typeOfEnergy);
         }
 
+        public override bool isElectricity()
+        {
+            return WorkOnCar.isElectricity(m_engine);
+        }
+
         public override bool isFuel()
         {
             return WorkOnCar.isFuel(m_engine);

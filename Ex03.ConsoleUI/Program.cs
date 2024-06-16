@@ -48,7 +48,7 @@ namespace Ex03.ConsoleUI
 
             while (i_userInput != "Q")
             {
-                Console.WriteLine("enter: insert(insert new vehicle), show all licenses, change vehicle status, add air pressure, add fuel to car, "); //TODO : fix message
+                Console.WriteLine("enter: insert(insert new vehicle), show all licenses, change vehicle status, add air pressure, add fuel to car, charge electricity, show information car"); //TODO : fix message
                 i_userInput = Console.ReadLine();
                 switch(i_userInput)
                 {
@@ -153,8 +153,18 @@ namespace Ex03.ConsoleUI
                         i_typeOfFuel = Console.ReadLine();
                         i_garage.addFuel(i_licenseCarToAddFuel, i_valueHowMuchFuelToAdd, i_typeOfFuel); //TODO : need to handle exception
                         break;
-                    
+                    case ("charge electricity"):
+                        Console.WriteLine("enter licenses of car to add pressure to: ");
+                        i_licenseCarToCharge = Console.ReadLine();
+                        Console.WriteLine("enter amount of hours to add to battery: ");
+                        i_howMuchElectricityToAdd = Console.ReadLine();
+                        float.TryParse(i_howMuchElectricityToAdd, out i_valueHowMuchElectricityToAdd); //TODO : need to put this lines in try
+                        i_garage.addElectricity(i_licenseCarToCharge, i_valueHowMuchElectricityToAdd);
+                        break;
+                    case ("show information car"):
+                        break;
 
+                        
                 }
                 
             }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using static Ex03.GarageLogic.FuelEngine;
 
 namespace Ex03.GarageLogic
 {
@@ -19,15 +20,30 @@ namespace Ex03.GarageLogic
 
         public void addElectricity(string i_licenseCarToAddAirPressureTo, float i_howMuchElectricityToAdd)
         {
-
+            GarageVehicleWithInformation i_carWithInformationWithSameLicense = isCarLicenseInGarage(i_licenseCarToAddAirPressureTo);
+            if (i_carWithInformationWithSameLicense == null)
+            {
+                //TODO :throw exception no car with such license found
+            }
+            else if (!(i_carWithInformationWithSameLicense.getVehicle().isElectricity())) {
+                //TODO :throw exception car not run on electricity
+            }
+            else
+            {
+                i_carWithInformationWithSameLicense.getVehicle().addFuelOrElectricity(i_howMuchElectricityToAdd, ""); //no need to send the type of fuel in electricity car
+            }
         }
 
         public void addFuel(string i_licenseCarToAddAirPressureTo, float i_howMuchFuelToAdd, string typeOfFuel)
         {
             GarageVehicleWithInformation i_carWithInformationWithSameLicense = isCarLicenseInGarage(i_licenseCarToAddAirPressureTo);
-            if (i_carWithInformationWithSameLicense == null || !(i_carWithInformationWithSameLicense.getVehicle().isFuel()))
+            if (i_carWithInformationWithSameLicense == null)
             {
                 //TODO :throw exception no car with such license found
+            }
+            else if (!(i_carWithInformationWithSameLicense.getVehicle().isFuel()))
+            {
+                //TODO :throw exception car not run on electricity
             }
             else
             {

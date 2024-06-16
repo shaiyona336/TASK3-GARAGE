@@ -17,6 +17,16 @@ namespace Ex03.GarageLogic
             return i_flag;
         }
 
+        public static bool isElectricity(Engine i_engine)
+        {
+            bool i_flag = false;
+            if (i_engine is ElectricEngine)
+            {
+                i_flag = true;
+            }
+            return i_flag;
+        }
+
         public static void addResourceToResource(ref int addTo, int howMuchToAdd, int maximumAirPressureInWheel)
         {
             if (addTo + howMuchToAdd <= maximumAirPressureInWheel)

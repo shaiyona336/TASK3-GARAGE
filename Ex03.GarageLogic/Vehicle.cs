@@ -17,6 +17,7 @@ namespace Ex03.GarageLogic
         abstract public void setCarInitialState(float i_intAttribute);
         abstract public void setCarInitialState(bool i_intAttribute);
         abstract public bool isFuel();
+        abstract public bool isElectricity();
         abstract public void addFuelOrElectricity(float howMuchFuelToAdd, string typeOfEnergy);
         
 
