@@ -10,6 +10,11 @@ namespace Ex03.GarageLogic
         private float m_maximumForBattery; //how many hours can electric car drive by with maximum battery
 
 
+        public override float getMaximumEnergy()
+        {
+            return m_maximumForBattery;
+        }
+
         public override float getEnergy()
         {
             return m_statusBattery;

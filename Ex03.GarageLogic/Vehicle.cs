@@ -7,9 +7,9 @@ namespace Ex03.GarageLogic
 {
     public abstract class Vehicle
     {
-        private string modelName;
-        private string licensePlate;
-        protected List<Wheel> wheels;
+        private string m_modelName;
+        private string m_licensePlate;
+        protected List<Wheel> m_wheels;
 
 
         abstract public void setCarInitialState(string stringAttribute);
@@ -19,16 +19,84 @@ namespace Ex03.GarageLogic
         abstract public bool isFuel();
         abstract public bool isElectricity();
         abstract public void addFuelOrElectricity(float howMuchFuelToAdd, string typeOfEnergy);
-        
+        abstract public string getInformationAboutCar();
 
 
-      
+        public string getLicensePlate()
+        {
+            return m_licensePlate;
+        }
+
+        public string getModelName()
+        {
+            return m_modelName;
+        }
+
+        public string getWheeslManufactorName()
+        {
+            string i_manuFactorName;
+
+            if (m_wheels.Count != 0)
+            {
+                i_manuFactorName = m_wheels[0].getManufactorName();
+            }
+            else
+            {
+                i_manuFactorName = "no wheels";
+            }
+            return i_manuFactorName;
+        }
+
+        public float getMaximumAirPressureInWheels()
+        {
+            float airPressureInWheels = 0;
+
+            if (m_wheels.Count != 0)
+            {
+                airPressureInWheels = m_wheels[0].getMaximumAirPressureInWheel();
+            }
+            else
+            {
+                //TODO : no wheels
+            }
+            return airPressureInWheels;
+        }
+
+        public float getAirPressureInWheels()
+        {
+            float airPressureInWheels = 0;
+
+            if (m_wheels.Count != 0)
+            {
+                airPressureInWheels = m_wheels[0].getAirPressureInWheel();
+            }
+            else
+            {
+                //TODO : no wheels
+            }
+            return airPressureInWheels;
+        }
+
+
+        public void setWheelsManufactorName(string i_manufactorName)
+        {
+            if (m_wheels.Count != 0)
+            {
+                foreach (Wheel wheel in m_wheels)
+                {
+                    wheel.setManufactorName(i_manufactorName);
+                }
+            }
+        }
+
+
+
 
         public void setAirPressureInWheelToMaximum()
         {
-            if (wheels.Count != 0)
+            if (m_wheels.Count != 0)
                 {
-                    foreach (Wheel wheel in wheels)
+                    foreach (Wheel wheel in m_wheels)
                 {
                     wheel.setAirPressureInWheelToMaximum();
                 }
@@ -42,11 +110,11 @@ namespace Ex03.GarageLogic
 
         public void initializeWheels(int numberOfWheels)
         {
-            wheels = new List<Wheel>();
+            m_wheels = new List<Wheel>();
             for (int wheelIndex = 0; wheelIndex < numberOfWheels; wheelIndex++)
             {
                 Wheel wheel = new Wheel();
-                wheels.Add(wheel);
+                m_wheels.Add(wheel);
             }
         }
 
@@ -54,27 +122,23 @@ namespace Ex03.GarageLogic
 
         public void setModelName(string setModelName)
         {
-            modelName = setModelName;
+            m_modelName = setModelName;
         }
 
         public void setLicensePlate(string setLicensePlate)
         {
-            licensePlate = setLicensePlate;
+            m_licensePlate = setLicensePlate;
         }
 
-        public string getLicensePlate()
-        {
-            return licensePlate;
-        }
 
         abstract public string getAttributes();
 
 
 
 
-        public void setInitialWheelsPressure(int i_setMaximumAirPressure)
+        public void setInitialWheelsPressure(float i_setMaximumAirPressure)
         {
-            foreach (Wheel wheel in wheels)
+            foreach (Wheel wheel in m_wheels)
             {
                 wheel.setMaximumAirPressureInWheel(i_setMaximumAirPressure);
             }
@@ -82,16 +146,15 @@ namespace Ex03.GarageLogic
 
 
 
-        public void addWheelsPressure (int setAirPressure)
+        public void addWheelsPressure (float setAirPressure)
         {
-            foreach (Wheel wheel in wheels)
+            foreach (Wheel wheel in m_wheels)
             {
-                wheel.addAirPressureToWheels(setAirPressure);
+                wheel.addAirPressureToWheel(setAirPressure);
             }
         }
 
-
-
         abstract public float getEnergy();
+
     }
 }

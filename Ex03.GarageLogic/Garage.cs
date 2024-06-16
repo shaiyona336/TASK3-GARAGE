@@ -10,9 +10,32 @@ namespace Ex03.GarageLogic
         int m_indexSetupAttribute = 0; //with attribute for the last entered vehicle does the function needs now
 
 
-   
 
-        public void addElectricity(string i_licenseCarToAddAirPressureTo, float i_howMuchElectricityToAdd)
+        public string showInformationAboutCar(string licenseCarToShowInformationAbout)
+        {
+            string i_informationAboutCarInGarage;
+            string i_insideCarInformationAboutHimself;
+            string allInformationAboutCar;
+            GarageVehicleWithInformation i_carWithInformationWithSameLicense;
+            i_carWithInformationWithSameLicense = isCarLicenseInGarage(licenseCarToShowInformationAbout);
+
+            if (licenseCarToShowInformationAbout == null)
+            {
+                i_insideCarInformationAboutHimself = "no such car";
+            }
+            else
+            {
+                i_insideCarInformationAboutHimself = i_carWithInformationWithSameLicense.getVehicle().getInformationAboutCar();
+            }
+
+            return i_insideCarInformationAboutHimself; // need to return allInformationAboutCar
+        }
+
+
+      
+
+
+    public void addElectricity(string i_licenseCarToAddAirPressureTo, float i_howMuchElectricityToAdd)
         {
             GarageVehicleWithInformation i_carWithInformationWithSameLicense = isCarLicenseInGarage(i_licenseCarToAddAirPressureTo);
             if (i_carWithInformationWithSameLicense == null)

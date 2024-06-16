@@ -8,6 +8,29 @@ namespace Ex03.GarageLogic
         private string m_nameCreator;
         private float m_airPressureInWheel;
         private float m_maximumAirPressureInWheel;
+        private string m_manufactorName;
+
+
+        public void setManufactorName(string i_manuFctorName)
+        {
+            m_manufactorName = i_manuFctorName;
+        }
+
+        public float getAirPressureInWheel()
+        {
+            return m_airPressureInWheel;
+        }
+
+        public float getMaximumAirPressureInWheel()
+        {
+            return m_maximumAirPressureInWheel;
+        }
+
+
+        public string getManufactorName()
+        {
+            return m_manufactorName;
+        }
 
         public void setAirPressureInWheelToMaximum()
         {
@@ -19,7 +42,7 @@ namespace Ex03.GarageLogic
         }
 
 
-        public void addAirPressureToWheels(int i_howMuchPressureToAdd)
+        public void addAirPressureToWheel(float i_howMuchPressureToAdd)
         {
             WorkOnCar.addResourceToResource(ref m_airPressureInWheel, i_howMuchPressureToAdd, m_maximumAirPressureInWheel);
         }

@@ -18,6 +18,31 @@ namespace Ex03.GarageLogic
         private float m_statusFuel;
         private float m_maximumFuel;
 
+        public override float getMaximumEnergy()
+        {
+            return m_maximumFuel;
+        }
+        public string getTypeOfFuel()
+        {
+            string i_typeOfFuel = "";
+
+            switch (m_typeFuel)
+            {
+                case (typeOfFuel.Soler):
+                    i_typeOfFuel = "Soler";
+                    break;
+                case (typeOfFuel.Octan95):
+                    i_typeOfFuel = "Octan95";
+                    break;
+                case (typeOfFuel.Octan96):
+                    i_typeOfFuel = "Octan96";
+                    break;
+                case (typeOfFuel.Octan98):
+                    i_typeOfFuel = "Octan98";
+                    break;
+            }
+            return i_typeOfFuel;
+        }
 
         public override float getEnergy()
         {

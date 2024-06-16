@@ -13,7 +13,7 @@ namespace Ex03.ConsoleUI
 
             while (userInput != "Q")
             {
-                Console.WriteLine("enter: insert(insert new vehicle), show all licenses, change vehicle status, add air pressure, add fuel to car, "); //TODO : fix message
+                Console.WriteLine("enter: insert(insert new vehicle), show all licenses, change vehicle status, add air pressure, add fuel to car, charge electricity, show information car"); //TODO : fix message
                 userInput = Console.ReadLine();
                 try
                 {
@@ -46,10 +46,10 @@ namespace Ex03.ConsoleUI
                     addFuel(i_Garage);
                     break;
                 case "charge electricity":
-                    addFuel(i_Garage);
+                    addElectricity(i_Garage);
                     break;
                 case "show information car":
-                    addFuel(i_Garage);
+                    showInformationAboutCar(i_Garage);
                     break;
                 default:
                     Console.WriteLine("Invalid input. Please try again.");
@@ -201,7 +201,19 @@ namespace Ex03.ConsoleUI
             i_Garage.addElectricity(i_licenseCarToCharge, i_valueHowMuchElectricityToAdd);
 
          }
+
+        public static void showInformationAboutCar(Garage i_Garage)
+        {
+            string i_licenseCarToShowInformationAbout;
+            string i_informationAboutCar;
+
+            Console.WriteLine("enter license of car to show information about: ");
+            i_licenseCarToShowInformationAbout = Console.ReadLine();
+            i_informationAboutCar = i_Garage.showInformationAboutCar(i_licenseCarToShowInformationAbout);
+            Console.WriteLine(i_informationAboutCar);
+        }
+
      }
-  }
+}
 
 
