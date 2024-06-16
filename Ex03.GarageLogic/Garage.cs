@@ -10,13 +10,7 @@ namespace Ex03.GarageLogic
         int m_indexSetupAttribute = 0; //with attribute for the last entered vehicle does the function needs now
 
 
-        //public List<String> showAllLicenses()
-        //{
-        //    List<String> allLicensesToShow;
-
-        //    allLicensesToShow = showAllLicenses("ANY");
-        //    return allLicensesToShow;
-        //}
+   
 
         public void addElectricity(string i_licenseCarToAddAirPressureTo, float i_howMuchElectricityToAdd)
         {
