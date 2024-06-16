@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.ExceptionServices;
 using Ex03.GarageLogic;
 
 namespace Ex03.ConsoleUI
@@ -9,178 +8,167 @@ namespace Ex03.ConsoleUI
     {
         public static void Main()
         {
-            Garage i_garage = new Garage();
-            string i_userInput = null;
-            string i_licenseCar;
-            string i_attributesToEnter;
-            string[] i_attributesToEnterArray;
-            //every car that we add we need to send name of owner, phone number of owner, and car status
-            string i_nameOfOwnerLastAddedCar;
-            string i_phoneOfOwnerLastAddedCar;
-            string i_carStatusLastAddedCar;
-            //with type of attribute need to add now
-            string i_withTypeOfAttribute;
-            //message to print to user
-            string i_messageWithAttributeToEnter;
-            //input attribute
-            string i_stringInputAttribute;
-            //int i_intInputAttribute;
-            //float i_floatInputAttribute;
-            bool i_booleanInputAttribute = false;
+            Garage garage = new Garage();
+            string userInput = null;
 
-            string i_withCarToEnter;
-            string i_whatTypeOfLicensesToShow;
-            List<String> allLicenses;
-            string i_licenseCarToChangeStatus;
-            string i_newDesireStatusCar;
-            string i_licenseCarToAddPressure;
-            string i_licenseCarToAddFuel;
-            string i_howMuchFuelToAdd;
-            float i_valueHowMuchFuelToAdd;
-            string i_typeOfFuel;
-            string i_licenseCarToCharge;
-            string i_howMuchElectricityToAdd;
-            float i_valueHowMuchElectricityToAdd;
-
-            string typeOfFuel;
-
-
-
-
-
-
-            while (i_userInput != "Q")
+            while (userInput != "Q")
             {
                 Console.WriteLine("enter: insert(insert new vehicle), show all licenses, change vehicle status, add air pressure, add fuel to car, "); //TODO : fix message
-                i_userInput = Console.ReadLine();
-                switch (i_userInput)
+                userInput = Console.ReadLine();
+                try
                 {
-                    case ("insert"):
-                        Console.WriteLine("enter license for car: ");
-                        i_licenseCar = Console.ReadLine();
-                        Console.WriteLine("with type vehicle to enter (car/truck/motorcycle): ");
-                        i_withCarToEnter = Console.ReadLine();
-                        i_attributesToEnter = i_garage.addVehicleToGarage(i_licenseCar, i_withCarToEnter);
-                        if (i_attributesToEnter == "car already in garage, moved to status: in-progress")
-                        {
-                            Console.WriteLine(i_attributesToEnter);
-                        }
-                        else //if new car added to the garage
-                        {
-                            Console.WriteLine("enter name of owner: ");
-                            i_nameOfOwnerLastAddedCar = Console.ReadLine();
-                            Console.WriteLine("enter phone of owner: ");
-                            i_phoneOfOwnerLastAddedCar = Console.ReadLine();
-                            Console.WriteLine("enter the status you want for the car (INPROGRESS/FIXED/PAYED): ");
-                            i_carStatusLastAddedCar = Console.ReadLine();
-                            //send data basic about car to garage
-                            i_garage.setLastEnteredVehicle(i_nameOfOwnerLastAddedCar);
-                            i_garage.setLastEnteredVehicle(i_phoneOfOwnerLastAddedCar);
-                            i_garage.setLastEnteredVehicle(i_carStatusLastAddedCar);
-                            i_garage.setLastEnteredVehicle(i_licenseCar);
-
-
-                            i_attributesToEnterArray = i_attributesToEnter.Split(new string[] { "||" }, StringSplitOptions.None);
-                            foreach (string attribute in i_attributesToEnterArray)
-                            {
-                                i_messageWithAttributeToEnter = attribute.Split(new string[] { "::" }, StringSplitOptions.None)[0];
-                                i_withTypeOfAttribute = attribute.Split(new string[] { "::" }, StringSplitOptions.None)[1];
-                                Console.WriteLine(i_messageWithAttributeToEnter);
-                                i_stringInputAttribute = Console.ReadLine();
-                                switch (i_withTypeOfAttribute)
-                                {
-                                    case ("int"):
-                                        if (!int.TryParse(i_stringInputAttribute, out int i_intInputAttribute))
-                                        {
-                                            throw new FormatException("Cannot convert to int");
-                                            //TODO : exception cannot convert to int (done?)
-                                        }
-                                        i_garage.setLastEnteredVehicle(i_intInputAttribute);
-                                        break;
-                                    case ("float"):
-                                        if (!float.TryParse(i_stringInputAttribute, out float i_floatInputAttribute))
-                                        {
-                                            throw new FormatException("Cannot convert to float");
-                                            //TODO : exception cannot convert to int (done?)
-                                        }
-                                        i_garage.setLastEnteredVehicle(i_floatInputAttribute);
-                                        break;
-                                    case ("bool"):
-                                        if (!bool.TryParse(i_stringInputAttribute, out i_booleanInputAttribute))
-                                        {
-                                            throw new FormatException("Cannot convert to bool");
-                                            //TODO : exception cannot convert to boolean (done?)
-                                        }
-                                        i_garage.setLastEnteredVehicle(i_booleanInputAttribute);
-                                        break;
-                                    default: //needed to send string
-                                        i_garage.setLastEnteredVehicle(i_stringInputAttribute);
-                                        break;
-                                }
-                                if (i_messageWithAttributeToEnter == "is car on fuel" && i_booleanInputAttribute == true) //need to send type of fuel only for fuel engine
-                                {
-                                    Console.WriteLine("enter type of fuel for car: ");
-                                    typeOfFuel = Console.ReadLine();
-                                    i_garage.setLastEnteredVehicle(typeOfFuel);
-                                }
-                                
-
-                            }
-                        }
-                        break;
-                    case ("show all licenses"):
-                        Console.WriteLine("what type of licenses(INPROGRESS,FIXED,PAYED,ANY): ");
-                        i_whatTypeOfLicensesToShow = Console.ReadLine();
-                        switch (i_whatTypeOfLicensesToShow)
-                        {
-                            case "A":
-                            case "A1":
-                            case "AA":
-                            case "B1":
-                                allLicenses = i_garage.showAllLicenses(i_whatTypeOfLicensesToShow); //TODO : need to handle exception (done?)
-                                foreach (string i_licenses in allLicenses)
-                                {
-                                    Console.WriteLine(i_licenses);
-                                }
-                                break;
-                            default:
-                                throw new ArgumentException($"No valid license type matches \"{i_whatTypeOfLicensesToShow}\"");
-                        }
-                        break;
-                    case ("change vehicle status"): // i_newDesireStatusCar
-                        Console.WriteLine("enter licenses of car to change status to: ");
-                        i_licenseCarToChangeStatus = Console.ReadLine();
-                        Console.WriteLine("enter new status: ");
-                        i_newDesireStatusCar = Console.ReadLine();
-                        i_garage.changeStatusToCar(i_licenseCarToChangeStatus, i_newDesireStatusCar); //TODO : need to handle exception
-                        break;
-                    case ("add air pressure"):
-                        Console.WriteLine("enter licenses of car to add pressure to: ");
-                        i_licenseCarToAddPressure = Console.ReadLine();
-                        i_garage.FillFullAirPressureInWheels(i_licenseCarToAddPressure); //TODO : need to handle exception
-                        break;
-                    case ("add fuel to car"):
-                        Console.WriteLine("enter licenses of car to add pressure to: ");
-                        i_licenseCarToAddFuel = Console.ReadLine();
-                        Console.WriteLine("enter how much fuel would you like to add: ");
-                        i_howMuchFuelToAdd = Console.ReadLine();
-                        float.TryParse(i_howMuchFuelToAdd, out i_valueHowMuchFuelToAdd); //TODO : need to put this lines in try
-                        Console.WriteLine("enter what type of fuel do you want to use: ");
-                        i_typeOfFuel = Console.ReadLine();
-                        i_garage.addFuel(i_licenseCarToAddFuel, i_valueHowMuchFuelToAdd, i_typeOfFuel); //TODO : need to handle exception
-                        break;
-                    
-
+                    HandleUserInput(garage, userInput);
                 }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+        }
 
+        private static void HandleUserInput(Garage garage, string userInput)
+        {
+            switch (userInput)
+            {
+                case "insert":
+                    InsertVehicle(garage);
+                    break;
+                case "show all licenses":
+                    ShowAllLicenses(garage);
+                    break;
+                case "change vehicle status":
+                    ChangeVehicleStatus(garage);
+                    break;
+                case "add air pressure":
+                    AddAirPressure(garage);
+                    break;
+                case "add fuel to car":
+                    AddFuel(garage);
+                    break;
+                default:
+                    Console.WriteLine("Invalid input. Please try again.");
+                    break;
+            }
+        }
+
+        private static void InsertVehicle(Garage garage)
+        {
+            Console.WriteLine("enter license for car: ");
+            string licenseCar = Console.ReadLine();
+            Console.WriteLine("with type vehicle to enter (car/truck/motorcycle): ");
+            string withCarToEnter = Console.ReadLine();
+
+            string attributesToEnter = garage.addVehicleToGarage(licenseCar, withCarToEnter);
+            if (attributesToEnter == "car already in garage, moved to status: in-progress")
+            {
+                Console.WriteLine(attributesToEnter);
+                return;
             }
 
-            try {; }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            } //Maybe do it like this?
+            Console.WriteLine("enter name of owner: ");
+            string nameOfOwner = Console.ReadLine();
+            Console.WriteLine("enter phone of owner: ");
+            string phoneOfOwner = Console.ReadLine();
+            Console.WriteLine("enter the status you want for the car (INPROGRESS/FIXED/PAYED): ");
+            string carStatus = Console.ReadLine();
 
+            garage.setLastEnteredVehicle(nameOfOwner);
+            garage.setLastEnteredVehicle(phoneOfOwner);
+            garage.setLastEnteredVehicle(carStatus);
+            garage.setLastEnteredVehicle(licenseCar);
+
+            ProcessVehicleAttributes(garage, attributesToEnter);
+        }
+
+        private static void ProcessVehicleAttributes(Garage garage, string attributesToEnter)
+        {
+            string[] attributesArray = attributesToEnter.Split(new string[] { "||" }, StringSplitOptions.None);
+
+            foreach (string attribute in attributesArray)
+            {
+                string messageWithAttributeToEnter = attribute.Split(new string[] { "::" }, StringSplitOptions.None)[0];
+                string typeOfAttribute = attribute.Split(new string[] { "::" }, StringSplitOptions.None)[1];
+                Console.WriteLine(messageWithAttributeToEnter);
+                string inputAttribute = Console.ReadLine();
+
+                switch (typeOfAttribute)
+                {
+                    case "int":
+                        if (!int.TryParse(inputAttribute, out int intInputAttribute))
+                        {
+                            throw new FormatException("Cannot convert to int");
+                        }
+                        garage.setLastEnteredVehicle(intInputAttribute);
+                        break;
+                    case "float":
+                        if (!float.TryParse(inputAttribute, out float floatInputAttribute))
+                        {
+                            throw new FormatException("Cannot convert to float");
+                        }
+                        garage.setLastEnteredVehicle(floatInputAttribute);
+                        break;
+                    case "bool":
+                        if (!bool.TryParse(inputAttribute, out bool boolInputAttribute))
+                        {
+                            throw new FormatException("Cannot convert to bool");
+                        }
+                        garage.setLastEnteredVehicle(boolInputAttribute);
+                        break;
+                    default:
+                        garage.setLastEnteredVehicle(inputAttribute);
+                        break;
+                }
+
+                if (messageWithAttributeToEnter == "is car on fuel" && bool.Parse(inputAttribute))
+                {
+                    Console.WriteLine("enter type of fuel for car: ");
+                    string typeOfFuel = Console.ReadLine();
+                    garage.setLastEnteredVehicle(typeOfFuel);
+                }
+            }
+        }
+
+        private static void ShowAllLicenses(Garage garage)
+        {
+            Console.WriteLine("what type of licenses(INPROGRESS,FIXED,PAYED,ANY): ");
+            string typeOfLicenses = Console.ReadLine();
+
+            List<string> allLicenses = garage.showAllLicenses(typeOfLicenses); //TODO : need to handle exception
+            foreach (string license in allLicenses)
+            {
+                Console.WriteLine(license);
+            }
+        }
+
+        private static void ChangeVehicleStatus(Garage garage)
+        {
+            Console.WriteLine("enter license of car to change status to: ");
+            string licenseCar = Console.ReadLine();
+            Console.WriteLine("enter new status: ");
+            string newStatus = Console.ReadLine();
+            garage.changeStatusToCar(licenseCar, newStatus); //TODO : need to handle exception
+        }
+
+        private static void AddAirPressure(Garage garage)
+        {
+            Console.WriteLine("enter license of car to add pressure to: ");
+            string licenseCar = Console.ReadLine();
+            garage.FillFullAirPressureInWheels(licenseCar); //TODO : need to handle exception
+        }
+
+        private static void AddFuel(Garage garage)
+        {
+            Console.WriteLine("enter license of car to add fuel to: ");
+            string licenseCar = Console.ReadLine();
+            Console.WriteLine("enter how much fuel would you like to add: ");
+            string howMuchFuel = Console.ReadLine();
+            if (!float.TryParse(howMuchFuel, out float valueHowMuchFuel))
+            {
+                throw new FormatException("Cannot convert to float");
+            }
+            Console.WriteLine("enter what type of fuel do you want to use: ");
+            string typeOfFuel = Console.ReadLine();
+            garage.addFuel(licenseCar, valueHowMuchFuel, typeOfFuel); //TODO : need to handle exception
         }
     }
 }
