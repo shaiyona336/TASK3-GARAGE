@@ -167,9 +167,7 @@ namespace Ex03.ConsoleUI
 
         private static void addAirPressure(Garage i_Garage)
         {
-            Console.WriteLine("enter license of car to add pressure to: ");
-            string licenseCar = Console.ReadLine();
-            i_Garage.FillFullAirPressureInWheels(licenseCar); //TODO : need to handle exception
+            executeMethod("enter license of car to add pressure to:", (Action<string>)i_Garage.FillFullAirPressureInWheels);
         }
 
         private static void addFuel(Garage i_Garage)
