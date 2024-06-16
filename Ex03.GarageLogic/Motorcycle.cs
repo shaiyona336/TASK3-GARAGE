@@ -44,6 +44,8 @@ namespace Ex03.GarageLogic
                 case (typeOfLicense.B1):
                     i_typeOfLicense = "B1";
                     break;
+                default:
+                    break;
             }
             return i_typeOfLicense;
         }

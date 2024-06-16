@@ -11,24 +11,44 @@ namespace Ex03.GarageLogic
 
 
 
+        public string getInformationCarInGarage(GarageVehicleWithInformation i_carWithInformationWithSameLicense)
+        {
+            string i_informationCarInGarage = "";
+
+            if (!(i_carWithInformationWithSameLicense == null)) {
+                i_informationCarInGarage = String.Format("name of owner: {0}\n" +
+                    "phone of owner: {1}\n" +
+                    "car status: {2}\n", i_carWithInformationWithSameLicense.getNameOwner(), i_carWithInformationWithSameLicense.getPhoneOwner(), i_carWithInformationWithSameLicense.getCarStatus());
+             }
+            else
+            {
+                //TODO : exception no car to get information to
+            }
+
+            return i_informationCarInGarage;
+        }
+
+
         public string showInformationAboutCar(string licenseCarToShowInformationAbout)
         {
             string i_informationAboutCarInGarage;
             string i_insideCarInformationAboutHimself;
-            string allInformationAboutCar;
+            string allInformationAboutCar = "";
             GarageVehicleWithInformation i_carWithInformationWithSameLicense;
             i_carWithInformationWithSameLicense = isCarLicenseInGarage(licenseCarToShowInformationAbout);
 
             if (licenseCarToShowInformationAbout == null)
             {
-                i_insideCarInformationAboutHimself = "no such car";
+                allInformationAboutCar = "no such car";
             }
             else
             {
+                i_informationAboutCarInGarage = getInformationCarInGarage(i_carWithInformationWithSameLicense);
                 i_insideCarInformationAboutHimself = i_carWithInformationWithSameLicense.getVehicle().getInformationAboutCar();
+                allInformationAboutCar = i_informationAboutCarInGarage + i_insideCarInformationAboutHimself;
             }
 
-            return i_insideCarInformationAboutHimself; // need to return allInformationAboutCar
+            return allInformationAboutCar; // need to return allInformationAboutCar
         }
 
 

@@ -17,6 +17,37 @@ namespace Ex03.GarageLogic
         private string m_phoneOfOwner;
         private carStatus m_statusCar;
 
+
+        public string getNameOwner()
+        {
+            return m_nameOfOwner;
+        }
+        public string getPhoneOwner()
+        {
+            return m_phoneOfOwner;
+        }
+        public string getCarStatus()
+        {
+            string i_carStatus = "";
+
+            switch (m_statusCar)
+            {
+                case (carStatus.INPROGRESS):
+                    i_carStatus = "INPROGRESS";
+                    break;
+                case (carStatus.FIXED):
+                    i_carStatus = "FIXED";
+                    break;
+                case (carStatus.PAYED):
+                    i_carStatus = "PAYED";
+                    break;
+                default:
+                    break;
+            }
+
+            return i_carStatus;
+
+        }
         public Vehicle getVehicle()
         {
             return m_vehicle;
