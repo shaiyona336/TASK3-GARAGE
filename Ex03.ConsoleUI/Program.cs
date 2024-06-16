@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
+using System.Security.Cryptography;
 using Ex03.GarageLogic;
 
 namespace Ex03.ConsoleUI
@@ -59,12 +61,12 @@ namespace Ex03.ConsoleUI
 
         private static void insertVehicle(Garage i_Garage)
         {
-            Console.WriteLine("enter license for car: ");
-            string licenseCar = Console.ReadLine();
-            Console.WriteLine("with type vehicle to enter (car/truck/motorcycle): ");
-            string withCarToEnter = Console.ReadLine();
+            string requestToUser1 = "enter license for car:";
+            string requestToUser2 = "with type vehicle to enter (car/truck/motorcycle):";
+            Func<string, string, string> addVehicleToGarageFunc = i_Garage.addVehicleToGarage;
+            string attributesToEnter = (string)executeMethod(requestToUser1, requestToUser2, addVehicleToGarageFunc,
+                out string licenseCar);
 
-            string attributesToEnter = i_Garage.addVehicleToGarage(licenseCar, withCarToEnter);
             if (attributesToEnter == "car already in garage, moved to status: in-progress")
             {
                 Console.WriteLine(attributesToEnter);
@@ -73,10 +75,10 @@ namespace Ex03.ConsoleUI
 
             // Send data basic about car to garage
             Action<string> setLastEnteredVehicle = i_Garage.setLastEnteredVehicle;
-            executeMethod("enter name of owner: ", setLastEnteredVehicle);
+            executeMethod("enter name of owner:", setLastEnteredVehicle);
             executeMethod("enter phone number of owner:", setLastEnteredVehicle);
             executeMethod("enter the status you want for the car (INPROGRESS/FIXED/PAYED):", setLastEnteredVehicle);
-            i_Garage.setLastEnteredVehicle(licenseCar);
+            setLastEnteredVehicle(licenseCar);
 
             processVehicleAttributes(i_Garage, attributesToEnter);
         }
@@ -92,7 +94,7 @@ namespace Ex03.ConsoleUI
                 Console.WriteLine(messageWithAttributeToEnter);
                 string inputAttribute = Console.ReadLine();
 
-                string parsedValue = parseAttribute(typeOfAttribute, inputAttribute);
+                string parsedValue = parseAttribute(typeOfAttribute, inputAttribute); //TODO: exception generic 2
                 i_Garage.setLastEnteredVehicle(parsedValue);
 
                 if (messageWithAttributeToEnter == "is car on fuel" && bool.Parse(inputAttribute))
@@ -122,15 +124,13 @@ namespace Ex03.ConsoleUI
 
         private static void showAllLicenses(Garage i_Garage)
         {
-            string i_whatTypeOfLicensesToShow;
-            List<string> allLicenses;
-            Console.WriteLine("what type of licenses(INPROGRESS,FIXED,PAYED,ANY): ");
-            i_whatTypeOfLicensesToShow = Console.ReadLine();
-            allLicenses = i_Garage.showAllLicenses(i_whatTypeOfLicensesToShow); //TODO : need to handle exception
-            foreach (string i_licenses in allLicenses)
+            string askForLicenseType = "what type of licenses(INPROGRESS,FIXED,PAYED,ANY):";
+            Func<string, List<string>> showAllLicensesFunc = i_Garage.showAllLicenses;
+            var allLicenses = executeMethod(askForLicenseType, showAllLicensesFunc);
+
+            foreach (string i_licenses in (List<string>)allLicenses)
             {
                 Console.WriteLine(i_licenses);
-
             }
         }
 
@@ -138,7 +138,7 @@ namespace Ex03.ConsoleUI
         //{
         //    Console.WriteLine("what type of licenses(INPROGRESS,FIXED,PAYED,ANY): ");
         //    string typeOfLicenses = Console.ReadLine();
-
+        //
         //    switch (typeOfLicenses)
         //    {
         //        case "A":
@@ -158,11 +158,10 @@ namespace Ex03.ConsoleUI
 
         private static void changeVehicleStatus(Garage i_Garage)
         {
-            Console.WriteLine("enter license of car to change status to: ");
-            string licenseCar = Console.ReadLine();
-            Console.WriteLine("enter new status: ");
-            string newStatus = Console.ReadLine();
-            i_Garage.changeStatusToCar(licenseCar, newStatus); //TODO : need to handle exception
+            string requestToUser1 = "enter license of car to change status to:";
+            string requestToUser2 = "enter new status:";
+            Action<string, string> changeStatusToCarFunc = i_Garage.changeStatusToCar;
+            executeMethod(requestToUser1, requestToUser2, changeStatusToCarFunc);
         }
 
         private static void addAirPressure(Garage i_Garage)
@@ -183,7 +182,7 @@ namespace Ex03.ConsoleUI
             }
             Console.WriteLine("enter what type of fuel do you want to use: ");
             string typeOfFuel = Console.ReadLine();
-            i_Garage.addFuel(licenseCar, valueHowMuchFuel, typeOfFuel); //TODO : need to handle exception
+            i_Garage.addFuel(licenseCar, valueHowMuchFuel, typeOfFuel); //TODO: exception generic 3
         }
 
         public static void addElectricity(Garage i_Garage)
@@ -199,27 +198,25 @@ namespace Ex03.ConsoleUI
             {
                 throw new FormatException("Cannot convert to float");
             }
-            i_Garage.addElectricity(i_licenseCarToCharge, i_valueHowMuchElectricityToAdd);
+            i_Garage.addElectricity(i_licenseCarToCharge, i_valueHowMuchElectricityToAdd);//TODO: exception generic 2
 
         }
 
         public static void showInformationAboutCar(Garage i_Garage)
         {
-            string i_licenseCarToShowInformationAbout;
-            string i_informationAboutCar;
+            string askForCarLicenseMessage = "enter license of car to show information about:";
+            Func<string, string> showInformationAboutCarFunc = i_Garage.showInformationAboutCar;
 
-            Console.WriteLine("enter license of car to show information about: ");
-            i_licenseCarToShowInformationAbout = Console.ReadLine();
-            i_informationAboutCar = i_Garage.showInformationAboutCar(i_licenseCarToShowInformationAbout);
-            Console.WriteLine(i_informationAboutCar);
+            string informationAboutCar = (string)executeMethod(askForCarLicenseMessage, showInformationAboutCarFunc);
+            Console.WriteLine(informationAboutCar);
         }
 
-        private static object executeMethod(string i_RequestFromUser, Delegate i_Function)
+        private static object executeMethod(string i_RequestFromUser1, Delegate i_Function)
         {
             object returnValue = null;
             while (true)
             {
-                Console.WriteLine(i_RequestFromUser);
+                Console.WriteLine(i_RequestFromUser1);
                 string userInput = Console.ReadLine();
 
                 try
@@ -241,6 +238,90 @@ namespace Ex03.ConsoleUI
                 }
             }
             return returnValue;
+        }
+
+        private static object executeMethod(string i_RequestFromUser1, string i_RequestFromUser2, Delegate i_Function, 
+            out string o_UserInput1, out string o_UserInput2)
+        {
+            object returnValue = null;
+            while (true)
+            {
+                Console.WriteLine(i_RequestFromUser1);
+                string userInput1 = Console.ReadLine();
+                Console.WriteLine(i_RequestFromUser2);
+                string userInput2 = Console.ReadLine();
+
+                try
+                {
+                    if (i_Function is Func<string, string, object> nonVoidMethod)
+                    {
+                        returnValue = nonVoidMethod(userInput1, userInput2);
+                    }
+                    else if (i_Function is Action<string, string> voidMethod)
+                    {
+                        voidMethod(userInput1, userInput2);
+                    }
+                    o_UserInput1 = userInput1;
+                    o_UserInput2 = userInput2;
+                    break;
+                }
+                catch (Exception exception)
+                {
+                    Console.WriteLine(exception.Message);
+                }
+            }
+            return returnValue;
+        }
+
+        private static object executeMethod(string i_RequestFromUser1, string i_RequestFromUser2, Delegate i_Function, 
+            out string o_UserInput1)
+        {
+            return executeMethod(i_RequestFromUser1, i_RequestFromUser2, i_Function, out o_UserInput1, out string dummy2);
+        }
+
+        private static object executeMethod(string i_RequestFromUser1, string i_RequestFromUser2, Delegate i_Function)
+        {
+            return executeMethod(i_RequestFromUser1, i_RequestFromUser2, i_Function, out string dummy1, out string dummy2);
+        }
+
+        //private static object executeMethod(Delegate i_Function, params string[] i_RequestsFromUser)
+        //{
+        //    object returnValue = null;
+        //    string[] userInputs = new string[i_RequestsFromUser.Length];
+        //    while (true)
+        //    {
+        //        for (int i = 0; i < i_RequestsFromUser.Length; i++)
+        //        {
+        //            Console.WriteLine(i_RequestsFromUser[i]);
+        //            userInputs[i] = Console.ReadLine();
+        //        }
+        //
+        //        try
+        //        {
+        //            if (getAmountOfInParamsInDelegate(i_Function) != i_RequestsFromUser.Length)
+        //            {
+        //                returnValue = nonVoidMethod(userInput);
+        //            }
+        //            else if (i_Function is Action<string> voidMethod)
+        //            {
+        //                voidMethod(userInput);
+        //            }
+        //
+        //            break;
+        //        }
+        //        catch (Exception exception)
+        //        {
+        //            Console.WriteLine(exception.Message);
+        //        }
+        //
+        //    }
+        //}
+
+        private static int getAmountOfInParamsInDelegate(Delegate i_delegate)
+        {
+            MethodInfo methodInfo = i_delegate.Method;
+            ParameterInfo[] deletageParameters = methodInfo.GetParameters();
+            return deletageParameters.Length;
         }
 
     }
