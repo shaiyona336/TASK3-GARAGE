@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using Ex03.GarageLogic;
 
@@ -94,8 +95,16 @@ namespace Ex03.ConsoleUI
                 Console.WriteLine(messageWithAttributeToEnter);
                 string inputAttribute = Console.ReadLine();
 
-                string parsedValue = parseAttribute(typeOfAttribute, inputAttribute); //TODO: exception generic 2
-                i_Garage.setLastEnteredVehicle(parsedValue);
+                string parsedValue = parseAttribute(typeOfAttribute, inputAttribute);
+                try
+                {
+                    i_Garage.setLastEnteredVehicle(parsedValue);
+                }
+                catch (Exception exception)
+                {
+                    Console.WriteLine(exception.Message);
+                    //TODO: Exception here is not enough. Still need to handle it
+                }
 
                 if (messageWithAttributeToEnter == "is car on fuel" && bool.Parse(inputAttribute))
                 {
@@ -116,7 +125,7 @@ namespace Ex03.ConsoleUI
 
             if (!parsers.ContainsKey(i_TypeOfAttribute))
             {
-                throw new ArgumentException($"Unsupported attribute type: {i_TypeOfAttribute}");
+                throw new ArgumentException($"Unsupported attribute type: {i_TypeOfAttribute}", i_TypeOfAttribute);
             }
 
             return parsers[i_TypeOfAttribute](i_InputAttribute);
@@ -171,35 +180,49 @@ namespace Ex03.ConsoleUI
 
         private static void addFuel(Garage i_Garage)
         {
+            methodStart:
             Console.WriteLine("enter license of car to add fuel to: ");
             string licenseCar = Console.ReadLine();
+
             Console.WriteLine("enter how much fuel would you like to add: ");
             string howMuchFuel = Console.ReadLine();
-            if (!float.TryParse(howMuchFuel, out float valueHowMuchFuel))
-            {
-                throw new FormatException("Cannot convert to float");
-                //TODO : need to put this line in try
-            }
+            float valueHowMuchFuel = float.Parse(howMuchFuel);
+
             Console.WriteLine("enter what type of fuel do you want to use: ");
             string typeOfFuel = Console.ReadLine();
-            i_Garage.addFuel(licenseCar, valueHowMuchFuel, typeOfFuel); //TODO: exception generic 3
+
+            try
+            {
+                i_Garage.addFuel(licenseCar, valueHowMuchFuel, typeOfFuel); 
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+                goto methodStart;
+            }
         }
 
         public static void addElectricity(Garage i_Garage)
         {
-            string i_licenseCarToCharge;
-            string i_howMuchElectricityToAdd;
+            methodStart:
+            string licenseCarToCharge;
+            string howMuchElectricityToAdd;
 
             Console.WriteLine("enter licenses of car to add pressure to: ");
-            i_licenseCarToCharge = Console.ReadLine();
+            licenseCarToCharge = Console.ReadLine();
             Console.WriteLine("enter amount of hours to add to battery: ");
-            i_howMuchElectricityToAdd = Console.ReadLine();
-            if (!float.TryParse(i_howMuchElectricityToAdd, out float i_valueHowMuchElectricityToAdd))
-            {
-                throw new FormatException("Cannot convert to float");
-            }
-            i_Garage.addElectricity(i_licenseCarToCharge, i_valueHowMuchElectricityToAdd);//TODO: exception generic 2
+            howMuchElectricityToAdd = Console.ReadLine();
+            float i_valueHowMuchElectricityToAdd = float.Parse(howMuchElectricityToAdd);
 
+            try
+            {
+                i_Garage.addElectricity(licenseCarToCharge, i_valueHowMuchElectricityToAdd);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+                goto methodStart;
+            }
         }
 
         public static void showInformationAboutCar(Garage i_Garage)
@@ -240,7 +263,7 @@ namespace Ex03.ConsoleUI
             return returnValue;
         }
 
-        private static object executeMethod(string i_RequestFromUser1, string i_RequestFromUser2, Delegate i_Function, 
+        private static object executeMethod(string i_RequestFromUser1, string i_RequestFromUser2, Delegate i_Function,
             out string o_UserInput1, out string o_UserInput2)
         {
             object returnValue = null;
@@ -273,7 +296,7 @@ namespace Ex03.ConsoleUI
             return returnValue;
         }
 
-        private static object executeMethod(string i_RequestFromUser1, string i_RequestFromUser2, Delegate i_Function, 
+        private static object executeMethod(string i_RequestFromUser1, string i_RequestFromUser2, Delegate i_Function,
             out string o_UserInput1)
         {
             return executeMethod(i_RequestFromUser1, i_RequestFromUser2, i_Function, out o_UserInput1, out string dummy2);
