@@ -24,8 +24,8 @@ namespace Ex03.ConsoleUI
             string i_messageWithAttributeToEnter;
             //input attribute
             string i_stringInputAttribute;
-            int i_intInputAttribute;
-            float i_floatInputAttribute;
+            //int i_intInputAttribute;
+            //float i_floatInputAttribute;
             bool i_booleanInputAttribute = false;
 
             string i_withCarToEnter;
@@ -106,7 +106,7 @@ namespace Ex03.ConsoleUI
                                         i_garage.setLastEnteredVehicle(i_floatInputAttribute);
                                         break;
                                     case ("bool"):
-                                        if (!bool.TryParse(i_stringInputAttribute, out bool i_booleanInputAttribute))
+                                        if (!bool.TryParse(i_stringInputAttribute, out i_booleanInputAttribute))
                                         {
                                             throw new FormatException("Cannot convert to bool");
                                             //TODO : exception cannot convert to boolean (done?)
