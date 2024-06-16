@@ -92,44 +92,32 @@ namespace Ex03.ConsoleUI
                 Console.WriteLine(messageWithAttributeToEnter);
                 string inputAttribute = Console.ReadLine();
 
-                switch (typeOfAttribute)
-                {
-                    case "int":
-                        if (!int.TryParse(inputAttribute, out int intInputAttribute))
-                        {
-                            throw new FormatException("Cannot convert to int");
-                            //TODO : exception cannot convert to int (done?)
-                        }
-                        i_Garage.setLastEnteredVehicle(intInputAttribute);
-                        break;
-                    case "float":
-                        if (!float.TryParse(inputAttribute, out float floatInputAttribute))
-                        {
-                            throw new FormatException("Cannot convert to float");
-                            //TODO : exception cannot convert to float (done?)
-                        }
-                        i_Garage.setLastEnteredVehicle(floatInputAttribute);
-                        break;
-                    case "bool":
-                        if (!bool.TryParse(inputAttribute, out bool boolInputAttribute))
-                        {
-                            throw new FormatException("Cannot convert to bool");
-                            //TODO : exception cannot convert to boolean (done?)
-                        }
-                        i_Garage.setLastEnteredVehicle(boolInputAttribute);
-                        break;
-                    default: // Needed to send string
-                        i_Garage.setLastEnteredVehicle(inputAttribute);
-                        break;
-                }
+                string parsedValue = parseAttribute(typeOfAttribute, inputAttribute);
+                i_Garage.setLastEnteredVehicle(parsedValue);
 
                 if (messageWithAttributeToEnter == "is car on fuel" && bool.Parse(inputAttribute))
                 {
-                    Console.WriteLine("enter type of fuel for car: ");
-                    string typeOfFuel = Console.ReadLine();
-                    i_Garage.setLastEnteredVehicle(typeOfFuel);
+                    executeMethod("enter type of fuel for car:", (Action<string>)i_Garage.setLastEnteredVehicle);
                 }
             }
+        }
+
+        private static string parseAttribute(string i_TypeOfAttribute, string i_InputAttribute)
+        {
+            var parsers = new Dictionary<string, Func<string, string>>
+    {
+        { "int", input => int.TryParse(input, out int result) ? input : throw new FormatException("Cannot convert to int") },
+        { "float", input => float.TryParse(input, out float result) ? input : throw new FormatException("Cannot convert to float") },
+        { "bool", input => bool.TryParse(input, out bool result) ? input : throw new FormatException("Cannot convert to bool") },
+        { "string", input => input }
+    };
+
+            if (!parsers.ContainsKey(i_TypeOfAttribute))
+            {
+                throw new ArgumentException($"Unsupported attribute type: {i_TypeOfAttribute}");
+            }
+
+            return parsers[i_TypeOfAttribute](i_InputAttribute);
         }
 
         private static void showAllLicenses(Garage i_Garage)
