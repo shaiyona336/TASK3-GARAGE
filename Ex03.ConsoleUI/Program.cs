@@ -13,11 +13,11 @@ namespace Ex03.ConsoleUI
 
             while (userInput != "Q")
             {
-                Console.WriteLine("enter: insert(insert new vehicle), show all licenses, change vehicle status, add air pressure, add fuel to car, "); //TODO : fix message
+                Console.WriteLine("enter: insert(insert new vehicle), show all licenses, change vehicle status, add air pressure, add fuel to car, ");
                 userInput = Console.ReadLine();
                 try
                 {
-                    HandleUserInput(garage, userInput);
+                    handleUserInput(garage, userInput);
                 }
                 catch (Exception ex)
                 {
@@ -26,24 +26,24 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        private static void HandleUserInput(Garage garage, string userInput)
+        private static void handleUserInput(Garage i_Garage, string i_UserInput)
         {
-            switch (userInput)
+            switch (i_UserInput)
             {
                 case "insert":
-                    InsertVehicle(garage);
+                    insertVehicle(i_Garage);
                     break;
                 case "show all licenses":
-                    ShowAllLicenses(garage);
+                    showAllLicenses(i_Garage);
                     break;
                 case "change vehicle status":
-                    ChangeVehicleStatus(garage);
+                    changeVehicleStatus(i_Garage);
                     break;
                 case "add air pressure":
-                    AddAirPressure(garage);
+                    addAirPressure(i_Garage);
                     break;
                 case "add fuel to car":
-                    AddFuel(garage);
+                    addFuel(i_Garage);
                     break;
                 default:
                     Console.WriteLine("Invalid input. Please try again.");
@@ -51,14 +51,14 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        private static void InsertVehicle(Garage garage)
+        private static void insertVehicle(Garage i_Garage)
         {
             Console.WriteLine("enter license for car: ");
             string licenseCar = Console.ReadLine();
             Console.WriteLine("with type vehicle to enter (car/truck/motorcycle): ");
             string withCarToEnter = Console.ReadLine();
 
-            string attributesToEnter = garage.addVehicleToGarage(licenseCar, withCarToEnter);
+            string attributesToEnter = i_Garage.addVehicleToGarage(licenseCar, withCarToEnter);
             if (attributesToEnter == "car already in garage, moved to status: in-progress")
             {
                 Console.WriteLine(attributesToEnter);
@@ -72,17 +72,17 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("enter the status you want for the car (INPROGRESS/FIXED/PAYED): ");
             string carStatus = Console.ReadLine();
 
-            garage.setLastEnteredVehicle(nameOfOwner);
-            garage.setLastEnteredVehicle(phoneOfOwner);
-            garage.setLastEnteredVehicle(carStatus);
-            garage.setLastEnteredVehicle(licenseCar);
+            i_Garage.setLastEnteredVehicle(nameOfOwner);
+            i_Garage.setLastEnteredVehicle(phoneOfOwner);
+            i_Garage.setLastEnteredVehicle(carStatus);
+            i_Garage.setLastEnteredVehicle(licenseCar);
 
-            ProcessVehicleAttributes(garage, attributesToEnter);
+            processVehicleAttributes(i_Garage, attributesToEnter);
         }
 
-        private static void ProcessVehicleAttributes(Garage garage, string attributesToEnter)
+        private static void processVehicleAttributes(Garage i_Garage, string i_AttributesToEnter)
         {
-            string[] attributesArray = attributesToEnter.Split(new string[] { "||" }, StringSplitOptions.None);
+            string[] attributesArray = i_AttributesToEnter.Split(new string[] { "||" }, StringSplitOptions.None);
 
             foreach (string attribute in attributesArray)
             {
@@ -98,24 +98,24 @@ namespace Ex03.ConsoleUI
                         {
                             throw new FormatException("Cannot convert to int");
                         }
-                        garage.setLastEnteredVehicle(intInputAttribute);
+                        i_Garage.setLastEnteredVehicle(intInputAttribute);
                         break;
                     case "float":
                         if (!float.TryParse(inputAttribute, out float floatInputAttribute))
                         {
                             throw new FormatException("Cannot convert to float");
                         }
-                        garage.setLastEnteredVehicle(floatInputAttribute);
+                        i_Garage.setLastEnteredVehicle(floatInputAttribute);
                         break;
                     case "bool":
                         if (!bool.TryParse(inputAttribute, out bool boolInputAttribute))
                         {
                             throw new FormatException("Cannot convert to bool");
                         }
-                        garage.setLastEnteredVehicle(boolInputAttribute);
+                        i_Garage.setLastEnteredVehicle(boolInputAttribute);
                         break;
                     default:
-                        garage.setLastEnteredVehicle(inputAttribute);
+                        i_Garage.setLastEnteredVehicle(inputAttribute);
                         break;
                 }
 
@@ -123,40 +123,40 @@ namespace Ex03.ConsoleUI
                 {
                     Console.WriteLine("enter type of fuel for car: ");
                     string typeOfFuel = Console.ReadLine();
-                    garage.setLastEnteredVehicle(typeOfFuel);
+                    i_Garage.setLastEnteredVehicle(typeOfFuel);
                 }
             }
         }
 
-        private static void ShowAllLicenses(Garage garage)
+        private static void showAllLicenses(Garage i_Garage)
         {
             Console.WriteLine("what type of licenses(INPROGRESS,FIXED,PAYED,ANY): ");
             string typeOfLicenses = Console.ReadLine();
 
-            List<string> allLicenses = garage.showAllLicenses(typeOfLicenses); //TODO : need to handle exception
+            List<string> allLicenses = i_Garage.showAllLicenses(typeOfLicenses);
             foreach (string license in allLicenses)
             {
                 Console.WriteLine(license);
             }
         }
 
-        private static void ChangeVehicleStatus(Garage garage)
+        private static void changeVehicleStatus(Garage i_Garage)
         {
             Console.WriteLine("enter license of car to change status to: ");
             string licenseCar = Console.ReadLine();
             Console.WriteLine("enter new status: ");
             string newStatus = Console.ReadLine();
-            garage.changeStatusToCar(licenseCar, newStatus); //TODO : need to handle exception
+            i_Garage.changeStatusToCar(licenseCar, newStatus);
         }
 
-        private static void AddAirPressure(Garage garage)
+        private static void addAirPressure(Garage i_Garage)
         {
             Console.WriteLine("enter license of car to add pressure to: ");
             string licenseCar = Console.ReadLine();
-            garage.FillFullAirPressureInWheels(licenseCar); //TODO : need to handle exception
+            i_Garage.FillFullAirPressureInWheels(licenseCar);
         }
 
-        private static void AddFuel(Garage garage)
+        private static void addFuel(Garage i_Garage)
         {
             Console.WriteLine("enter license of car to add fuel to: ");
             string licenseCar = Console.ReadLine();
@@ -168,7 +168,7 @@ namespace Ex03.ConsoleUI
             }
             Console.WriteLine("enter what type of fuel do you want to use: ");
             string typeOfFuel = Console.ReadLine();
-            garage.addFuel(licenseCar, valueHowMuchFuel, typeOfFuel); //TODO : need to handle exception
+            i_Garage.addFuel(licenseCar, valueHowMuchFuel, typeOfFuel);
         }
     }
 }
