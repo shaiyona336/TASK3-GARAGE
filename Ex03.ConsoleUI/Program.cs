@@ -71,17 +71,11 @@ namespace Ex03.ConsoleUI
                 return;
             }
 
-            Console.WriteLine("enter name of owner: ");
-            string nameOfOwner = Console.ReadLine();
-            Console.WriteLine("enter phone of owner: ");
-            string phoneOfOwner = Console.ReadLine();
-            Console.WriteLine("enter the status you want for the car (INPROGRESS/FIXED/PAYED): ");
-            string carStatus = Console.ReadLine();
-
             // Send data basic about car to garage
-            i_Garage.setLastEnteredVehicle(nameOfOwner);
-            i_Garage.setLastEnteredVehicle(phoneOfOwner);
-            i_Garage.setLastEnteredVehicle(carStatus);
+            Action<string> setLastEnteredVehicle = i_Garage.setLastEnteredVehicle;
+            executeMethod("enter name of owner: ", setLastEnteredVehicle);
+            executeMethod("enter phone number of owner:", setLastEnteredVehicle);
+            executeMethod("enter the status you want for the car (INPROGRESS/FIXED/PAYED):", setLastEnteredVehicle);
             i_Garage.setLastEnteredVehicle(licenseCar);
 
             processVehicleAttributes(i_Garage, attributesToEnter);
@@ -221,7 +215,7 @@ namespace Ex03.ConsoleUI
             }
             i_Garage.addElectricity(i_licenseCarToCharge, i_valueHowMuchElectricityToAdd);
 
-         }
+        }
 
         public static void showInformationAboutCar(Garage i_Garage)
         {
@@ -234,7 +228,36 @@ namespace Ex03.ConsoleUI
             Console.WriteLine(i_informationAboutCar);
         }
 
-     }
+        private static object executeMethod(string i_RequestFromUser, Delegate i_Function)
+        {
+            object returnValue = null;
+            while (true)
+            {
+                Console.WriteLine(i_RequestFromUser);
+                string userInput = Console.ReadLine();
+
+                try
+                {
+                    if (i_Function is Func<string, object> nonVoidMethod)
+                    {
+                        returnValue = nonVoidMethod(userInput);
+                    }
+                    else if (i_Function is Action<string> voidMethod)
+                    {
+                        voidMethod(userInput);
+                    }
+
+                    break;
+                }
+                catch (Exception exception)
+                {
+                    Console.WriteLine(exception.Message);
+                }
+            }
+            return returnValue;
+        }
+
+    }
 }
 
 
