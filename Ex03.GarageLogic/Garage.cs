@@ -155,7 +155,7 @@ namespace Ex03.GarageLogic
             {
                 m_indexSetupAttribute = 0;
                 //TODO : add options for types of vehicles to create
-                i_newCar = getVehicleFromString(typeOfCar);
+                i_newCar = makeNewCar.getVehicleFromString(typeOfCar);
                 i_newCarWithInformation = new GarageVehicleWithInformation();
                 i_newCarWithInformation.setVehicle(i_newCar);
                 if (m_vehiclesInGarage == null)
@@ -169,28 +169,6 @@ namespace Ex03.GarageLogic
             return i_argumentsToFillToInitializeVehicle;
         }
 
-
-        private Vehicle getVehicleFromString(string i_withCar)
-        {
-            Vehicle i_newCar = null;
-
-            switch (i_withCar)
-            {
-                case ("car"):
-                    i_newCar = new Car();
-                    break;
-                case ("truck"):
-                    i_newCar = new Truck();
-                    break;
-                case ("Motorcycle"):
-                    i_newCar = new MotorCycle();
-                    break;
-                default:
-                    //TODO : exception no such car
-                    break;
-            }
-            return i_newCar;
-        }
 
         public void setLastEnteredVehicle(string stringAttribute)
         {
