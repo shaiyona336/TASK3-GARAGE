@@ -125,6 +125,10 @@ namespace Ex03.GarageLogic
 
         public override void setCarInitialState(float i_floatAttribute)
         {
+            if (m_engine != null && m_engine is ElectricEngine) 
+            {
+                m_indexSetupAttribute++;
+            }
             if (m_indexSetupAttribute == 1)
             {
                 setInitialWheelsPressure(i_floatAttribute);

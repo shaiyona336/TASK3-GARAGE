@@ -101,7 +101,7 @@ namespace Ex03.GarageLogic
                     "color: {4}\n" +
                     "number of doors: {5}\n" +
                     "how much hours for battery: {6}\n" +
-                    "maximum amount of hours for battery: {7}\n" , getModelName(), getAirPressureInWheels(), getAirPressureInWheels(), getWheeslManufactorName(), m_color, m_numberOfDoors, m_engine.getEnergy(), m_engine.getMaximumEnergy());
+                    "maximum amount of hours for battery: {7}\n" , getModelName(), getAirPressureInWheels(), getMaximumAirPressureInWheels(), getWheeslManufactorName(), m_color, m_numberOfDoors, m_engine.getEnergy(), m_engine.getMaximumEnergy());
             }
 
             return i_informationAboutCar;
@@ -153,6 +153,10 @@ namespace Ex03.GarageLogic
 
         public override void setCarInitialState(float i_floatAttribute)
         {
+            if (m_engine != null && m_engine is ElectricEngine) //electric engine do not need to get type of fuel, so the index of set maximum energy is one less and need to add one
+            {
+                m_indexSetupAttribute++;
+            }
             if (m_indexSetupAttribute == 1)
             {
                 setInitialWheelsPressure(i_floatAttribute);

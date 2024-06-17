@@ -179,6 +179,10 @@ namespace Ex03.GarageLogic
 
         public override void setCarInitialState(float i_floatAttribute)
         {
+            if (m_engine != null && m_engine is ElectricEngine)
+            {
+                m_indexSetupAttribute++;
+            }
             if (m_indexSetupAttribute == 1)
             {
                 setInitialWheelsPressure(i_floatAttribute);
@@ -187,7 +191,7 @@ namespace Ex03.GarageLogic
             {
                 addWheelsPressure(i_floatAttribute);
             }
-            else if (m_indexSetupAttribute == 6)
+            else if (m_indexSetupAttribute == 8)
             {
                 m_engine.setMaximumEnergy(i_floatAttribute);
             }
@@ -201,7 +205,7 @@ namespace Ex03.GarageLogic
 
         public override void setCarInitialState(bool i_boolAttribute)
         {
-            if (m_indexSetupAttribute == 8)
+            if (m_indexSetupAttribute == 6)
             {
                 m_engine = WorkOnCar.setEngineByBool(i_boolAttribute);
             }
