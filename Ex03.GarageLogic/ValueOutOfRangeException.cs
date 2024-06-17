@@ -18,7 +18,7 @@ namespace Ex03.GarageLogic
         }
 
         public ValueOutOfRangeException(float i_MinValue, float i_MaxValue)
-            : this($"The value should be a number between {i_MinValue} and {i_MaxValue}.", i_MinValue, i_MaxValue)
+            : this($"The given value must be a number between {i_MinValue} and {i_MaxValue}.", i_MinValue, i_MaxValue)
         {
         }
 

@@ -94,18 +94,23 @@ namespace Ex03.GarageLogic
 
         public void setAirPressureInWheelToMaximum()
         {
-            if (m_wheels.Count != 0)
-                {
-                    foreach (Wheel wheel in m_wheels)
-                {
-                    wheel.setAirPressureInWheelToMaximum();
-                }
-                   }
-                else
-                    {
-                        //TODO : exception no wheels in vehicle
-                    }
-          }
+            foreach (Wheel wheel in m_wheels)
+            {
+                wheel.setAirPressureInWheelToMaximum();
+            }
+
+            //if (m_wheels.Count != 0)
+            //{
+            //    foreach (Wheel wheel in m_wheels)
+            //    {
+            //        wheel.setAirPressureInWheelToMaximum();
+            //    }
+            //}
+            //else
+            //{
+            //    //TODO : exception no wheels in vehicle (might not need)
+            //}
+        }
 
 
         public void initializeWheels(int numberOfWheels)

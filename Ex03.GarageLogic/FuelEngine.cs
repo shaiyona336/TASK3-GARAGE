@@ -95,8 +95,7 @@ namespace Ex03.GarageLogic
                     typeOfFuelCorrectFormat = typeOfFuel.Octan98;
                     break;
                 default:
-                    //TODO: throw exception invalid fuel
-                    break;
+                    throw new ArgumentException("{typeOfEnergy} is not a valid fuel type", nameof(typeOfEnergy));
             }
             if (typeOfFuelCorrectFormat == m_typeFuel)
             {

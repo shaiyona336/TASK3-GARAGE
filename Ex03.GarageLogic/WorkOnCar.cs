@@ -27,31 +27,18 @@ namespace Ex03.GarageLogic
             return i_flag;
         }
 
-        public static void addResourceToResource(ref int addTo, int howMuchToAdd, int maximumAirPressureInWheel)
-        {
-            if (addTo + howMuchToAdd <= maximumAirPressureInWheel)
-            {
-                addTo = addTo + howMuchToAdd;
-            }
-            else
-            {
-                //TODO: throw exception
-            }
-        }
-
         public static void addResourceToResource(ref float addTo, float howMuchToAdd, float maximumAirPressureInWheel)
         {
             if (addTo + howMuchToAdd <= maximumAirPressureInWheel)
             {
-                addTo = addTo + howMuchToAdd;
+                addTo += howMuchToAdd;
             }
             else
             {
-                //TODO: throw exception
+                throw new ValueOutOfRangeException(0, maximumAirPressureInWheel);
             }
 
         }
-
 
         public static Engine setEngineByBool(bool isFuel)
         {

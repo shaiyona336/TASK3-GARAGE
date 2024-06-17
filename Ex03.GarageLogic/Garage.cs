@@ -15,14 +15,17 @@ namespace Ex03.GarageLogic
         {
             string i_informationCarInGarage = "";
 
-            if (!(i_carWithInformationWithSameLicense == null)) {
+            if (i_carWithInformationWithSameLicense != null)
+            {
                 i_informationCarInGarage = String.Format("name of owner: {0}\n" +
                     "phone of owner: {1}\n" +
-                    "car status: {2}\n", i_carWithInformationWithSameLicense.getNameOwner(), i_carWithInformationWithSameLicense.getPhoneOwner(), i_carWithInformationWithSameLicense.getCarStatus());
-             }
+                    "car status: {2}\n", i_carWithInformationWithSameLicense.getNameOwner(), 
+                    i_carWithInformationWithSameLicense.getPhoneOwner(), 
+                    i_carWithInformationWithSameLicense.getCarStatus());
+            }
             else
             {
-                //TODO : exception no car to get information to
+                throw new ArgumentException("No Vehicle to get information from", nameof(i_carWithInformationWithSameLicense));
             }
 
             return i_informationCarInGarage;
@@ -52,18 +55,19 @@ namespace Ex03.GarageLogic
         }
 
 
-      
 
 
-    public void addElectricity(string i_licenseCarToAddAirPressureTo, float i_howMuchElectricityToAdd)
+
+        public void addElectricity(string i_licenseCarToAddAirPressureTo, float i_howMuchElectricityToAdd)
         {
             GarageVehicleWithInformation i_carWithInformationWithSameLicense = isCarLicenseInGarage(i_licenseCarToAddAirPressureTo);
             if (i_carWithInformationWithSameLicense == null)
             {
-                //TODO :throw exception no car with such license found
+                throw new KeyNotFoundException("No vehicle with that license was found in the garage");
             }
-            else if (!(i_carWithInformationWithSameLicense.getVehicle().isElectricity())) {
-                //TODO :throw exception car not run on electricity
+            else if (!i_carWithInformationWithSameLicense.getVehicle().isElectricity())
+            {
+                throw new InvalidOperationException("Vehicle does not run on electricity");
             }
             else
             {
@@ -76,11 +80,11 @@ namespace Ex03.GarageLogic
             GarageVehicleWithInformation i_carWithInformationWithSameLicense = isCarLicenseInGarage(i_licenseCarToAddAirPressureTo);
             if (i_carWithInformationWithSameLicense == null)
             {
-                //TODO :throw exception no car with such license found
+                throw new KeyNotFoundException("No vehicle with that license was found in the garage");
             }
-            else if (!(i_carWithInformationWithSameLicense.getVehicle().isFuel()))
+            else if (!i_carWithInformationWithSameLicense.getVehicle().isFuel())
             {
-                //TODO :throw exception car not run on electricity
+                throw new InvalidOperationException("Vehicle does not run on fuel");
             }
             else
             {
@@ -95,27 +99,28 @@ namespace Ex03.GarageLogic
             GarageVehicleWithInformation i_carWithInformationWithSameLicense = isCarLicenseInGarage(i_licenseCarToAddAirPressureTo);
             if (i_carWithInformationWithSameLicense == null)
             {
-                //TODO :throw exception no car with such license found
+                throw new KeyNotFoundException("No vehicle with that license was found in the garage");
             }
             else
             {
                 i_carWithInformationWithSameLicense.FillWheelsPressure();
             }
 
-         }
+        }
 
         public void changeStatusToCar(string i_licenseCarToChangeStatusTo, string i_newStatusOfCar)
         {
             GarageVehicleWithInformation i_carWithInformationWithSameLicense = isCarLicenseInGarage(i_licenseCarToChangeStatusTo);
             if (i_carWithInformationWithSameLicense == null)
             {
-                //TODO :throw exception no car with such license found
+                throw new ArgumentException("No vehice with that license was found in the garage",
+                    nameof(i_carWithInformationWithSameLicense));
             }
             else
             {
                 if (i_newStatusOfCar != "INPROGRESS" && i_newStatusOfCar != "FIXED" && i_newStatusOfCar != "PAYED")
                 {
-                    //TODO : throw exception no such status to change to
+                    throw new ArgumentException($"\"{i_newStatusOfCar}\" is not a valid status", nameof(i_newStatusOfCar));
                 }
                 i_carWithInformationWithSameLicense.setStatusCar(i_newStatusOfCar);
             }
@@ -186,8 +191,7 @@ namespace Ex03.GarageLogic
                     i_newCar = new MotorCycle();
                     break;
                 default:
-                    throw new ArgumentException($"There's no type of vehicle that matches with \"{i_withCar}\"");
-                    //TODO : exception no such car (done?)
+                    throw new ArgumentException($"There's no type of vehicle that matches with \"{i_withCar}\"", nameof(i_newCar));
             }
             return i_newCar;
         }
@@ -250,7 +254,6 @@ namespace Ex03.GarageLogic
     }
 }
 
-    
 
 
-       
+
