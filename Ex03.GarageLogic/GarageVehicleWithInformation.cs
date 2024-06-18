@@ -87,8 +87,7 @@ namespace Ex03.GarageLogic
                     i_flag = true;
                     break;
                 default:
-                    //TODO : exception no such car status
-                    break;
+                    throw new ArgumentException($"There's no car status that matches with \"{i_carStatus}\"");
             }
 
             return i_flag;
@@ -109,8 +108,8 @@ namespace Ex03.GarageLogic
                     m_statusCar = carStatus.PAYED;
                     break;
                 default:
-                    //TODO : exception no such status
-                    break;
+                    throw new ArgumentException($"There's no valid status that matches with \"{i_statusCar}\"");
+
             }
         }
 

@@ -21,8 +21,8 @@ namespace Ex03.GarageLogic
                     i_newCar = new MotorCycle();
                     break;
                 default:
-                    //TODO : exception no such car
-                    break;
+                    throw new ArgumentException($"There's no type of vehicle that matches with \"{i_withCar}\"");
+                    
             }
             return i_newCar;
         }
