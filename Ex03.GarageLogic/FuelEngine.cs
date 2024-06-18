@@ -1,4 +1,6 @@
-﻿namespace Ex03.GarageLogic
+﻿using System;
+
+namespace Ex03.GarageLogic
 {
     sealed class FuelEngine : Engine
     {
@@ -35,6 +37,8 @@
                 case eTypeOfFuel.Octan98:
                     typeOfFuel = "Octan98";
                     break;
+                default:
+                    throw new ArgumentException($"{typeOfFuel} is not a valid fuel type", nameof(typeOfFuel));
             }
             return typeOfFuel;
         }

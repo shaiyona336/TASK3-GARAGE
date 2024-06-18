@@ -25,19 +25,8 @@ namespace Ex03.GarageLogic
             return flag;
         }
 
+<<<<<<< HEAD
         public static void AddResourceToResource(ref int i_AddTo, int i_HowMuchToAdd, int i_MaximumAirPressureInWheel)
-        {
-            if (i_AddTo + i_HowMuchToAdd <= i_MaximumAirPressureInWheel)
-            {
-                i_AddTo += i_HowMuchToAdd;
-            }
-            else
-            {
-                throw new ValueOutOfRangeException(0, i_MaximumAirPressureInWheel);
-            }
-        }
-
-        public static void AddResourceToResource(ref float i_AddTo, float i_HowMuchToAdd, float i_MaximumAirPressureInWheel)
         {
             if (i_AddTo + i_HowMuchToAdd <= i_MaximumAirPressureInWheel)
             {
@@ -49,7 +38,30 @@ namespace Ex03.GarageLogic
             }
         }
 
+        public static void AddResourceToResource(ref float i_AddTo, float i_HowMuchToAdd, float i_MaximumAirPressureInWheel)
+=======
+        public static void addResourceToResource(ref float addTo, float howMuchToAdd, float maximumAirPressureInWheel)
+>>>>>>> c8b8a4f (Throwing more exceptions)
+        {
+            if (i_AddTo + i_HowMuchToAdd <= i_MaximumAirPressureInWheel)
+            {
+<<<<<<< HEAD
+                i_AddTo = i_AddTo + i_HowMuchToAdd;
+=======
+                addTo += howMuchToAdd;
+>>>>>>> c8b8a4f (Throwing more exceptions)
+            }
+            else
+            {
+                throw new ValueOutOfRangeException(0, maximumAirPressureInWheel);
+            }
+        }
+
+<<<<<<< HEAD
         public static Engine SetEngineByBool(bool i_IsFuel)
+=======
+        public static Engine setEngineByBool(bool isFuel)
+>>>>>>> c8b8a4f (Throwing more exceptions)
         {
             Engine engine;
             if (i_IsFuel == true)

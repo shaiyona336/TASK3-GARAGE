@@ -83,7 +83,11 @@ namespace Ex03.GarageLogic
                     flag = true;
                     break;
                 default:
-                    throw new ArgumentException($"There's no car status that matches with \"{i_CarStatus}\"", nameof(i_CarStatus));
+<<<<<<< HEAD
+                    throw new ArgumentException($"There's no car status that matches with \"{i_CarStatus}\"");
+=======
+                    throw new ArgumentException($"There's no car status that matches with \"{i_carStatus}\"", nameof(i_carStatus));
+>>>>>>> c8b8a4f (Throwing more exceptions)
             }
 
             return flag;
@@ -103,7 +107,11 @@ namespace Ex03.GarageLogic
                     m_StatusCar = eCarStatus.Payed;
                     break;
                 default:
+<<<<<<< HEAD
                     throw new ArgumentException($"There's no valid status that matches with \"{i_StatusCar}\"");
+=======
+                    throw new ArgumentException($"There's no valid status that matches with \"{i_statusCar}\"", nameof(i_statusCar));
+>>>>>>> c8b8a4f (Throwing more exceptions)
             }
         }
 

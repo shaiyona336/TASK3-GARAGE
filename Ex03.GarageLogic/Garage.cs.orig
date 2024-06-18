@@ -12,15 +12,25 @@ namespace Ex03.GarageLogic
         {
             string informationCarInGarage = "";
 
-            if (i_CarWithInformationWithSameLicense != null)
+<<<<<<< HEAD
+            if (!(i_CarWithInformationWithSameLicense == null))
             {
                 informationCarInGarage = String.Format("name of owner: {0}\n" +
                     "phone of owner: {1}\n" +
                     "car status: {2}\n", i_CarWithInformationWithSameLicense.GetNameOwner(), i_CarWithInformationWithSameLicense.GetPhoneOwner(), i_CarWithInformationWithSameLicense.GetCarStatus());
+=======
+            if (i_carWithInformationWithSameLicense != null)
+            {
+                i_informationCarInGarage = String.Format("name of owner: {0}\n" +
+                    "phone of owner: {1}\n" +
+                    "car status: {2}\n", i_carWithInformationWithSameLicense.getNameOwner(), 
+                    i_carWithInformationWithSameLicense.getPhoneOwner(), 
+                    i_carWithInformationWithSameLicense.getCarStatus());
+>>>>>>> c8b8a4f (Throwing more exceptions)
             }
             else
             {
-                throw new ArgumentException("No Vehicle to get information from", nameof(i_CarWithInformationWithSameLicense));
+                throw new ArgumentException("No Vehicle to get information from", nameof(i_carWithInformationWithSameLicense));
             }
 
             return informationCarInGarage;
@@ -48,16 +58,45 @@ namespace Ex03.GarageLogic
             return allInformationAboutCar; // need to return allInformationAboutCar
         }
 
+<<<<<<< HEAD
         public void AddElectricity(string i_LicenseCarToAddAirPressureTo, float i_HowMuchElectricityToAdd)
+=======
+
+
+
+
+        public void addElectricity(string i_licenseCarToAddAirPressureTo, float i_howMuchElectricityToAdd)
+>>>>>>> c8b8a4f (Throwing more exceptions)
         {
             GarageVehicleWithInformation carWithInformationWithSameLicense = IsCarLicenseInGarage(i_LicenseCarToAddAirPressureTo);
             if (carWithInformationWithSameLicense == null)
             {
                 throw new KeyNotFoundException("No vehicle with that license was found in the garage");
             }
+<<<<<<< HEAD
             else if (!(carWithInformationWithSameLicense.GetVehicle().IsElectricity()))
+=======
+            else if (!i_carWithInformationWithSameLicense.getVehicle().isElectricity())
             {
                 throw new InvalidOperationException("Vehicle does not run on electricity");
+            }
+            else
+            {
+                i_carWithInformationWithSameLicense.getVehicle().addFuelOrElectricity(i_howMuchElectricityToAdd, ""); //no need to send the type of fuel in electricity car
+            }
+        }
+
+        public void addFuel(string i_licenseCarToAddAirPressureTo, float i_howMuchFuelToAdd, string typeOfFuel)
+        {
+            GarageVehicleWithInformation i_carWithInformationWithSameLicense = isCarLicenseInGarage(i_licenseCarToAddAirPressureTo);
+            if (i_carWithInformationWithSameLicense == null)
+            {
+                throw new KeyNotFoundException("No vehicle with that license was found in the garage");
+            }
+            else if (!i_carWithInformationWithSameLicense.getVehicle().isFuel())
+>>>>>>> c8b8a4f (Throwing more exceptions)
+            {
+                throw new InvalidOperationException("Vehicle does not run on fuel");
             }
             else
             {
@@ -70,11 +109,11 @@ namespace Ex03.GarageLogic
             GarageVehicleWithInformation carWithInformationWithSameLicense = IsCarLicenseInGarage(i_LicenseCarToAddAirPressureTo);
             if (carWithInformationWithSameLicense == null)
             {
-                throw new KeyNotFoundException("No vehicle with that license was found in the garage");
+                //TODO :throw exception no car with such license found
             }
             else if (!(carWithInformationWithSameLicense.GetVehicle().IsFuel()))
             {
-                throw new InvalidOperationException("Vehicle does not run on electricity");
+                //TODO :throw exception car not run on electricity
             }
             else
             {
@@ -95,19 +134,25 @@ namespace Ex03.GarageLogic
             }
         }
 
+<<<<<<< HEAD
         public void ChangeStatusToCar(string i_LicenseCarToChangeStatusTo, string i_NewStatusOfCar)
+=======
+        }
+
+        public void changeStatusToCar(string i_licenseCarToChangeStatusTo, string i_newStatusOfCar)
+>>>>>>> c8b8a4f (Throwing more exceptions)
         {
             GarageVehicleWithInformation carWithInformationWithSameLicense = IsCarLicenseInGarage(i_LicenseCarToChangeStatusTo);
             if (carWithInformationWithSameLicense == null)
             {
                 throw new ArgumentException("No vehice with that license was found in the garage",
-             nameof(carWithInformationWithSameLicense));
+                    nameof(i_carWithInformationWithSameLicense));
             }
             else
             {
                 if (i_NewStatusOfCar != "INPROGRESS" && i_NewStatusOfCar != "FIXED" && i_NewStatusOfCar != "PAYED")
                 {
-                    throw new ArgumentException($"\"{i_NewStatusOfCar}\" is not a valid status", nameof(i_NewStatusOfCar));
+                    throw new ArgumentException($"\"{i_newStatusOfCar}\" is not a valid status", nameof(i_newStatusOfCar));
                 }
                 carWithInformationWithSameLicense.SetStatusCar(i_NewStatusOfCar);
             }
@@ -177,7 +222,33 @@ namespace Ex03.GarageLogic
                     m_VehiclesInGarage[0].GetVehicle().SetLicensePlate(i_StringAttribute);
                     break;
                 default:
+<<<<<<< HEAD
                     m_VehiclesInGarage[0].GetVehicle().SetCarInitialState(i_StringAttribute);
+=======
+                    throw new ArgumentException($"There's no type of vehicle that matches with \"{i_withCar}\"", nameof(i_newCar));
+            }
+            return i_newCar;
+        }
+
+        public void setLastEnteredVehicle(string stringAttribute)
+        {
+            switch (m_indexSetupAttribute)
+            {
+                case (0):
+                    m_vehiclesInGarage[0].setNameOfOwner(stringAttribute);
+                    break;
+                case (1):
+                    m_vehiclesInGarage[0].setPhoneOfOwner(stringAttribute);
+                    break;
+                case (2):
+                    m_vehiclesInGarage[0].setStatusCar(stringAttribute);
+                    break;
+                case (3):
+                    m_vehiclesInGarage[0].getVehicle().setLicensePlate(stringAttribute);
+                    break;
+                default:
+                    m_vehiclesInGarage[0].getVehicle().setCarInitialState(stringAttribute);
+>>>>>>> c8b8a4f (Throwing more exceptions)
                     break;
             }
             m_IndexSetupAttribute++;
@@ -216,3 +287,10 @@ namespace Ex03.GarageLogic
         }
     }
 }
+<<<<<<< HEAD
+=======
+
+
+
+
+>>>>>>> c8b8a4f (Throwing more exceptions)

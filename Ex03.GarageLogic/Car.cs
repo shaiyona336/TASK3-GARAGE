@@ -60,7 +60,8 @@ namespace Ex03.GarageLogic
                 case ("black"):
                     colorToReturn = eColorsOfCars.Black;
                     break;
-                default: //TODO: EXCEPTION NO SUCH COLOR
+                default:
+                    throw new ArgumentException($"\"{i_Color}\" is not a valid color", nameof(i_Color));
                     break;
             }
             return colorToReturn;
