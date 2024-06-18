@@ -82,15 +82,15 @@ namespace Ex03.ConsoleUI
 
             else
             {
-                Console.WriteLine("with type vehicle to enter (car/truck/motorcycle): ");
-                string withCarToEnter = Console.ReadLine();
+                //Console.WriteLine("with type vehicle to enter (car/truck/motorcycle): ");
+                //string withCarToEnter = Console.ReadLine();
 
-                i_attributesToEnter = (string)executeMethod(withCarToEnter, addVehicleToGarageFunc, out string licenseCar);
-                i_attributesToEnter = i_Garage.addVehicle(withCarToEnter);
+                i_attributesToEnter = (string)executeMethod("with type vehicle to enter (car/truck/motorcycle): ", addVehicleToGarageFunc);
+                //i_attributesToEnter = i_Garage.addVehicle(withCarToEnter);
                 executeMethod("enter name of owner:", setLastEnteredVehicle);
                 executeMethod("enter phone number of owner:", setLastEnteredVehicle);
                 executeMethod("enter the status you want for the car (INPROGRESS/FIXED/PAYED):", setLastEnteredVehicle);
-                setLastEnteredVehicle(licenseCar);
+                setLastEnteredVehicle(i_licenseCar);
 
                 processVehicleAttributes(i_Garage, i_attributesToEnter);
             }
@@ -101,36 +101,40 @@ namespace Ex03.ConsoleUI
 
 
             ///////////////////////////alon - insert
-        private static void insertVehicle(Garage i_Garage)
-        {
-            string requestToUser1 = "enter license for car:";
-            string requestToUser2 = "with type vehicle to enter (car/truck/motorcycle):";
-            Func<string, string, string> addVehicleToGarageFunc = i_Garage.addVehicleToGarage;
-            string attributesToEnter = (string)executeMethod(requestToUser1, requestToUser2, addVehicleToGarageFunc,
-                out string licenseCar);
+        //private static void insertVehicle(Garage i_Garage)
+        //{
+        //    string requestToUser1 = "enter license for car:";
+        //    string requestToUser2 = "with type vehicle to enter (car/truck/motorcycle):";
+        //    Func<string, string, string> addVehicleToGarageFunc = i_Garage.addVehicleToGarage;
+        //    string attributesToEnter = (string)executeMethod(requestToUser1, requestToUser2, addVehicleToGarageFunc,
+        //        out string licenseCar);
 
-            if (attributesToEnter == "car already in garage, moved to status: in-progress")
-            {
-                Console.WriteLine(attributesToEnter);
-                return;
-            }
+        //    if (attributesToEnter == "car already in garage, moved to status: in-progress")
+        //    {
+        //        Console.WriteLine(attributesToEnter);
+        //        return;
+        //    }
 
-            // Send data basic about car to garage
-            Action<string> setLastEnteredVehicle = i_Garage.setLastEnteredVehicle;
-            executeMethod("enter name of owner:", setLastEnteredVehicle);
-            executeMethod("enter phone number of owner:", setLastEnteredVehicle);
-            executeMethod("enter the status you want for the car (INPROGRESS/FIXED/PAYED):", setLastEnteredVehicle);
-            setLastEnteredVehicle(licenseCar);
+        //    // Send data basic about car to garage
+        //    Action<string> setLastEnteredVehicle = i_Garage.setLastEnteredVehicle;
+        //    executeMethod("enter name of owner:", setLastEnteredVehicle);
+        //    executeMethod("enter phone number of owner:", setLastEnteredVehicle);
+        //    executeMethod("enter the status you want for the car (INPROGRESS/FIXED/PAYED):", setLastEnteredVehicle);
+        //    setLastEnteredVehicle(licenseCar);
 
-            processVehicleAttributes(i_Garage, attributesToEnter);
-        }
+        //    processVehicleAttributes(i_Garage, attributesToEnter);
+        //}
         /////////////////////////////////////
 
+        
 
 
         private static void processVehicleAttributes(Garage i_Garage, string i_AttributesToEnter)
         {
             string[] attributesArray = i_AttributesToEnter.Split(new string[] { "||" }, StringSplitOptions.None);
+            //int intInputAttribute;
+            //float floatInputAttribute;
+            //bool boolInputAttribute;
 
             foreach (string attribute in attributesArray)
             {
@@ -139,16 +143,46 @@ namespace Ex03.ConsoleUI
                 Console.WriteLine(messageWithAttributeToEnter);
                 string inputAttribute = Console.ReadLine();
 
-                string parsedValue = parseAttribute(typeOfAttribute, inputAttribute);
-                try
+                //string parsedValue = parseAttribute(typeOfAttribute, inputAttribute);
+                switch (typeOfAttribute)
                 {
-                    i_Garage.setLastEnteredVehicle(parsedValue);
+                    case "int":
+                        if (!int.TryParse(inputAttribute, out int intInputAttribute))
+                        {
+                            throw new FormatException("Cannot convert to int");
+                            //TODO : exception cannot convert to int (done?)
+                        }
+                        i_Garage.setLastEnteredVehicle(intInputAttribute);
+                        break;
+                    case "float":
+                        if (!float.TryParse(inputAttribute, out float floatInputAttribute))
+                        {
+                            throw new FormatException("Cannot convert to float");
+                            //TODO : exception cannot convert to float (done?)
+                        }
+                        i_Garage.setLastEnteredVehicle(floatInputAttribute);
+                        break;
+                    case "bool":
+                        if (!bool.TryParse(inputAttribute, out bool boolInputAttribute))
+                        {
+                            throw new FormatException("Cannot convert to bool");
+                            //TODO : exception cannot convert to boolean (done?)
+                        }
+                        i_Garage.setLastEnteredVehicle(boolInputAttribute);
+                        break;
+                    default: // Needed to send string
+                        i_Garage.setLastEnteredVehicle(inputAttribute);
+                        break;
                 }
-                catch (Exception exception)
-                {
-                    Console.WriteLine(exception.Message);
-                    //TODO: Exception here is not enough. Still need to handle it
-                }
+                //try
+                //{
+                //    i_Garage.setLastEnteredVehicle(parsedValue);
+                //}
+                //catch (Exception exception)
+                //{
+                //    Console.WriteLine(exception.Message);
+                //    //TODO: Exception here is not enough. Still need to handle it
+                //}
 
                 if (messageWithAttributeToEnter == "is car on fuel" && bool.Parse(inputAttribute))
                 {
