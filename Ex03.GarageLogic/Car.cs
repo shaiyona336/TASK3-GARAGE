@@ -17,7 +17,6 @@ namespace Ex03.GarageLogic
         private colorsOfCars m_color;
         private int m_numberOfDoors;
         private Engine m_engine = new FuelEngine();
-        int m_indexSetupAttribute = 0; //with attribute by the order of get attributes does the function need now to set
         private const int m_numberOfWheels = 4;
 
 

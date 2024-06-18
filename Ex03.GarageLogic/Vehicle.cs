@@ -10,6 +10,7 @@ namespace Ex03.GarageLogic
         private string m_modelName;
         private string m_licensePlate;
         protected List<Wheel> m_wheels;
+        public int m_indexSetupAttribute { get; set; } = 0; //with attribute by the order of get attributes does the function need now to set
 
 
         abstract public void setCarInitialState(string stringAttribute);

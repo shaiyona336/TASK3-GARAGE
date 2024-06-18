@@ -17,7 +17,6 @@ namespace Ex03.GarageLogic
         private typeOfLicense m_typeLicense;
         private int m_engineVolume;
         private Engine m_engine = new FuelEngine();
-        int m_indexSetupAttribute = 0;
         private const int m_numberOfWheels = 2;
 
 
