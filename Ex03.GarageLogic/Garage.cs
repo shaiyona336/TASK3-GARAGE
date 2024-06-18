@@ -15,11 +15,12 @@ namespace Ex03.GarageLogic
         {
             string i_informationCarInGarage = "";
 
-            if (!(i_carWithInformationWithSameLicense == null)) {
+            if (!(i_carWithInformationWithSameLicense == null))
+            {
                 i_informationCarInGarage = String.Format("name of owner: {0}\n" +
                     "phone of owner: {1}\n" +
                     "car status: {2}\n", i_carWithInformationWithSameLicense.getNameOwner(), i_carWithInformationWithSameLicense.getPhoneOwner(), i_carWithInformationWithSameLicense.getCarStatus());
-             }
+            }
             else
             {
                 //TODO : exception no car to get information to
@@ -52,17 +53,18 @@ namespace Ex03.GarageLogic
         }
 
 
-      
 
 
-    public void addElectricity(string i_licenseCarToAddAirPressureTo, float i_howMuchElectricityToAdd)
+
+        public void addElectricity(string i_licenseCarToAddAirPressureTo, float i_howMuchElectricityToAdd)
         {
             GarageVehicleWithInformation i_carWithInformationWithSameLicense = isCarLicenseInGarage(i_licenseCarToAddAirPressureTo);
             if (i_carWithInformationWithSameLicense == null)
             {
                 //TODO :throw exception no car with such license found
             }
-            else if (!(i_carWithInformationWithSameLicense.getVehicle().isElectricity())) {
+            else if (!(i_carWithInformationWithSameLicense.getVehicle().isElectricity()))
+            {
                 //TODO :throw exception car not run on electricity
             }
             else
@@ -102,7 +104,7 @@ namespace Ex03.GarageLogic
                 i_carWithInformationWithSameLicense.FillWheelsPressure();
             }
 
-         }
+        }
 
         public void changeStatusToCar(string i_licenseCarToChangeStatusTo, string i_newStatusOfCar)
         {
@@ -139,33 +141,37 @@ namespace Ex03.GarageLogic
         }
 
 
-        public string addVehicleToGarage(string i_licenseCar, string typeOfCar)
+        public bool isCarInGarage(string i_licenseCar) //canAddCar
         {
-            string i_argumentsToFillToInitializeVehicle = "car already in garage, moved to status: in-progress"; //default value if car is in the garage, if it is not, it will be changed to the arugments that we need to add to the new car
+            bool i_isVehicleExist = false;
             GarageVehicleWithInformation i_carSameLicense;
-            GarageVehicleWithInformation i_newCarWithInformation = null;
-            Vehicle i_newCar;
             //check if license already exist
             i_carSameLicense = isCarLicenseInGarage(i_licenseCar);
             if (i_carSameLicense != null)
             {
                 i_carSameLicense.setCarStatusInProgress();
+                i_isVehicleExist = true;
             }
-            else //if car not in garage, insert him
-            {
-                m_indexSetupAttribute = 0;
-                //TODO : add options for types of vehicles to create
-                i_newCar = makeNewCar.getVehicleFromString(typeOfCar);
-                i_newCarWithInformation = new GarageVehicleWithInformation();
-                i_newCarWithInformation.setVehicle(i_newCar);
-                if (m_vehiclesInGarage == null)
-                {
-                    m_vehiclesInGarage = new List<GarageVehicleWithInformation>();
-                }
-                m_vehiclesInGarage.Insert(0, i_newCarWithInformation);
-                i_argumentsToFillToInitializeVehicle = i_newCar.getAttributes();
-            }
+            return i_isVehicleExist;
+        }
 
+
+        public string addVehicle(string typeOfCar)
+        {
+            Vehicle i_newCar;
+            GarageVehicleWithInformation i_newCarWithInformation = null;
+            string i_argumentsToFillToInitializeVehicle;
+
+            m_indexSetupAttribute = 0; //reset m_indexSetupAttribute to enter the new vehicle
+            i_newCar = makeNewCar.getVehicleFromString(typeOfCar);
+            i_newCarWithInformation = new GarageVehicleWithInformation();
+            i_newCarWithInformation.setVehicle(i_newCar);
+            if (m_vehiclesInGarage == null)
+            {
+                m_vehiclesInGarage = new List<GarageVehicleWithInformation>();
+            }
+            m_vehiclesInGarage.Insert(0, i_newCarWithInformation);
+            i_argumentsToFillToInitializeVehicle = i_newCar.getAttributes();
             return i_argumentsToFillToInitializeVehicle;
         }
 
@@ -227,8 +233,3 @@ namespace Ex03.GarageLogic
         }
     }
 }
-
-    
-
-
-       

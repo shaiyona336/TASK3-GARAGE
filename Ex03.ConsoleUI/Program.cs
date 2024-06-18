@@ -59,32 +59,40 @@ namespace Ex03.ConsoleUI
 
         private static void insertVehicle(Garage i_Garage)
         {
-            Console.WriteLine("enter license for car: ");
-            string licenseCar = Console.ReadLine();
-            Console.WriteLine("with type vehicle to enter (car/truck/motorcycle): ");
-            string withCarToEnter = Console.ReadLine();
+            string i_licenseCar;
+            string i_withCarToEnter;
+            string i_attributesToEnter;
 
-            string attributesToEnter = i_Garage.addVehicleToGarage(licenseCar, withCarToEnter);
-            if (attributesToEnter == "car already in garage, moved to status: in-progress")
+            Console.WriteLine("enter license for car: ");
+            i_licenseCar = Console.ReadLine();
+
+            if (i_Garage.isCarInGarage(i_licenseCar))
             {
-                Console.WriteLine(attributesToEnter);
-                return;
+                Console.WriteLine("car already in garage, moved to status INPROGRESS");
             }
 
-            Console.WriteLine("enter name of owner: ");
-            string nameOfOwner = Console.ReadLine();
-            Console.WriteLine("enter phone of owner: ");
-            string phoneOfOwner = Console.ReadLine();
-            Console.WriteLine("enter the status you want for the car (INPROGRESS/FIXED/PAYED): ");
-            string carStatus = Console.ReadLine();
+            else
+            {
+                Console.WriteLine("with type vehicle to enter (car/truck/motorcycle): ");
+                string withCarToEnter = Console.ReadLine();
+                i_attributesToEnter = i_Garage.addVehicle(withCarToEnter);
+                Console.WriteLine("enter name of owner: ");
+                string nameOfOwner = Console.ReadLine();
+                Console.WriteLine("enter phone of owner: ");
+                string phoneOfOwner = Console.ReadLine();
+                Console.WriteLine("enter the status you want for the car (INPROGRESS/FIXED/PAYED): ");
+                string carStatus = Console.ReadLine();
 
-            // Send data basic about car to garage
-            i_Garage.setLastEnteredVehicle(nameOfOwner);
-            i_Garage.setLastEnteredVehicle(phoneOfOwner);
-            i_Garage.setLastEnteredVehicle(carStatus);
-            i_Garage.setLastEnteredVehicle(licenseCar);
+                // Send data basic about car to garage
+                i_Garage.setLastEnteredVehicle(nameOfOwner);
+                i_Garage.setLastEnteredVehicle(phoneOfOwner);
+                i_Garage.setLastEnteredVehicle(carStatus);
+                i_Garage.setLastEnteredVehicle(i_licenseCar);
 
-            processVehicleAttributes(i_Garage, attributesToEnter);
+                processVehicleAttributes(i_Garage, i_attributesToEnter);
+            }
+
+
         }
 
         private static void processVehicleAttributes(Garage i_Garage, string i_AttributesToEnter)
@@ -200,7 +208,7 @@ namespace Ex03.ConsoleUI
             }
             i_Garage.addElectricity(i_licenseCarToCharge, i_valueHowMuchElectricityToAdd);
 
-         }
+        }
 
         public static void showInformationAboutCar(Garage i_Garage)
         {
@@ -213,7 +221,7 @@ namespace Ex03.ConsoleUI
             Console.WriteLine(i_informationAboutCar);
         }
 
-     }
+    }
 }
 
 
