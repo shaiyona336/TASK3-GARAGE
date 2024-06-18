@@ -1,0 +1,17 @@
+insert
+567
+car
+shai
+052
+FIXED
+abc
+6
+5
+hfg
+white
+5
+true
+Octan95
+8
+show information car
+567
