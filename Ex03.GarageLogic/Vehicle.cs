@@ -38,7 +38,7 @@ namespace Ex03.GarageLogic
 
             if (m_wheels.Count != 0)
             {
-                i_manuFactorName = m_wheels[0].getManufactorName();
+                i_manuFactorName = m_wheels[0].m_manufactorName;
             }
             else
             {
@@ -53,7 +53,7 @@ namespace Ex03.GarageLogic
 
             if (m_wheels.Count != 0)
             {
-                airPressureInWheels = m_wheels[0].getMaximumAirPressureInWheel();
+                airPressureInWheels = m_wheels[0].m_maximumAirPressureInWheel;
             }
             else
             {
@@ -84,7 +84,7 @@ namespace Ex03.GarageLogic
             {
                 foreach (Wheel wheel in m_wheels)
                 {
-                    wheel.setManufactorName(i_manufactorName);
+                    wheel.m_manufactorName = i_manufactorName;
                 }
             }
         }
@@ -140,7 +140,7 @@ namespace Ex03.GarageLogic
         {
             foreach (Wheel wheel in m_wheels)
             {
-                wheel.setMaximumAirPressureInWheel(i_setMaximumAirPressure);
+                wheel.m_maximumAirPressureInWheel = i_setMaximumAirPressure;
             }
         }
 
