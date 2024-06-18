@@ -7,8 +7,8 @@ namespace Ex03.GarageLogic
     sealed class Truck : Vehicle
     {
 
-        private bool m_isTransferDangerousMaterials;
-        private float m_cargoVolume;
+        public bool m_isTransferDangerousMaterials { get; set; }
+        public float m_cargoVolume { get; set; }
         private Engine m_engine = new FuelEngine();
         int m_indexSetupAttribute = 0;
         private const int m_numberOfWheels = 4;
@@ -17,6 +17,18 @@ namespace Ex03.GarageLogic
         {
             initializeWheels(m_numberOfWheels);
         }
+
+        //private void setIsTransferDangerousMaterials(bool i_isTransferDangerousMaterials)
+        //{
+        //    m_isTransferDangerousMaterials = i_isTransferDangerousMaterials;
+        //}
+
+
+        //private void setCargoVolume(float i_cargoVolume)
+        //{
+        //    m_cargoVolume = i_cargoVolume;
+        //}
+
 
 
         public override string getInformationAboutCar()
@@ -82,18 +94,7 @@ namespace Ex03.GarageLogic
 
         
 
-        
-
-        private void setIsTransferDangerousMaterials(bool i_isTransferDangerousMaterials)
-        {
-            m_isTransferDangerousMaterials = i_isTransferDangerousMaterials;
-        }
-
-
-        private void setCargoVolume(float i_cargoVolume)
-        {
-            m_cargoVolume = i_cargoVolume;
-        }
+      
 
 
 
@@ -139,7 +140,7 @@ namespace Ex03.GarageLogic
             }
             else if (m_indexSetupAttribute == 5)
             {
-                setCargoVolume(i_floatAttribute);
+                m_cargoVolume = i_floatAttribute;
             }
             else if (m_indexSetupAttribute == 8)
             {
@@ -156,7 +157,7 @@ namespace Ex03.GarageLogic
         {
             if (m_indexSetupAttribute == 4)
             {
-                setIsTransferDangerousMaterials(i_boolAttribute);
+                m_isTransferDangerousMaterials = i_boolAttribute;
             }
             else if (m_indexSetupAttribute == 6)
             {

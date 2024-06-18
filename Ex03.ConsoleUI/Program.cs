@@ -16,7 +16,7 @@ namespace Ex03.ConsoleUI
 
             while (userInput != "Q")
             {
-                Console.WriteLine("enter: insert(insert new vehicle), show all licenses, change vehicle status, add air pressure, add fuel to car, charge electricity, show information car"); //TODO : fix message
+                Console.WriteLine("enter: insert(insert new vehicle), show all licenses, change vehicle status, add air pressure, add fuel to car, charge electricity, show information car, Q to exit"); //TODO : fix message
                 userInput = Console.ReadLine();
                 try
                 {
