@@ -1,36 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-
-
-namespace Ex03.GarageLogic
+﻿namespace Ex03.GarageLogic
 {
     sealed class ElectricEngine : Engine
     {
-        private float m_statusBattery; //hours for battery
-        private float m_maximumForBattery; //how many hours can electric car drive by with maximum battery
+        private float m_StatusBattery; //hours for battery
+        private float m_MaximumForBattery; //how many hours can electric car drive by with maximum battery
 
-
-        public override float getMaximumEnergy()
+        public override float GetMaximumEnergy()
         {
-            return m_maximumForBattery;
+            return m_MaximumForBattery;
         }
 
-        public override float getEnergy()
+        public override float GetEnergy()
         {
-            return m_statusBattery;
+            return m_StatusBattery;
         }
 
-
-        public override void addEnergy(float howManyHoursToAddToBattery, string typeOfEnergy)
+        public override void AddEnergy(float i_HowManyHoursToAddToBattery, string i_TypeOfEnergy)
         {
-            WorkOnCar.addResourceToResource(ref m_statusBattery, howManyHoursToAddToBattery, m_maximumForBattery);
+            WorkOnCar.AddResourceToResource(ref m_StatusBattery, i_HowManyHoursToAddToBattery, m_MaximumForBattery);
         }
 
-
-        public override void setMaximumEnergy(float i_maximumEnergy)
+        public override void SetMaximumEnergy(float i_MaximumEnergy)
         {
-            m_maximumForBattery = i_maximumEnergy;
+            m_MaximumForBattery = i_MaximumEnergy;
         }
-
     }
 }

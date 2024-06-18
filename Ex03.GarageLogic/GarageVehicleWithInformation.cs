@@ -1,136 +1,130 @@
 ﻿using System;
 using System.Collections.Generic;
 
-
 namespace Ex03.GarageLogic
 {
     public class GarageVehicleWithInformation
     {
-        enum carStatus
+        enum eCarStatus
         {
-            INPROGRESS,
-            FIXED,
-            PAYED
+            InProgress,
+            Fixed,
+            Payed
         }
-        private Vehicle m_vehicle;
-        private string m_nameOfOwner;
-        private string m_phoneOfOwner;
-        private carStatus m_statusCar;
+        private Vehicle m_Vehicle;
+        private string m_NameOfOwner;
+        private string m_PhoneOfOwner;
+        private eCarStatus m_StatusCar;
 
-
-        public string getNameOwner()
+        public string GetNameOwner()
         {
-            return m_nameOfOwner;
+            return m_NameOfOwner;
         }
-        public string getPhoneOwner()
+        public string GetPhoneOwner()
         {
-            return m_phoneOfOwner;
+            return m_PhoneOfOwner;
         }
-        public string getCarStatus()
+        public string GetCarStatus()
         {
-            string i_carStatus = "";
+            string carStatus = "";
 
-            switch (m_statusCar)
+            switch (m_StatusCar)
             {
-                case (carStatus.INPROGRESS):
-                    i_carStatus = "INPROGRESS";
+                case eCarStatus.InProgress:
+                    carStatus = "INPROGRESS";
                     break;
-                case (carStatus.FIXED):
-                    i_carStatus = "FIXED";
+                case eCarStatus.Fixed:
+                    carStatus = "FIXED";
                     break;
-                case (carStatus.PAYED):
-                    i_carStatus = "PAYED";
+                case eCarStatus.Payed:
+                    carStatus = "PAYED";
                     break;
                 default:
                     break;
             }
 
-            return i_carStatus;
-
+            return carStatus;
         }
-        public Vehicle getVehicle()
+        public Vehicle GetVehicle()
         {
-            return m_vehicle;
+            return m_Vehicle;
         }
 
         public void FillWheelsPressure()
         {
-            m_vehicle.setAirPressureInWheelToMaximum();
+            m_Vehicle.SetAirPressureInWheelToMaximum();
         }
 
-
-        public bool isCarCorrectStatusToShow(string i_carStatus)
+        public bool IsCarCorrectStatusToShow(string i_CarStatus)
         {
-            bool i_flag = false;
-            
-            switch(i_carStatus)
+            bool flag = false;
+
+            switch (i_CarStatus)
             {
-                case ("INPROGRESS"):
-                    if (m_statusCar == carStatus.INPROGRESS)
+                case "INPROGRESS":
+                    if (m_StatusCar == eCarStatus.InProgress)
                     {
-                        i_flag = true;
+                        flag = true;
                     }
                     break;
-                case ("FIXED"):
-                    if (m_statusCar == carStatus.FIXED)
+                case "FIXED":
+                    if (m_StatusCar == eCarStatus.Fixed)
                     {
-                        i_flag = true;
+                        flag = true;
                     }
                     break;
-                case ("PAYED"):
-                    if (m_statusCar == carStatus.PAYED)
+                case "PAYED":
+                    if (m_StatusCar == eCarStatus.Payed)
                     {
-                        i_flag = true;
+                        flag = true;
                     }
                     break;
-                case ("ANY"):
-                    i_flag = true;
+                case "ANY":
+                    flag = true;
                     break;
                 default:
-                    throw new ArgumentException($"There's no car status that matches with \"{i_carStatus}\"");
+                    throw new ArgumentException($"There's no car status that matches with \"{i_CarStatus}\"");
             }
 
-            return i_flag;
-                 
+            return flag;
         }
 
-        public void setStatusCar(string i_statusCar)
+        public void SetStatusCar(string i_StatusCar)
         {
-            switch (i_statusCar)
+            switch (i_StatusCar)
             {
-                case ("INPROGRESS"):
-                    m_statusCar = carStatus.INPROGRESS;
+                case "INPROGRESS":
+                    m_StatusCar = eCarStatus.InProgress;
                     break;
-                case ("FIXED"):
-                    m_statusCar = carStatus.FIXED;
+                case "FIXED":
+                    m_StatusCar = eCarStatus.Fixed;
                     break;
-                case ("PAYED"):
-                    m_statusCar = carStatus.PAYED;
+                case "PAYED":
+                    m_StatusCar = eCarStatus.Payed;
                     break;
                 default:
-                    throw new ArgumentException($"There's no valid status that matches with \"{i_statusCar}\"");
-
+                    throw new ArgumentException($"There's no valid status that matches with \"{i_StatusCar}\"");
             }
         }
 
-        public void setVehicle(Vehicle i_vehicle)
+        public void SetVehicle(Vehicle i_Vehicle)
         {
-            m_vehicle = i_vehicle;
+            m_Vehicle = i_Vehicle;
         }
 
-        public void setNameOfOwner(string i_nameOfOwner)
+        public void SetNameOfOwner(string i_NameOfOwner)
         {
-            m_nameOfOwner = i_nameOfOwner;
+            m_NameOfOwner = i_NameOfOwner;
         }
 
-        public void setPhoneOfOwner(string i_phoneOfOwner)
+        public void SetPhoneOfOwner(string i_PhoneOfOwner)
         {
-            m_phoneOfOwner = i_phoneOfOwner;
+            m_PhoneOfOwner = i_PhoneOfOwner;
         }
 
-        public void setCarStatusInProgress()
+        public void SetCarStatusInProgress()
         {
-            m_statusCar = carStatus.INPROGRESS;
+            m_StatusCar = eCarStatus.InProgress;
         }
     }
 }

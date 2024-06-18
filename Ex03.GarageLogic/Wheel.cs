@@ -1,51 +1,47 @@
 ﻿using System;
 
-
 namespace Ex03.GarageLogic
 {
     public sealed class Wheel
     {
-        private string m_nameCreator;
-        private float m_airPressureInWheel;
-        private float m_maximumAirPressureInWheel;
-        private string m_manufactorName;
+        private string m_NameCreator;
+        private float m_AirPressureInWheel;
+        private float m_MaximumAirPressureInWheel;
+        private string m_ManufactorName;
 
-
-        public void setManufactorName(string i_manuFctorName)
+        public void SetManufactorName(string i_ManufactorName)
         {
-            m_manufactorName = i_manuFctorName;
+            m_ManufactorName = i_ManufactorName;
         }
 
-        public float getAirPressureInWheel()
+        public float GetAirPressureInWheel()
         {
-            return m_airPressureInWheel;
+            return m_AirPressureInWheel;
         }
 
-        public float getMaximumAirPressureInWheel()
+        public float GetMaximumAirPressureInWheel()
         {
-            return m_maximumAirPressureInWheel;
+            return m_MaximumAirPressureInWheel;
         }
 
-
-        public string getManufactorName()
+        public string GetManufactorName()
         {
-            return m_manufactorName;
+            return m_ManufactorName;
         }
 
-        public void setAirPressureInWheelToMaximum()
+        public void SetAirPressureInWheelToMaximum()
         {
-            m_airPressureInWheel = m_maximumAirPressureInWheel;
-        }
-        public void setMaximumAirPressureInWheel(float i_maximumAirPressureInWheel)
-        {
-            m_maximumAirPressureInWheel = i_maximumAirPressureInWheel;
+            m_AirPressureInWheel = m_MaximumAirPressureInWheel;
         }
 
-
-        public void addAirPressureToWheel(float i_howMuchPressureToAdd)
+        public void SetMaximumAirPressureInWheel(float i_MaximumAirPressureInWheel)
         {
-            WorkOnCar.addResourceToResource(ref m_airPressureInWheel, i_howMuchPressureToAdd, m_maximumAirPressureInWheel);
+            m_MaximumAirPressureInWheel = i_MaximumAirPressureInWheel;
         }
 
+        public void AddAirPressureToWheel(float i_HowMuchPressureToAdd)
+        {
+            WorkOnCar.AddResourceToResource(ref m_AirPressureInWheel, i_HowMuchPressureToAdd, m_MaximumAirPressureInWheel);
+        }
     }
 }

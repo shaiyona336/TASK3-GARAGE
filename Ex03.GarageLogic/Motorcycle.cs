@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-
 namespace Ex03.GarageLogic
 {
-    sealed class MotorCycle : Vehicle
+    sealed class Motorcycle : Vehicle
     {
-        enum typeOfLicense
+        enum eTypeOfLicense
         {
             A,
             A1,
@@ -14,51 +13,48 @@ namespace Ex03.GarageLogic
             B1,
         }
 
-        private typeOfLicense m_typeLicense;
-        private int m_engineVolume;
-        private Engine m_engine = new FuelEngine();
-        int m_indexSetupAttribute = 0;
-        private const int m_numberOfWheels = 2;
+        private eTypeOfLicense m_TypeLicense;
+        private int m_EngineVolume;
+        private Engine m_Engine = new FuelEngine();
+        private int m_IndexSetupAttribute = 0;
+        private const int k_NumberOfWheels = 2;
 
-
-        public MotorCycle()
+        public Motorcycle()
         {
-            initializeWheels(m_numberOfWheels);
+            InitializeWheels(k_NumberOfWheels);
         }
 
-
-        private string getTypeOfLicense()
+        private string GetTypeOfLicense()
         {
-            string i_typeOfLicense = "";
+            string typeOfLicense = "";
 
-            switch (m_typeLicense) {
-                case (typeOfLicense.A):
-                    i_typeOfLicense = "A";
+            switch (m_TypeLicense)
+            {
+                case eTypeOfLicense.A:
+                    typeOfLicense = "A";
                     break;
-                case (typeOfLicense.A1):
-                    i_typeOfLicense = "A1";
+                case eTypeOfLicense.A1:
+                    typeOfLicense = "A1";
                     break;
-                case (typeOfLicense.AA):
-                    i_typeOfLicense = "AA";
+                case eTypeOfLicense.AA:
+                    typeOfLicense = "AA";
                     break;
-                case (typeOfLicense.B1):
-                    i_typeOfLicense = "B1";
+                case eTypeOfLicense.B1:
+                    typeOfLicense = "B1";
                     break;
                 default:
                     break;
             }
-            return i_typeOfLicense;
+            return typeOfLicense;
         }
 
-
-
-        public override string getInformationAboutCar()
+        public override string GetInformationAboutCar()
         {
-            string i_informationAboutCar = "";
+            string informationAboutCar;
 
-            if (m_engine is FuelEngine)
+            if (m_Engine is FuelEngine)
             {
-                i_informationAboutCar = String.Format("model name: {0}\n" +
+                informationAboutCar = String.Format("model name: {0}\n" +
                     "air pressure in wheels: {1}\n" +
                     "maximum air pressure in wheels: {2}\n" +
                     "manufactor name of wheels: {3}\n" +
@@ -66,156 +62,143 @@ namespace Ex03.GarageLogic
                     "cargo volume: {5}\n" +
                     "how much fuel: {6}\n" +
                     "type of fuel: {7}\n" +
-                    "maximum amount of fuel: {8}\n", getModelName(), getAirPressureInWheels(), getMaximumAirPressureInWheels(), getWheeslManufactorName(), getTypeOfLicense(), m_engineVolume, m_engine.getEnergy(), (m_engine as FuelEngine).getTypeOfFuel(), m_engine.getMaximumEnergy());
+                    "maximum amount of fuel: {8}\n", GetModelName(), GetAirPressureInWheels(), GetMaximumAirPressureInWheels(), GetWheeslManufactorName(), GetTypeOfLicense(), m_EngineVolume, m_Engine.GetEnergy(), (m_Engine as FuelEngine).GetTypeOfFuel(), m_Engine.GetMaximumEnergy());
             }
             else //car on electric engine
             {
-                i_informationAboutCar = String.Format("model name: {0}\n" +
+                informationAboutCar = String.Format("model name: {0}\n" +
                     "air pressure in wheels: {1}\n" +
                     "maximum air pressure in wheels: {2}\n" +
                     "manufactor name of wheels: {3}\n" +
                     "type of license: {4}\n" +
                     "cargo volume: {5}\n" +
                     "how much hours for battery: {6}\n" +
-                    "maximum amount of hours for battery: {7}\n", getModelName(), getAirPressureInWheels(), getMaximumAirPressureInWheels(), getWheeslManufactorName(), getTypeOfLicense(), m_engineVolume, m_engine.getEnergy(), m_engine.getMaximumEnergy());
+                    "maximum amount of hours for battery: {7}\n", GetModelName(), GetAirPressureInWheels(), GetMaximumAirPressureInWheels(), GetWheeslManufactorName(), GetTypeOfLicense(), m_EngineVolume, m_Engine.GetEnergy(), m_Engine.GetMaximumEnergy());
             }
 
-            return i_informationAboutCar;
+            return informationAboutCar;
         }
 
-
-        public override string getAttributes()
+        public override string GetAttributes()
         {
-            return ("model name::string||maximum air pressure wheels::float||air pressure in wheels::float||manufactor name of wheels::string||type of license(A,A1,AA,B1)::string||engine volume::int||is car on fuel::bool||maximum energy::float");
+            return "model name::string||maximum air pressure wheels::float||air pressure in wheels::float||manufactor name of wheels::string||type of license(A,A1,AA,B1)::string||engine volume::int||is car on fuel::bool||maximum energy::float";
         }
 
-
-        public override float getEnergy()
+        public override float GetEnergy()
         {
-            return m_engine.getEnergy();
+            return m_Engine.GetEnergy();
         }
 
-        public override void addFuelOrElectricity(float howMuchFuelToAdd, string typeOfEnergy)
+        public override void AddFuelOrElectricity(float i_HowMuchFuelToAdd, string i_TypeOfEnergy)
         {
-            m_engine.addEnergy(howMuchFuelToAdd, typeOfEnergy);
+            m_Engine.AddEnergy(i_HowMuchFuelToAdd, i_TypeOfEnergy);
         }
 
-        public override bool isElectricity()
+        public override bool IsElectricity()
         {
-            return WorkOnCar.isElectricity(m_engine);
+            return WorkOnCar.IsElectricity(m_Engine);
         }
 
-        public override bool isFuel()
+        public override bool IsFuel()
         {
-            return WorkOnCar.isFuel(m_engine);
+            return WorkOnCar.IsFuel(m_Engine);
         }
 
-
-
-
-        
-
-
-        private typeOfLicense stringColorToEnum(string i_color)
+        private eTypeOfLicense StringColorToEnum(string i_Color)
         {
-            typeOfLicense i_typeToReturn = typeOfLicense.A;
-            switch (i_color)
+            eTypeOfLicense i_TypeToReturn = eTypeOfLicense.A;
+            switch (i_Color)
             {
-                case ("A"):
-                    i_typeToReturn = i_typeToReturn = typeOfLicense.A;
+                case "A":
+                    i_TypeToReturn = eTypeOfLicense.A;
                     break;
-                case ("A1"):
-                    i_typeToReturn = i_typeToReturn = typeOfLicense.A1;
+                case "A1":
+                    i_TypeToReturn = eTypeOfLicense.A1;
                     break;
-                case ("AA"):
-                    i_typeToReturn = i_typeToReturn = typeOfLicense.AA;
+                case "AA":
+                    i_TypeToReturn = eTypeOfLicense.AA;
                     break;
-                case ("B1"):
-                    i_typeToReturn = i_typeToReturn = typeOfLicense.B1;
+                case "B1":
+                    i_TypeToReturn = eTypeOfLicense.B1;
                     break;
                 default: //TODO: EXCEPTION NO SUCH TYPE OF LICENSE
                     break;
-
             }
-            return i_typeToReturn;
+            return i_TypeToReturn;
         }
 
-
-        public override void setCarInitialState(string i_stringAttribute)
+        public override void SetCarInitialState(string i_StringAttribute)
         {
-            switch (m_indexSetupAttribute)
+            switch (m_IndexSetupAttribute)
             {
-                case (0):
-                    this.setModelName(i_stringAttribute);
+                case 0:
+                    this.SetModelName(i_StringAttribute);
                     break;
-                case (3):
-                    setWheelsManufactorName(i_stringAttribute);
+                case 3:
+                    SetWheelsManufactorName(i_StringAttribute);
                     break;
-                case (4):
-                    m_typeLicense = stringColorToEnum(i_stringAttribute);
+                case 4:
+                    m_TypeLicense = StringColorToEnum(i_StringAttribute);
                     break;
-                case (7):
-                    (m_engine as FuelEngine).setTypeOfFuel(i_stringAttribute);
+                case 7:
+                    (m_Engine as FuelEngine).SetTypeOfFuel(i_StringAttribute);
                     break;
                 default:
                     //TODO : SENT WRONG ATTRIBUTE
                     break;
             }
-            m_indexSetupAttribute++;
+            m_IndexSetupAttribute++;
         }
-        public override void setCarInitialState(int i_intAttribute)
+
+        public override void SetCarInitialState(int i_IntAttribute)
         {
-            if (m_indexSetupAttribute == 5)
+            if (m_IndexSetupAttribute == 5)
             {
-                m_engineVolume = i_intAttribute;
+                m_EngineVolume = i_IntAttribute;
             }
             else
             {
                 //TODO : SENT WRONG ATTRIBUTE
             }
-            m_indexSetupAttribute++;
+            m_IndexSetupAttribute++;
         }
 
-
-        public override void setCarInitialState(float i_floatAttribute)
+        public override void SetCarInitialState(float i_FloatAttribute)
         {
-            if (m_engine != null && m_engine is ElectricEngine)
+            if (m_Engine != null && m_Engine is ElectricEngine)
             {
-                m_indexSetupAttribute++;
+                m_IndexSetupAttribute++;
             }
-            if (m_indexSetupAttribute == 1)
+            if (m_IndexSetupAttribute == 1)
             {
-                setInitialWheelsPressure(i_floatAttribute);
+                SetInitialWheelsPressure(i_FloatAttribute);
             }
-            else if (m_indexSetupAttribute == 2)
+            else if (m_IndexSetupAttribute == 2)
             {
-                addWheelsPressure(i_floatAttribute);
+                AddWheelsPressure(i_FloatAttribute);
             }
-            else if (m_indexSetupAttribute == 8)
+            else if (m_IndexSetupAttribute == 8)
             {
-                m_engine.setMaximumEnergy(i_floatAttribute);
+                m_Engine.SetMaximumEnergy(i_FloatAttribute);
             }
             else
             {
                 //TODO : SENT WRONG ATTRIBUTE
             }
-            m_indexSetupAttribute++;
+            m_IndexSetupAttribute++;
         }
 
-
-        public override void setCarInitialState(bool i_boolAttribute)
+        public override void SetCarInitialState(bool i_BoolAttribute)
         {
-            if (m_indexSetupAttribute == 6)
+            if (m_IndexSetupAttribute == 6)
             {
-                m_engine = WorkOnCar.setEngineByBool(i_boolAttribute);
+                m_Engine = WorkOnCar.SetEngineByBool(i_BoolAttribute);
             }
             else
             {
                 //TODO : SENT WRONG ATTRIBUTE
             }
-            m_indexSetupAttribute++;
+            m_IndexSetupAttribute++;
         }
-
-
     }
 }

@@ -1,88 +1,78 @@
 ﻿using System;
 using System.Collections.Generic;
 
-
-
 namespace Ex03.GarageLogic
 {
     sealed class Car : Vehicle
     {
-        enum colorsOfCars
+        enum eColorsOfCars
         {
-            YELLOW,
-            WHITE,
-            RED,
-            BLACK,
+            Yellow,
+            White,
+            Red,
+            Black,
         }
-        private colorsOfCars m_color;
-        private int m_numberOfDoors;
-        private Engine m_engine = new FuelEngine();
-        int m_indexSetupAttribute = 0; //with attribute by the order of get attributes does the function need now to set
-        private const int m_numberOfWheels = 4;
-
+        private eColorsOfCars m_Color;
+        private int m_NumberOfDoors;
+        private Engine m_Engine = new FuelEngine();
+        private int m_IndexSetupAttribute = 0; //with attribute by the order of get attributes does the function need now to set
+        private const int k_NumberOfWheels = 4;
 
         public Car()
         {
-            initializeWheels(m_numberOfWheels);
+            InitializeWheels(k_NumberOfWheels);
         }
 
-
-        public override float getEnergy()
+        public override float GetEnergy()
         {
-            return m_engine.getEnergy();
+            return m_Engine.GetEnergy();
         }
 
-
-        public override bool isElectricity()
+        public override bool IsElectricity()
         {
-            return WorkOnCar.isElectricity(m_engine);
+            return WorkOnCar.IsElectricity(m_Engine);
         }
 
-
-        public override bool isFuel()
+        public override bool IsFuel()
         {
-            return WorkOnCar.isFuel(m_engine);
+            return WorkOnCar.IsFuel(m_Engine);
         }
 
-
-        public override void addFuelOrElectricity(float howMuchFuelToAdd, string typeOfEnergy)
+        public override void AddFuelOrElectricity(float i_HowMuchFuelToAdd, string i_TypeOfEnergy)
         {
-            m_engine.addEnergy(howMuchFuelToAdd, typeOfEnergy);
+            m_Engine.AddEnergy(i_HowMuchFuelToAdd, i_TypeOfEnergy);
         }
 
-
-
-        private colorsOfCars stringColorToEnum(string i_color)
+        private eColorsOfCars StringColorToEnum(string i_Color)
         {
-            colorsOfCars i_colorToReturn = colorsOfCars.BLACK;
-            switch (i_color)
+            eColorsOfCars colorToReturn = eColorsOfCars.Black;
+            switch (i_Color)
             {
                 case ("yellow"):
-                    i_colorToReturn = i_colorToReturn = colorsOfCars.YELLOW;
+                    colorToReturn = eColorsOfCars.Yellow;
                     break;
                 case ("white"):
-                    i_colorToReturn = i_colorToReturn = colorsOfCars.WHITE;
+                    colorToReturn = eColorsOfCars.White;
                     break;
                 case ("red"):
-                    i_colorToReturn = i_colorToReturn = colorsOfCars.RED;
+                    colorToReturn = eColorsOfCars.Red;
                     break;
                 case ("black"):
-                    i_colorToReturn = i_colorToReturn = colorsOfCars.BLACK;
+                    colorToReturn = eColorsOfCars.Black;
                     break;
                 default: //TODO: EXCEPTION NO SUCH COLOR
                     break;
-
             }
-            return i_colorToReturn;
+            return colorToReturn;
         }
 
-        public override string getInformationAboutCar()
+        public override string GetInformationAboutCar()
         {
-            string i_informationAboutCar = "";
+            string informationAboutCar;
 
-            if (m_engine is FuelEngine)
+            if (m_Engine is FuelEngine)
             {
-                i_informationAboutCar = String.Format("model name: {0}\n" +
+                informationAboutCar = String.Format("model name: {0}\n" +
                     "air pressure in wheels: {1}\n" +
                     "maximum air pressure in wheels: {2}\n" +
                     "manufactor name of wheels: {3}\n" +
@@ -90,105 +80,101 @@ namespace Ex03.GarageLogic
                     "number of doors: {5}\n" +
                     "how much fuel: {6}\n" +
                     "type of fuel: {7}\n" +
-                    "maximum amount of fuel: {8}\n", getModelName(), getAirPressureInWheels(), getMaximumAirPressureInWheels(), getWheeslManufactorName(), m_color, m_numberOfDoors, m_engine.getEnergy(), (m_engine as FuelEngine).getTypeOfFuel(), m_engine.getMaximumEnergy());
+                    "maximum amount of fuel: {8}\n", GetModelName(), GetAirPressureInWheels(), GetMaximumAirPressureInWheels(), GetWheeslManufactorName(), m_Color, m_NumberOfDoors, m_Engine.GetEnergy(), (m_Engine as FuelEngine).GetTypeOfFuel(), m_Engine.GetMaximumEnergy());
             }
             else //car on electric engine
             {
-                i_informationAboutCar = String.Format("model name: {0}\n" +
+                informationAboutCar = String.Format("model name: {0}\n" +
                     "air pressure in wheels: {1}\n" +
                     "maximum air pressure in wheels: {2}\n" +
                     "manufactor name of wheels: {3}\n" +
                     "color: {4}\n" +
                     "number of doors: {5}\n" +
                     "how much hours for battery: {6}\n" +
-                    "maximum amount of hours for battery: {7}\n" , getModelName(), getAirPressureInWheels(), getMaximumAirPressureInWheels(), getWheeslManufactorName(), m_color, m_numberOfDoors, m_engine.getEnergy(), m_engine.getMaximumEnergy());
+                    "maximum amount of hours for battery: {7}\n", GetModelName(), GetAirPressureInWheels(), GetMaximumAirPressureInWheels(), GetWheeslManufactorName(), m_Color, m_NumberOfDoors, m_Engine.GetEnergy(), m_Engine.GetMaximumEnergy());
             }
 
-            return i_informationAboutCar;
+            return informationAboutCar;
         }
 
-
-        public override string getAttributes()
+        public override string GetAttributes()
         {
-            m_indexSetupAttribute = 0;
+            m_IndexSetupAttribute = 0;
             return ("model name::string||maximum air pressure wheels::float||air pressure in wheels::float||manufactor name of wheels::string||color(yellow,white,red,black)::string||number of doors::int||is car on fuel::bool||maximum energy::float");
         }
 
-
-        public override void setCarInitialState(string i_stringAttribute)
+        public override void SetCarInitialState(string i_StringAttribute)
         {
-            switch (m_indexSetupAttribute)
+            switch (m_IndexSetupAttribute)
             {
                 case (0):
-                    this.setModelName(i_stringAttribute);
+                    this.SetModelName(i_StringAttribute);
                     break;
                 case (3):
-                    setWheelsManufactorName(i_stringAttribute);
+                    SetWheelsManufactorName(i_StringAttribute);
                     break;
                 case (4):
-                    m_color = stringColorToEnum(i_stringAttribute);
+                    m_Color = StringColorToEnum(i_StringAttribute);
                     break;
                 case (7):
-                    (m_engine as FuelEngine).setTypeOfFuel(i_stringAttribute);
+                    (m_Engine as FuelEngine).SetTypeOfFuel(i_StringAttribute);
                     break;
                 default:
                     //TODO : SENT WRONG ATTRIBUTE
                     break;
             }
-            m_indexSetupAttribute++;
-        }
-        public override void setCarInitialState(int i_intAttribute)
-        {     
-            if (m_indexSetupAttribute == 5)
-            {
-                m_numberOfDoors = i_intAttribute;
-            }
-            else
-            {
-                //TODO : SENT WRONG ATTRIBUTE
-            }
-            m_indexSetupAttribute++;
+            m_IndexSetupAttribute++;
         }
 
-
-        public override void setCarInitialState(float i_floatAttribute)
+        public override void SetCarInitialState(int i_IntAttribute)
         {
-            if (m_engine != null && m_engine is ElectricEngine) //electric engine do not need to get type of fuel, so the index of set maximum energy is one less and need to add one
+            if (m_IndexSetupAttribute == 5)
             {
-                m_indexSetupAttribute++;
-            }
-            if (m_indexSetupAttribute == 1)
-            {
-                setInitialWheelsPressure(i_floatAttribute);
-            }
-            else if (m_indexSetupAttribute == 2)
-            {
-                addWheelsPressure(i_floatAttribute);
-            }
-            else if (m_indexSetupAttribute == 8)
-            {
-                m_engine.setMaximumEnergy(i_floatAttribute);
+                m_NumberOfDoors = i_IntAttribute;
             }
             else
             {
                 //TODO : SENT WRONG ATTRIBUTE
             }
-           m_indexSetupAttribute++;
+            m_IndexSetupAttribute++;
         }
 
-
-        public override void setCarInitialState(bool i_boolAttribute)
+        public override void SetCarInitialState(float i_FloatAttribute)
         {
-            if (m_indexSetupAttribute == 6)
+            if (m_Engine != null && m_Engine is ElectricEngine) //electric engine do not need to get type of fuel, so the index of set maximum energy is one less and need to add one
             {
-                m_engine = WorkOnCar.setEngineByBool(i_boolAttribute);
+                m_IndexSetupAttribute++;
+            }
+            if (m_IndexSetupAttribute == 1)
+            {
+                SetInitialWheelsPressure(i_FloatAttribute);
+            }
+            else if (m_IndexSetupAttribute == 2)
+            {
+                AddWheelsPressure(i_FloatAttribute);
+            }
+            else if (m_IndexSetupAttribute == 8)
+            {
+                m_Engine.SetMaximumEnergy(i_FloatAttribute);
             }
             else
             {
                 //TODO : SENT WRONG ATTRIBUTE
             }
-            m_indexSetupAttribute++;
+            m_IndexSetupAttribute++;
         }
 
+        public override void SetCarInitialState(bool i_BoolAttribute)
+        {
+            if (m_IndexSetupAttribute == 6)
+            {
+                m_Engine = WorkOnCar.SetEngineByBool(i_BoolAttribute);
+            }
+            else
+            {
+                //TODO : SENT WRONG ATTRIBUTE
+            }
+            m_IndexSetupAttribute++;
+        }
     }
 }

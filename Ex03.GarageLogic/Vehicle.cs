@@ -2,58 +2,55 @@
 using System;
 using System.Collections.Generic;
 
-
 namespace Ex03.GarageLogic
 {
     public abstract class Vehicle
     {
-        private string m_modelName;
-        private string m_licensePlate;
-        protected List<Wheel> m_wheels;
+        private string m_ModelName;
+        private string m_LicensePlate;
+        protected List<Wheel> m_Wheels;
 
+        public abstract void SetCarInitialState(string i_StringAttribute);
+        public abstract void SetCarInitialState(int i_IntAttribute);
+        public abstract void SetCarInitialState(float i_IntAttribute);
+        public abstract void SetCarInitialState(bool i_IntAttribute);
+        public abstract bool IsFuel();
+        public abstract bool IsElectricity();
+        public abstract void AddFuelOrElectricity(float i_HowMuchFuelToAdd, string i_TypeOfEnergy);
+        public abstract string GetInformationAboutCar();
 
-        abstract public void setCarInitialState(string stringAttribute);
-        abstract public void setCarInitialState(int i_intAttribute);
-        abstract public void setCarInitialState(float i_intAttribute);
-        abstract public void setCarInitialState(bool i_intAttribute);
-        abstract public bool isFuel();
-        abstract public bool isElectricity();
-        abstract public void addFuelOrElectricity(float howMuchFuelToAdd, string typeOfEnergy);
-        abstract public string getInformationAboutCar();
-
-
-        public string getLicensePlate()
+        public string GetLicensePlate()
         {
-            return m_licensePlate;
+            return m_LicensePlate;
         }
 
-        public string getModelName()
+        public string GetModelName()
         {
-            return m_modelName;
+            return m_ModelName;
         }
 
-        public string getWheeslManufactorName()
+        public string GetWheeslManufactorName()
         {
-            string i_manuFactorName;
+            string manuFactorName;
 
-            if (m_wheels.Count != 0)
+            if (m_Wheels.Count != 0)
             {
-                i_manuFactorName = m_wheels[0].getManufactorName();
+                manuFactorName = m_Wheels[0].GetManufactorName();
             }
             else
             {
-                i_manuFactorName = "no wheels";
+                manuFactorName = "no wheels";
             }
-            return i_manuFactorName;
+            return manuFactorName;
         }
 
-        public float getMaximumAirPressureInWheels()
+        public float GetMaximumAirPressureInWheels()
         {
             float airPressureInWheels = 0;
 
-            if (m_wheels.Count != 0)
+            if (m_Wheels.Count != 0)
             {
-                airPressureInWheels = m_wheels[0].getMaximumAirPressureInWheel();
+                airPressureInWheels = m_Wheels[0].GetMaximumAirPressureInWheel();
             }
             else
             {
@@ -62,13 +59,13 @@ namespace Ex03.GarageLogic
             return airPressureInWheels;
         }
 
-        public float getAirPressureInWheels()
+        public float GetAirPressureInWheels()
         {
             float airPressureInWheels = 0;
 
-            if (m_wheels.Count != 0)
+            if (m_Wheels.Count != 0)
             {
-                airPressureInWheels = m_wheels[0].getAirPressureInWheel();
+                airPressureInWheels = m_Wheels[0].GetAirPressureInWheel();
             }
             else
             {
@@ -77,84 +74,70 @@ namespace Ex03.GarageLogic
             return airPressureInWheels;
         }
 
-
-        public void setWheelsManufactorName(string i_manufactorName)
+        public void SetWheelsManufactorName(string i_ManufactorName)
         {
-            if (m_wheels.Count != 0)
+            if (m_Wheels.Count != 0)
             {
-                foreach (Wheel wheel in m_wheels)
+                foreach (Wheel wheel in m_Wheels)
                 {
-                    wheel.setManufactorName(i_manufactorName);
+                    wheel.SetManufactorName(i_ManufactorName);
                 }
             }
         }
 
-
-
-
-        public void setAirPressureInWheelToMaximum()
+        public void SetAirPressureInWheelToMaximum()
         {
-            if (m_wheels.Count != 0)
+            if (m_Wheels.Count != 0)
+            {
+                foreach (Wheel wheel in m_Wheels)
                 {
-                    foreach (Wheel wheel in m_wheels)
-                {
-                    wheel.setAirPressureInWheelToMaximum();
+                    wheel.SetAirPressureInWheelToMaximum();
                 }
-                   }
-                else
-                    {
-                        //TODO : exception no wheels in vehicle
-                    }
-          }
+            }
+            else
+            {
+                //TODO : exception no wheels in vehicle
+            }
+        }
 
-
-        public void initializeWheels(int numberOfWheels)
+        public void InitializeWheels(int i_NumberOfWheels)
         {
-            m_wheels = new List<Wheel>();
-            for (int wheelIndex = 0; wheelIndex < numberOfWheels; wheelIndex++)
+            m_Wheels = new List<Wheel>();
+            for (int wheelIndex = 0; wheelIndex < i_NumberOfWheels; wheelIndex++)
             {
                 Wheel wheel = new Wheel();
-                m_wheels.Add(wheel);
+                m_Wheels.Add(wheel);
             }
         }
 
-
-
-        public void setModelName(string setModelName)
+        public void SetModelName(string i_SetModelName)
         {
-            m_modelName = setModelName;
+            m_ModelName = i_SetModelName;
         }
 
-        public void setLicensePlate(string setLicensePlate)
+        public void SetLicensePlate(string i_SetLicensePlate)
         {
-            m_licensePlate = setLicensePlate;
+            m_LicensePlate = i_SetLicensePlate;
         }
 
+        public abstract string GetAttributes();
 
-        abstract public string getAttributes();
-
-
-
-
-        public void setInitialWheelsPressure(float i_setMaximumAirPressure)
+        public void SetInitialWheelsPressure(float i_SetMaximumAirPressure)
         {
-            foreach (Wheel wheel in m_wheels)
+            foreach (Wheel wheel in m_Wheels)
             {
-                wheel.setMaximumAirPressureInWheel(i_setMaximumAirPressure);
+                wheel.SetMaximumAirPressureInWheel(i_SetMaximumAirPressure);
             }
         }
 
-
-
-        public void addWheelsPressure (float setAirPressure)
+        public void AddWheelsPressure(float i_SetAirPressure)
         {
-            foreach (Wheel wheel in m_wheels)
+            foreach (Wheel wheel in m_Wheels)
             {
-                wheel.addAirPressureToWheel(setAirPressure);
+                wheel.AddAirPressureToWheel(i_SetAirPressure);
             }
         }
 
-        abstract public float getEnergy();
-
+        public abstract float GetEnergy();
     }
 }

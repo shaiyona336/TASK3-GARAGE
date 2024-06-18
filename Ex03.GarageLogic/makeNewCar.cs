@@ -1,30 +1,28 @@
 ﻿using System;
 
-
 namespace Ex03.GarageLogic
 {
-    internal class makeNewCar
+    internal class MakeNewCar
     {
-        public static Vehicle getVehicleFromString(string i_withCar)
+        public static Vehicle GetVehicleFromString(string i_VehicleType)
         {
-            Vehicle i_newCar = null;
+            Vehicle newVehicle = null;
 
-            switch (i_withCar)
+            switch (i_VehicleType)
             {
-                case ("car"):
-                    i_newCar = new Car();
+                case "car":
+                    newVehicle = new Car();
                     break;
-                case ("truck"):
-                    i_newCar = new Truck();
+                case "truck":
+                    newVehicle = new Truck();
                     break;
-                case ("Motorcycle"):
-                    i_newCar = new MotorCycle();
+                case "motorcycle":
+                    newVehicle = new Motorcycle();
                     break;
                 default:
-                    throw new ArgumentException($"There's no type of vehicle that matches with \"{i_withCar}\"");
-                    
+                    throw new ArgumentException($"There's no type of vehicle that matches with \"{i_VehicleType}\"");
             }
-            return i_newCar;
+            return newVehicle;
         }
     }
 }

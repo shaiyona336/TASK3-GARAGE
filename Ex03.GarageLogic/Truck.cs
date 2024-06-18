@@ -6,26 +6,24 @@ namespace Ex03.GarageLogic
 {
     sealed class Truck : Vehicle
     {
-
-        private bool m_isTransferDangerousMaterials;
-        private float m_cargoVolume;
-        private Engine m_engine = new FuelEngine();
-        int m_indexSetupAttribute = 0;
-        private const int m_numberOfWheels = 4;
+        private bool m_IsTransferDangerousMaterials;
+        private float m_CargoVolume;
+        private Engine m_Engine = new FuelEngine();
+        private int m_IndexSetupAttribute = 0;
+        private const int k_NumberOfWheels = 4;
 
         public Truck()
         {
-            initializeWheels(m_numberOfWheels);
+            InitializeWheels(k_NumberOfWheels);
         }
 
-
-        public override string getInformationAboutCar()
+        public override string GetInformationAboutCar()
         {
-            string i_informationAboutCar = "";
+            string informationAboutCar;
 
-            if (m_engine is FuelEngine)
+            if (m_Engine is FuelEngine)
             {
-                i_informationAboutCar = String.Format("model name: {0}\n" +
+                informationAboutCar = String.Format("model name: {0}\n" +
                     "air pressure in wheels: {1}\n" +
                     "maximum air pressure in wheels: {2}\n" +
                     "manufactor name of wheels: {3}\n" +
@@ -33,144 +31,128 @@ namespace Ex03.GarageLogic
                     "cargo volume: {5}\n" +
                     "how much fuel: {6}\n" +
                     "type of fuel: {7}\n" +
-                    "maximum amount of fuel: {8}\n", getModelName(), getAirPressureInWheels(), getMaximumAirPressureInWheels(), getWheeslManufactorName(), m_isTransferDangerousMaterials, m_cargoVolume, m_engine.getEnergy(), (m_engine as FuelEngine).getTypeOfFuel(), m_engine.getMaximumEnergy());
+                    "maximum amount of fuel: {8}\n", GetModelName(), GetAirPressureInWheels(), GetMaximumAirPressureInWheels(), GetWheeslManufactorName(), m_IsTransferDangerousMaterials, m_CargoVolume, m_Engine.GetEnergy(), (m_Engine as FuelEngine).GetTypeOfFuel(), m_Engine.GetMaximumEnergy());
             }
             else //car on electric engine
             {
-                i_informationAboutCar = String.Format("model name: {0}\n" +
+                informationAboutCar = String.Format("model name: {0}\n" +
                      "air pressure in wheels: {1}\n" +
                      "maximum air pressure in wheels: {2}\n" +
                      "manufactor name of wheels: {3}\n" +
                      "is truck transfer dangerous materials: {4}\n" +
                      "cargo volume: {5}\n" +
                      "how much hours for battery: {6}\n" +
-                     "maximum amount of hours for battery: {7}\n", getModelName(), getAirPressureInWheels(), getMaximumAirPressureInWheels(), getWheeslManufactorName(), m_isTransferDangerousMaterials, m_cargoVolume, m_engine.getEnergy(),  m_engine.getMaximumEnergy());
+                     "maximum amount of hours for battery: {7}\n", GetModelName(), GetAirPressureInWheels(), GetMaximumAirPressureInWheels(), GetWheeslManufactorName(), m_IsTransferDangerousMaterials, m_CargoVolume, m_Engine.GetEnergy(), m_Engine.GetMaximumEnergy());
             }
 
-            return i_informationAboutCar;
+            return informationAboutCar;
         }
 
-
-        public override string getAttributes()
+        public override string GetAttributes()
         {
-            return ("model name::string||maximum air pressure wheels::float||air pressure in wheels::float||manufactor name of wheels::string||is the truck transfer dangerous materials::bool||cargo volume::float||is car on fuel::bool||maximum energy::float");
+            return "model name::string||maximum air pressure wheels::float||air pressure in wheels::float||manufactor name of wheels::string||is the truck transfer dangerous materials::bool||cargo volume::float||is car on fuel::bool||maximum energy::float";
         }
 
-
-
-        public override float getEnergy()
+        public override float GetEnergy()
         {
-            return m_engine.getEnergy();
+            return m_Engine.GetEnergy();
         }
 
-        public override void addFuelOrElectricity(float howMuchFuelToAdd, string typeOfEnergy)
+        public override void AddFuelOrElectricity(float i_HowMuchFuelToAdd, string i_TypeOfEnergy)
         {
-            m_engine.addEnergy(howMuchFuelToAdd, typeOfEnergy);
+            m_Engine.AddEnergy(i_HowMuchFuelToAdd, i_TypeOfEnergy);
         }
 
-
-        public override bool isElectricity()
+        public override bool IsElectricity()
         {
-            return WorkOnCar.isElectricity(m_engine);
+            return WorkOnCar.IsElectricity(m_Engine);
         }
 
-
-        public override bool isFuel()
+        public override bool IsFuel()
         {
-            return WorkOnCar.isFuel(m_engine);
+            return WorkOnCar.IsFuel(m_Engine);
         }
 
-        
-
-        
-
-        private void setIsTransferDangerousMaterials(bool i_isTransferDangerousMaterials)
+        private void SetIsTransferDangerousMaterials(bool i_IsTransferDangerousMaterials)
         {
-            m_isTransferDangerousMaterials = i_isTransferDangerousMaterials;
+            m_IsTransferDangerousMaterials = i_IsTransferDangerousMaterials;
         }
 
-
-        private void setCargoVolume(float i_cargoVolume)
+        private void SetCargoVolume(float i_CargoVolume)
         {
-            m_cargoVolume = i_cargoVolume;
+            m_CargoVolume = i_CargoVolume;
         }
 
-
-
-        public override void setCarInitialState(string i_stringAttribute)
+        public override void SetCarInitialState(string i_StringAttribute)
         {
-            switch (m_indexSetupAttribute)
+            switch (m_IndexSetupAttribute)
             {
-                case (0):
-                    this.setModelName(i_stringAttribute);
+                case 0:
+                    this.SetModelName(i_StringAttribute);
                     break;
-                case (3):
-                    setWheelsManufactorName(i_stringAttribute);
+                case 3:
+                    SetWheelsManufactorName(i_StringAttribute);
                     break;
-                case (7):
-                    (m_engine as FuelEngine).setTypeOfFuel(i_stringAttribute);
+                case 7:
+                    (m_Engine as FuelEngine).SetTypeOfFuel(i_StringAttribute);
                     break;
                 default:
                     //TODO : SENT WRONG ATTRIBUTE
                     break;
             }
-            m_indexSetupAttribute++;
+            m_IndexSetupAttribute++;
         }
 
-        public override void setCarInitialState(int i_intAttribute)
+        public override void SetCarInitialState(int i_IntAttribute)
         {
-           //TODO : SENT WRONG ATTRIBUTE
-            m_indexSetupAttribute++;
+            //TODO : SENT WRONG ATTRIBUTE
+            m_IndexSetupAttribute++;
         }
 
-        public override void setCarInitialState(float i_floatAttribute)
+        public override void SetCarInitialState(float i_FloatAttribute)
         {
-            if (m_engine != null && m_engine is ElectricEngine) 
+            if (m_Engine != null && m_Engine is ElectricEngine)
             {
-                m_indexSetupAttribute++;
+                m_IndexSetupAttribute++;
             }
-            if (m_indexSetupAttribute == 1)
+            if (m_IndexSetupAttribute == 1)
             {
-                setInitialWheelsPressure(i_floatAttribute);
+                SetInitialWheelsPressure(i_FloatAttribute);
             }
-            else if (m_indexSetupAttribute == 2)
+            else if (m_IndexSetupAttribute == 2)
             {
-                addWheelsPressure(i_floatAttribute);
+                AddWheelsPressure(i_FloatAttribute);
             }
-            else if (m_indexSetupAttribute == 5)
+            else if (m_IndexSetupAttribute == 5)
             {
-                setCargoVolume(i_floatAttribute);
+                SetCargoVolume(i_FloatAttribute);
             }
-            else if (m_indexSetupAttribute == 8)
+            else if (m_IndexSetupAttribute == 8)
             {
-                m_engine.setMaximumEnergy(i_floatAttribute);
+                m_Engine.SetMaximumEnergy(i_FloatAttribute);
             }
             else
             {
                 //TODO : SENT WRONG ATTRIBUTE
             }
-            m_indexSetupAttribute++;
+            m_IndexSetupAttribute++;
         }
 
-        public override void setCarInitialState(bool i_boolAttribute)
+        public override void SetCarInitialState(bool i_BoolAttribute)
         {
-            if (m_indexSetupAttribute == 4)
+            if (m_IndexSetupAttribute == 4)
             {
-                setIsTransferDangerousMaterials(i_boolAttribute);
+                SetIsTransferDangerousMaterials(i_BoolAttribute);
             }
-            else if (m_indexSetupAttribute == 6)
+            else if (m_IndexSetupAttribute == 6)
             {
-                m_engine = WorkOnCar.setEngineByBool(i_boolAttribute);
+                m_Engine = WorkOnCar.SetEngineByBool(i_BoolAttribute);
             }
             else
             {
                 //TODO : SENT WRONG ATTRIBUTE
             }
-            m_indexSetupAttribute++;
+            m_IndexSetupAttribute++;
         }
     }
-
-   }
-
-
-   
+}

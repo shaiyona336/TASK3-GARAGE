@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography;
 using Ex03.GarageLogic;
 
 namespace Ex03.ConsoleUI
@@ -37,7 +35,7 @@ namespace Ex03.ConsoleUI
                     insertVehicle(i_Garage);
                     break;
                 case "show all licenses":
-                    showAllLicenses(i_Garage);
+                    printAllLicensesInGarage(i_Garage);
                     break;
                 case "change vehicle status":
                     changeVehicleStatus(i_Garage);
@@ -65,17 +63,17 @@ namespace Ex03.ConsoleUI
 
         private static void insertVehicle(Garage i_Garage)
         {
-            string i_licenseCar;
-            string i_withCarToEnter;
-            string i_attributesToEnter;
-            Action<string> setLastEnteredVehicle = i_Garage.setLastEnteredVehicle;
-            Func<string, string> addVehicleToGarageFunc = i_Garage.addVehicle;
+            string vehicleLicense;
+            string vehicleTypeToEnterGarage;
+            string attributesToEnter;
+            Action<string> setLastEnteredVehicle = i_Garage.SetLastEnteredVehicle;
+            Func<string, string> addVehicleToGarageFunc = i_Garage.AddVehicle;
 
 
-            Console.WriteLine("enter license for car: ");
-            i_licenseCar = Console.ReadLine();
+            Console.WriteLine("enter license for the vehicle: ");
+            vehicleLicense = Console.ReadLine();
 
-            if (i_Garage.isCarInGarage(i_licenseCar))
+            if (i_Garage.IsCarInGarage(vehicleLicense))
             {
                 Console.WriteLine("car already in garage, moved to status INPROGRESS");
             }
@@ -85,14 +83,17 @@ namespace Ex03.ConsoleUI
                 //Console.WriteLine("with type vehicle to enter (car/truck/motorcycle): ");
                 //string withCarToEnter = Console.ReadLine();
 
-                i_attributesToEnter = (string)executeMethod("with type vehicle to enter (car/truck/motorcycle): ", addVehicleToGarageFunc);
-                //i_attributesToEnter = i_Garage.addVehicle(withCarToEnter);
-                executeMethod("enter name of owner:", setLastEnteredVehicle);
-                executeMethod("enter phone number of owner:", setLastEnteredVehicle);
-                executeMethod("enter the status you want for the car (INPROGRESS/FIXED/PAYED):", setLastEnteredVehicle);
-                setLastEnteredVehicle(i_licenseCar);
+                attributesToEnter = (string)askForInputAndHandleExceptions("What's the type" +
+                    " of the vehicle you want to enter the garage? (car/truck/motorcycle): ",
+                    addVehicleToGarageFunc);
 
-                processVehicleAttributes(i_Garage, i_attributesToEnter);
+                askForInputAndHandleExceptions("Enter name of owner:", setLastEnteredVehicle);
+                askForInputAndHandleExceptions("Enter phone number of owner:", setLastEnteredVehicle);
+                askForInputAndHandleExceptions("Enter the status you want for the car" +
+                    " (INPROGRESS/FIXED/PAYED):", setLastEnteredVehicle);
+                setLastEnteredVehicle(vehicleLicense);
+
+                processVehicleAttributes(i_Garage, attributesToEnter);
             }
             //addVehicle
 
@@ -125,53 +126,47 @@ namespace Ex03.ConsoleUI
         //    processVehicleAttributes(i_Garage, attributesToEnter);
         //}
         /////////////////////////////////////
-
-        
-
-
+       
         private static void processVehicleAttributes(Garage i_Garage, string i_AttributesToEnter)
         {
-            string[] attributesArray = i_AttributesToEnter.Split(new string[] { "||" }, StringSplitOptions.None);
-            //int intInputAttribute;
-            //float floatInputAttribute;
-            //bool boolInputAttribute;
+            string[] attributesArray = i_AttributesToEnter.Split(new string[] { "||" }, 
+                StringSplitOptions.None);
 
             foreach (string attribute in attributesArray)
             {
-                string messageWithAttributeToEnter = attribute.Split(new string[] { "::" }, StringSplitOptions.None)[0];
-                string typeOfAttribute = attribute.Split(new string[] { "::" }, StringSplitOptions.None)[1];
+                string messageWithAttributeToEnter = attribute.Split(new string[] { "::" },
+                    StringSplitOptions.None)[0];
+                string typeOfAttribute = attribute.Split(new string[] { "::" },
+                    StringSplitOptions.None)[1];
+
                 Console.WriteLine(messageWithAttributeToEnter);
                 string inputAttribute = Console.ReadLine();
 
-                //string parsedValue = parseAttribute(typeOfAttribute, inputAttribute);
                 switch (typeOfAttribute)
                 {
                     case "int":
                         if (!int.TryParse(inputAttribute, out int intInputAttribute))
                         {
                             throw new FormatException("Cannot convert to int");
-                            //TODO : exception cannot convert to int (done?)
                         }
-                        i_Garage.setLastEnteredVehicle(intInputAttribute);
+                        i_Garage.SetLastEnteredVehicle(intInputAttribute);
                         break;
                     case "float":
                         if (!float.TryParse(inputAttribute, out float floatInputAttribute))
                         {
                             throw new FormatException("Cannot convert to float");
-                            //TODO : exception cannot convert to float (done?)
                         }
-                        i_Garage.setLastEnteredVehicle(floatInputAttribute);
+                        i_Garage.SetLastEnteredVehicle(floatInputAttribute);
                         break;
                     case "bool":
                         if (!bool.TryParse(inputAttribute, out bool boolInputAttribute))
                         {
                             throw new FormatException("Cannot convert to bool");
-                            //TODO : exception cannot convert to boolean (done?)
                         }
-                        i_Garage.setLastEnteredVehicle(boolInputAttribute);
+                        i_Garage.SetLastEnteredVehicle(boolInputAttribute);
                         break;
                     default: // Needed to send string
-                        i_Garage.setLastEnteredVehicle(inputAttribute);
+                        i_Garage.SetLastEnteredVehicle(inputAttribute);
                         break;
                 }
                 //try
@@ -186,7 +181,8 @@ namespace Ex03.ConsoleUI
 
                 if (messageWithAttributeToEnter == "is car on fuel" && bool.Parse(inputAttribute))
                 {
-                    executeMethod("enter type of fuel for car:", (Action<string>)i_Garage.setLastEnteredVehicle);
+                    askForInputAndHandleExceptions("enter type of fuel for car:",
+                        (Action<string>)i_Garage.SetLastEnteredVehicle);
                 }
             }
         }
@@ -209,51 +205,30 @@ namespace Ex03.ConsoleUI
             return parsers[i_TypeOfAttribute](i_InputAttribute);
         }
 
-        private static void showAllLicenses(Garage i_Garage)
+        private static void printAllLicensesInGarage(Garage i_Garage)
         {
             string askForLicenseType = "what type of licenses(INPROGRESS,FIXED,PAYED,ANY):";
-            Func<string, List<string>> showAllLicensesFunc = i_Garage.showAllLicenses;
-            var allLicenses = executeMethod(askForLicenseType, showAllLicensesFunc);
+            Func<string, List<string>> showAllLicensesFunc = i_Garage.ShowAllLicenses;
+            var allLicenses = askForInputAndHandleExceptions(askForLicenseType, showAllLicensesFunc);
 
-            foreach (string i_licenses in (List<string>)allLicenses)
+            foreach (string license in (List<string>)allLicenses)
             {
-                Console.WriteLine(i_licenses);
+                Console.WriteLine(license);
             }
         }
-
-        //private static void showAllLicenses(Garage i_Garage)
-        //{
-        //    Console.WriteLine("what type of licenses(INPROGRESS,FIXED,PAYED,ANY): ");
-        //    string typeOfLicenses = Console.ReadLine();
-        //
-        //    switch (typeOfLicenses)
-        //    {
-        //        case "A":
-        //        case "A1":
-        //        case "AA":
-        //        case "B1":
-        //            List<string> allLicenses = i_Garage.showAllLicenses(typeOfLicenses); //TODO : need to handle exception (done?)
-        //            foreach (string license in allLicenses)
-        //            {
-        //                Console.WriteLine(license);
-        //            }
-        //            break;
-        //        default:
-        //            throw new ArgumentException($"No valid license type matches \"{typeOfLicenses}\"");
-        //    }
-        //}
 
         private static void changeVehicleStatus(Garage i_Garage)
         {
             string requestToUser1 = "enter license of car to change status to:";
             string requestToUser2 = "enter new status:";
-            Action<string, string> changeStatusToCarFunc = i_Garage.changeStatusToCar;
+            Action<string, string> changeStatusToCarFunc = i_Garage.ChangeStatusToCar;
             executeMethod(requestToUser1, requestToUser2, changeStatusToCarFunc);
         }
 
         private static void addAirPressure(Garage i_Garage)
         {
-            executeMethod("enter license of car to add pressure to:", (Action<string>)i_Garage.FillFullAirPressureInWheels);
+            askForInputAndHandleExceptions("enter license of car to add pressure to:",
+                (Action<string>)i_Garage.FillFullAirPressureInWheels);
         }
 
         private static void addFuel(Garage i_Garage)
@@ -271,7 +246,7 @@ namespace Ex03.ConsoleUI
 
             try
             {
-                i_Garage.addFuel(licenseCar, valueHowMuchFuel, typeOfFuel);
+                i_Garage.AddFuel(licenseCar, valueHowMuchFuel, typeOfFuel);
             }
             catch (Exception exception)
             {
@@ -290,11 +265,11 @@ namespace Ex03.ConsoleUI
             licenseCarToCharge = Console.ReadLine();
             Console.WriteLine("enter amount of hours to add to battery: ");
             howMuchElectricityToAdd = Console.ReadLine();
-            float i_valueHowMuchElectricityToAdd = float.Parse(howMuchElectricityToAdd);
+            float valueHowMuchElectricityToAdd = float.Parse(howMuchElectricityToAdd);
 
             try
             {
-                i_Garage.addElectricity(licenseCarToCharge, i_valueHowMuchElectricityToAdd);
+                i_Garage.AddElectricity(licenseCarToCharge, valueHowMuchElectricityToAdd);
             }
             catch (Exception exception)
             {
@@ -306,13 +281,13 @@ namespace Ex03.ConsoleUI
         public static void showInformationAboutCar(Garage i_Garage)
         {
             string askForCarLicenseMessage = "enter license of car to show information about:";
-            Func<string, string> showInformationAboutCarFunc = i_Garage.showInformationAboutCar;
+            Func<string, string> showInformationAboutCarFunc = i_Garage.ShowInformationAboutCar;
 
-            string informationAboutCar = (string)executeMethod(askForCarLicenseMessage, showInformationAboutCarFunc);
+            string informationAboutCar = (string)askForInputAndHandleExceptions(askForCarLicenseMessage, showInformationAboutCarFunc);
             Console.WriteLine(informationAboutCar);
         }
 
-        private static object executeMethod(string i_RequestFromUser1, Delegate i_Function)
+        private static object askForInputAndHandleExceptions(string i_RequestFromUser1, Delegate i_Function)
         {
             object returnValue = null;
             while (true)
@@ -384,39 +359,6 @@ namespace Ex03.ConsoleUI
         {
             return executeMethod(i_RequestFromUser1, i_RequestFromUser2, i_Function, out string dummy1, out string dummy2);
         }
-
-        //private static object executeMethod(Delegate i_Function, params string[] i_RequestsFromUser)
-        //{
-        //    object returnValue = null;
-        //    string[] userInputs = new string[i_RequestsFromUser.Length];
-        //    while (true)
-        //    {
-        //        for (int i = 0; i < i_RequestsFromUser.Length; i++)
-        //        {
-        //            Console.WriteLine(i_RequestsFromUser[i]);
-        //            userInputs[i] = Console.ReadLine();
-        //        }
-        //
-        //        try
-        //        {
-        //            if (getAmountOfInParamsInDelegate(i_Function) != i_RequestsFromUser.Length)
-        //            {
-        //                returnValue = nonVoidMethod(userInput);
-        //            }
-        //            else if (i_Function is Action<string> voidMethod)
-        //            {
-        //                voidMethod(userInput);
-        //            }
-        //
-        //            break;
-        //        }
-        //        catch (Exception exception)
-        //        {
-        //            Console.WriteLine(exception.Message);
-        //        }
-        //
-        //    }
-        //}
 
         private static int getAmountOfInParamsInDelegate(Delegate i_delegate)
         {

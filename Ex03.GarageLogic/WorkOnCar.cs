@@ -1,37 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 
-
 namespace Ex03.GarageLogic
 {
     internal class WorkOnCar
     {
-
-        public static bool isFuel(Engine i_engine)
+        public static bool IsFuel(Engine i_Engine)
         {
-            bool i_flag = false;
-            if (i_engine is FuelEngine)
+            bool flag = false;
+            if (i_Engine is FuelEngine)
             {
-                i_flag = true;
+                flag = true;
             }
-            return i_flag;
+            return flag;
         }
 
-        public static bool isElectricity(Engine i_engine)
+        public static bool IsElectricity(Engine i_Engine)
         {
-            bool i_flag = false;
-            if (i_engine is ElectricEngine)
+            bool flag = false;
+            if (i_Engine is ElectricEngine)
             {
-                i_flag = true;
+                flag = true;
             }
-            return i_flag;
+            return flag;
         }
 
-        public static void addResourceToResource(ref int addTo, int howMuchToAdd, int maximumAirPressureInWheel)
+        public static void AddResourceToResource(ref int i_AddTo, int i_HowMuchToAdd, int i_MaximumAirPressureInWheel)
         {
-            if (addTo + howMuchToAdd <= maximumAirPressureInWheel)
+            if (i_AddTo + i_HowMuchToAdd <= i_MaximumAirPressureInWheel)
             {
-                addTo = addTo + howMuchToAdd;
+                i_AddTo = i_AddTo + i_HowMuchToAdd;
             }
             else
             {
@@ -39,32 +37,30 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public static void addResourceToResource(ref float addTo, float howMuchToAdd, float maximumAirPressureInWheel)
+        public static void AddResourceToResource(ref float i_AddTo, float i_HowMuchToAdd, float i_MaximumAirPressureInWheel)
         {
-            if (addTo + howMuchToAdd <= maximumAirPressureInWheel)
+            if (i_AddTo + i_HowMuchToAdd <= i_MaximumAirPressureInWheel)
             {
-                addTo = addTo + howMuchToAdd;
+                i_AddTo = i_AddTo + i_HowMuchToAdd;
             }
             else
             {
                 //TODO: throw exception
             }
-
         }
 
-
-        public static Engine setEngineByBool(bool isFuel)
+        public static Engine SetEngineByBool(bool i_IsFuel)
         {
-            Engine i_engine;
-            if (isFuel == true)
+            Engine engine;
+            if (i_IsFuel == true)
             {
-                i_engine = new FuelEngine();
+                engine = new FuelEngine();
             }
             else
             {
-                i_engine = new ElectricEngine();
+                engine = new ElectricEngine();
             }
-            return i_engine;
+            return engine;
         }
     }
 }

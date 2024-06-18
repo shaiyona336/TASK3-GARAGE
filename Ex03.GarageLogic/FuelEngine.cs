@@ -1,115 +1,108 @@
-﻿using System;
-using System.Collections.Generic;
-
-
-namespace Ex03.GarageLogic
+﻿namespace Ex03.GarageLogic
 {
     sealed class FuelEngine : Engine
     {
-        public enum typeOfFuel
+        public enum eTypeOfFuel
         {
             Soler,
             Octan95,
             Octan96,
             Octan98,
-
         }
-        private typeOfFuel m_typeFuel = typeOfFuel.Soler;
-        private float m_statusFuel;
-        private float m_maximumFuel;
+        private eTypeOfFuel m_TypeFuel = eTypeOfFuel.Soler;
+        private float m_StatusFuel;
+        private float m_MaximumFuel;
 
-        public override float getMaximumEnergy()
+        public override float GetMaximumEnergy()
         {
-            return m_maximumFuel;
+            return m_MaximumFuel;
         }
-        public string getTypeOfFuel()
+        public string GetTypeOfFuel()
         {
-            string i_typeOfFuel = "";
+            string typeOfFuel = "";
 
-            switch (m_typeFuel)
+            switch (m_TypeFuel)
             {
-                case (typeOfFuel.Soler):
-                    i_typeOfFuel = "Soler";
+                case eTypeOfFuel.Soler:
+                    typeOfFuel = "Soler";
                     break;
-                case (typeOfFuel.Octan95):
-                    i_typeOfFuel = "Octan95";
+                case eTypeOfFuel.Octan95:
+                    typeOfFuel = "Octan95";
                     break;
-                case (typeOfFuel.Octan96):
-                    i_typeOfFuel = "Octan96";
+                case eTypeOfFuel.Octan96:
+                    typeOfFuel = "Octan96";
                     break;
-                case (typeOfFuel.Octan98):
-                    i_typeOfFuel = "Octan98";
+                case eTypeOfFuel.Octan98:
+                    typeOfFuel = "Octan98";
                     break;
             }
-            return i_typeOfFuel;
+            return typeOfFuel;
         }
 
-        public override float getEnergy()
+        public override float GetEnergy()
         {
-            return m_statusFuel;
+            return m_StatusFuel;
         }
 
-        public void setTypeOfFuel(string i_typeOfFuel)
+        public void SetTypeOfFuel(string i_TypeOfFuel)
         {
-            typeOfFuel typeOfFuelRightFormat = typeOfFuel.Soler;
-            
-            switch(i_typeOfFuel)
+            eTypeOfFuel typeOfFuelRightFormat = eTypeOfFuel.Soler;
+
+            switch (i_TypeOfFuel)
             {
-                case ("Soler"):
-                    typeOfFuelRightFormat = typeOfFuel.Soler; 
+                case "Soler":
+                    typeOfFuelRightFormat = eTypeOfFuel.Soler;
                     break;
-                case ("Octan95"):
-                    typeOfFuelRightFormat = typeOfFuel.Octan95;
+                case "Octan95":
+                    typeOfFuelRightFormat = eTypeOfFuel.Octan95;
                     break;
-                case ("Octan96"):
-                    typeOfFuelRightFormat = typeOfFuel.Octan96;
+                case "Octan96":
+                    typeOfFuelRightFormat = eTypeOfFuel.Octan96;
                     break;
-                case ("Octan98"):
-                    typeOfFuelRightFormat = typeOfFuel.Octan98;
+                case "Octan98":
+                    typeOfFuelRightFormat = eTypeOfFuel.Octan98;
                     break;
                 default:
                     //TODO : wrong type of fuel
                     break;
             }
 
-            m_typeFuel = typeOfFuelRightFormat;
+            m_TypeFuel = typeOfFuelRightFormat;
         }
 
-
-        public override void addEnergy(float howMuchFuelToAdd, string typeOfEnergy)
+        public override void AddEnergy(float i_HowMuchFuelToAdd, string i_TypeOfEnergy)
         {
-            typeOfFuel typeOfFuelCorrectFormat = typeOfFuel.Soler;
+            eTypeOfFuel typeOfFuelCorrectFormat = eTypeOfFuel.Soler;
 
-            switch (typeOfEnergy)
+            switch (i_TypeOfEnergy)
             {
-                case ("Soler"):
-                    typeOfFuelCorrectFormat = typeOfFuel.Soler;
+                case "Soler":
+                    typeOfFuelCorrectFormat = eTypeOfFuel.Soler;
                     break;
-                case ("Octan95"):
-                    typeOfFuelCorrectFormat = typeOfFuel.Octan95;
+                case "Octan95":
+                    typeOfFuelCorrectFormat = eTypeOfFuel.Octan95;
                     break;
-                case ("Octan96"):
-                    typeOfFuelCorrectFormat = typeOfFuel.Octan96;
+                case "Octan96":
+                    typeOfFuelCorrectFormat = eTypeOfFuel.Octan96;
                     break;
-                case ("Octan98"):
-                    typeOfFuelCorrectFormat = typeOfFuel.Octan98;
+                case "Octan98":
+                    typeOfFuelCorrectFormat = eTypeOfFuel.Octan98;
                     break;
                 default:
                     //TODO: throw exception invalid fuel
                     break;
             }
-            if (typeOfFuelCorrectFormat == m_typeFuel)
+            if (typeOfFuelCorrectFormat == m_TypeFuel)
             {
-                WorkOnCar.addResourceToResource(ref m_statusFuel, howMuchFuelToAdd, m_maximumFuel);
+                WorkOnCar.AddResourceToResource(ref m_StatusFuel, i_HowMuchFuelToAdd, m_MaximumFuel);
             }
             //TODO: wrong fuel type tried to be added
         }
 
-        public override void setMaximumEnergy(float i_maximumEnergy)
+        public override void SetMaximumEnergy(float i_MaximumEnergy)
         {
-            m_maximumFuel = i_maximumEnergy;
+            m_MaximumFuel = i_MaximumEnergy;
         }
 
     }
 }
-
