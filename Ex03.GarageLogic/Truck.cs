@@ -9,7 +9,7 @@ namespace Ex03.GarageLogic
 
         private bool m_isTransferDangerousMaterials;
         private float m_cargoVolume;
-        private Engine m_engine;
+        private Engine m_engine = new FuelEngine();
         int m_indexSetupAttribute = 0;
         private const int m_numberOfWheels = 4;
 
