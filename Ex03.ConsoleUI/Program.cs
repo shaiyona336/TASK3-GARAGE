@@ -82,9 +82,6 @@ namespace Ex03.ConsoleUI
 
             else
             {
-                //Console.WriteLine("with type vehicle to enter (car/truck/motorcycle): ");
-                //string withCarToEnter = Console.ReadLine();
-
                 i_attributesToEnter = (string)executeMethod("with type vehicle to enter (car/truck/motorcycle): ", addVehicleToGarageFunc);
                 //i_attributesToEnter = i_Garage.addVehicle(withCarToEnter);
                 executeMethod("enter name of owner:", setLastEnteredVehicle);
@@ -351,7 +348,6 @@ namespace Ex03.ConsoleUI
                 string userInput1 = Console.ReadLine();
                 Console.WriteLine(i_RequestFromUser2);
                 string userInput2 = Console.ReadLine();
-
                 try
                 {
                     if (i_Function is Func<string, string, object> nonVoidMethod)

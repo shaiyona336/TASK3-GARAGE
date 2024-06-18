@@ -17,12 +17,12 @@ namespace Ex03.GarageLogic
         private colorsOfCars m_color;
         private int m_numberOfDoors;
         private Engine m_engine = new FuelEngine();
-        private const int m_numberOfWheels = 4;
+        private const int k_numberOfWheels = 4;
 
 
         public Car()
         {
-            initializeWheels(m_numberOfWheels);
+            initializeWheels(k_numberOfWheels);
         }
 
 

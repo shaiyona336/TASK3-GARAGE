@@ -10,11 +10,11 @@ namespace Ex03.GarageLogic
         public bool m_isTransferDangerousMaterials { get; set; }
         public float m_cargoVolume { get; set; }
         private Engine m_engine = new FuelEngine();
-        private const int m_numberOfWheels = 4;
+        private const int k_numberOfWheels = 4;
 
         public Truck()
         {
-            initializeWheels(m_numberOfWheels);
+            initializeWheels(k_numberOfWheels);
         }
 
         //private void setIsTransferDangerousMaterials(bool i_isTransferDangerousMaterials)

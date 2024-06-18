@@ -17,12 +17,12 @@ namespace Ex03.GarageLogic
         private typeOfLicense m_typeLicense;
         private int m_engineVolume;
         private Engine m_engine = new FuelEngine();
-        private const int m_numberOfWheels = 2;
+        private const int k_numberOfWheels = 2;
 
 
         public MotorCycle()
         {
-            initializeWheels(m_numberOfWheels);
+            initializeWheels(k_numberOfWheels);
         }
 
 
