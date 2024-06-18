@@ -68,6 +68,9 @@ namespace Ex03.ConsoleUI
             string i_licenseCar;
             string i_withCarToEnter;
             string i_attributesToEnter;
+            Action<string> setLastEnteredVehicle = i_Garage.setLastEnteredVehicle;
+            Func<string, string> addVehicleToGarageFunc = i_Garage.addVehicle;
+
 
             Console.WriteLine("enter license for car: ");
             i_licenseCar = Console.ReadLine();
@@ -81,23 +84,17 @@ namespace Ex03.ConsoleUI
             {
                 Console.WriteLine("with type vehicle to enter (car/truck/motorcycle): ");
                 string withCarToEnter = Console.ReadLine();
-                i_attributesToEnter = i_Garage.addVehicle(withCarToEnter);
-                Console.WriteLine("enter name of owner: ");
-                string nameOfOwner = Console.ReadLine();
-                Console.WriteLine("enter phone of owner: ");
-                string phoneOfOwner = Console.ReadLine();
-                Console.WriteLine("enter the status you want for the car (INPROGRESS/FIXED/PAYED): ");
-                string carStatus = Console.ReadLine();
 
-                // Send data basic about car to garage
-                i_Garage.setLastEnteredVehicle(nameOfOwner);
-                i_Garage.setLastEnteredVehicle(phoneOfOwner);
-                i_Garage.setLastEnteredVehicle(carStatus);
-                i_Garage.setLastEnteredVehicle(i_licenseCar);
+                i_attributesToEnter = (string)executeMethod(withCarToEnter, addVehicleToGarageFunc, out string licenseCar);
+                i_attributesToEnter = i_Garage.addVehicle(withCarToEnter);
+                executeMethod("enter name of owner:", setLastEnteredVehicle);
+                executeMethod("enter phone number of owner:", setLastEnteredVehicle);
+                executeMethod("enter the status you want for the car (INPROGRESS/FIXED/PAYED):", setLastEnteredVehicle);
+                setLastEnteredVehicle(licenseCar);
 
                 processVehicleAttributes(i_Garage, i_attributesToEnter);
             }
-
+            //addVehicle
 
         }
         //////////////////////////////////////////
