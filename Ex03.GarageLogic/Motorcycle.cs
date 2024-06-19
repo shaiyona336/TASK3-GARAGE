@@ -79,7 +79,10 @@ namespace Ex03.GarageLogic
                     "type of license: {4}\n" +
                     "cargo volume: {5}\n" +
                     "how much hours for battery: {6}\n" +
-                    "maximum amount of hours for battery: {7}\n", GetModelName(), GetAirPressureInWheels(), GetMaximumAirPressureInWheels(), GetWheeslManufactorName(), GetTypeOfLicense(), m_EngineVolume, m_Engine.GetEnergy(), m_Engine.GetMaximumEnergy());
+                    "maximum amount of hours for battery: {7}\n", 
+                    GetModelName(), GetAirPressureInWheels(), GetMaximumAirPressureInWheels(), 
+                    GetWheeslManufactorName(), GetTypeOfLicense(), m_EngineVolume, m_Engine.GetEnergy(), 
+                    m_Engine.GetMaximumEnergy());
             }
 
             return informationAboutCar;

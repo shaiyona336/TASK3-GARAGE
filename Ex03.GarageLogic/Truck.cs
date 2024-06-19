@@ -1,29 +1,36 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Runtime;
 
 namespace Ex03.GarageLogic
 {
     sealed class Truck : Vehicle
     {
+        private const int k_MaximumAirPressure = 28;
+        private const string k_FuelType = "Soler";
+        private const float k_MaximumAmountOfFuel = 120;
+        private const int k_NumberOfWheels = 12;
+
         private bool m_IsTransferDangerousMaterials;
         private float m_CargoVolume;
-        private Engine m_Engine = new FuelEngine();
+        private FuelEngine m_Engine;
         private int m_IndexSetupAttribute = 0;
-        private const int k_NumberOfWheels = 4;
 
         public Truck()
         {
             InitializeWheels(k_NumberOfWheels);
+            SetInitialWheelsPressure(k_MaximumAirPressure);
+
+            m_Engine = new FuelEngine();
+            m_Engine.SetTypeOfFuel(k_FuelType);
+            m_Engine.SetMaximumEnergy(k_MaximumAmountOfFuel);
         }
 
         public override string GetInformationAboutCar()
         {
-            string informationAboutCar;
+            string informationAboutVehicle;
 
             if (m_Engine is FuelEngine)
             {
-                informationAboutCar = String.Format("model name: {0}\n" +
+                informationAboutVehicle = String.Format("model name: {0}\n" +
                     "air pressure in wheels: {1}\n" +
                     "maximum air pressure in wheels: {2}\n" +
                     "manufactor name of wheels: {3}\n" +
@@ -35,7 +42,7 @@ namespace Ex03.GarageLogic
             }
             else //car on electric engine
             {
-                informationAboutCar = String.Format("model name: {0}\n" +
+                informationAboutVehicle = String.Format("model name: {0}\n" +
                      "air pressure in wheels: {1}\n" +
                      "maximum air pressure in wheels: {2}\n" +
                      "manufactor name of wheels: {3}\n" +
@@ -45,12 +52,17 @@ namespace Ex03.GarageLogic
                      "maximum amount of hours for battery: {7}\n", GetModelName(), GetAirPressureInWheels(), GetMaximumAirPressureInWheels(), GetWheeslManufactorName(), m_IsTransferDangerousMaterials, m_CargoVolume, m_Engine.GetEnergy(), m_Engine.GetMaximumEnergy());
             }
 
-            return informationAboutCar;
+            return informationAboutVehicle;
         }
 
         public override string GetAttributes()
         {
-            return "model name::string||maximum air pressure wheels::float||air pressure in wheels::float||manufactor name of wheels::string||is the truck transfer dangerous materials::bool||cargo volume::float||is car on fuel::bool||maximum energy::float";
+            return "Enter Model Name::string" + //0
+                $"||Enter air pressure in wheels (maximum is {k_MaximumAirPressure})::float" + //1
+                "||Enter the manufactor name of the wheels::string" + //2
+                "||Is the truck transferring dangerous materials? (true/false)::bool" + //3
+                "||Enter cargo volume::float" + //4
+                $"||Enter the amount of fuel in the truck (maximum is {k_MaximumAmountOfFuel})::float"; //5
         }
 
         public override float GetEnergy()
@@ -90,11 +102,8 @@ namespace Ex03.GarageLogic
                 case 0:
                     this.SetModelName(i_StringAttribute);
                     break;
-                case 3:
+                case 2:
                     SetWheelsManufactorName(i_StringAttribute);
-                    break;
-                case 7:
-                    (m_Engine as FuelEngine).SetTypeOfFuel(i_StringAttribute);
                     break;
                 default:
                     //TODO : SENT WRONG ATTRIBUTE
@@ -111,25 +120,17 @@ namespace Ex03.GarageLogic
 
         public override void SetCarInitialState(float i_FloatAttribute)
         {
-            if (m_Engine != null && m_Engine is ElectricEngine)
-            {
-                m_IndexSetupAttribute++;
-            }
             if (m_IndexSetupAttribute == 1)
-            {
-                SetInitialWheelsPressure(i_FloatAttribute);
-            }
-            else if (m_IndexSetupAttribute == 2)
             {
                 AddWheelsPressure(i_FloatAttribute);
             }
-            else if (m_IndexSetupAttribute == 5)
+            else if (m_IndexSetupAttribute == 4)
             {
                 SetCargoVolume(i_FloatAttribute);
             }
-            else if (m_IndexSetupAttribute == 8)
+            else if (m_IndexSetupAttribute == 5)
             {
-                m_Engine.SetMaximumEnergy(i_FloatAttribute);
+                m_Engine.SetEnergy(i_FloatAttribute);
             }
             else
             {
@@ -140,13 +141,9 @@ namespace Ex03.GarageLogic
 
         public override void SetCarInitialState(bool i_BoolAttribute)
         {
-            if (m_IndexSetupAttribute == 4)
+            if (m_IndexSetupAttribute == 3)
             {
                 SetIsTransferDangerousMaterials(i_BoolAttribute);
-            }
-            else if (m_IndexSetupAttribute == 6)
-            {
-                m_Engine = WorkOnCar.SetEngineByBool(i_BoolAttribute);
             }
             else
             {
