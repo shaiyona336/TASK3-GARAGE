@@ -218,7 +218,6 @@ namespace Ex03.ConsoleUI
             string i_typeOfFuel;
             string i_inputAttribute;
 
-
             while (i_flag)
             {
                 Console.WriteLine(i_RequestFromUser1);
@@ -277,7 +276,6 @@ namespace Ex03.ConsoleUI
                                 Console.WriteLine(exception.Message);
                             }
                         }
-                        //executeMethod("enter type of fuel for car:", (Action<string>)i_Garage.setLastEnteredVehicle);
                     }
                 }
                 catch (Exception exception)
