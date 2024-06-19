@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Ex03.GarageLogic
 {
@@ -112,12 +111,12 @@ namespace Ex03.GarageLogic
 
         public override bool IsElectricity()
         {
-            return WorkOnCar.IsElectricity(m_Engine);
+            return m_Engine.IsElectricity();
         }
 
         public override bool IsFuel()
         {
-            return WorkOnCar.IsFuel(m_Engine);
+            return m_Engine.IsFuel();
         }
 
         private eTypeOfLicense stringLicenseTypeToEnum(string i_LicenseType)
@@ -196,7 +195,7 @@ namespace Ex03.GarageLogic
         {
             if (m_IndexSetupAttribute == 5)
             {
-                m_Engine = WorkOnCar.SetEngineByBool(i_BoolAttribute);
+                m_Engine = Engine.SetEngineByBool(i_BoolAttribute);
                 if (m_Engine is FuelEngine)
                 {
                     m_Engine.SetMaximumEnergy(k_MaximumAmountOfFuel);

@@ -40,7 +40,7 @@ namespace Ex03.GarageLogic
 
         public void AddAirPressureToWheel(float i_HowMuchPressureToAdd)
         {
-            WorkOnCar.AddResourceToResource(ref m_AirPressureInWheel, i_HowMuchPressureToAdd, m_MaximumAirPressureInWheel);
+            Vehicle.AddResourceToResource(ref m_AirPressureInWheel, i_HowMuchPressureToAdd, m_MaximumAirPressureInWheel);
         }
     }
 }

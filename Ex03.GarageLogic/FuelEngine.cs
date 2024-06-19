@@ -50,7 +50,7 @@ namespace Ex03.GarageLogic
 
         public void SetTypeOfFuel(string i_TypeOfFuel)
         {
-            eTypeOfFuel typeOfFuelRightFormat = eTypeOfFuel.Soler;
+            eTypeOfFuel typeOfFuelRightFormat;
 
             switch (i_TypeOfFuel)
             {
@@ -75,7 +75,7 @@ namespace Ex03.GarageLogic
 
         public override void AddEnergy(float i_HowMuchFuelToAdd, string i_TypeOfEnergy)
         {
-            eTypeOfFuel typeOfFuelCorrectFormat = eTypeOfFuel.Soler;
+            eTypeOfFuel typeOfFuelCorrectFormat;
 
             switch (i_TypeOfEnergy)
             {
@@ -96,7 +96,7 @@ namespace Ex03.GarageLogic
             }
             if (typeOfFuelCorrectFormat == m_TypeFuel)
             {
-                WorkOnCar.AddResourceToResource(ref m_StatusFuel, i_HowMuchFuelToAdd, m_MaximumFuel);
+                Vehicle.AddResourceToResource(ref m_StatusFuel, i_HowMuchFuelToAdd, m_MaximumFuel);
             }
             else
             {

@@ -77,12 +77,12 @@ namespace Ex03.GarageLogic
 
         public override bool IsElectricity()
         {
-            return WorkOnCar.IsElectricity(m_Engine);
+            return m_Engine.IsElectricity();
         }
 
         public override bool IsFuel()
         {
-            return WorkOnCar.IsFuel(m_Engine);
+            return m_Engine.IsFuel();
         }
 
         private void setIsTransferDangerousMaterials(bool i_IsTransferDangerousMaterials)

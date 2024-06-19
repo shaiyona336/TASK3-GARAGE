@@ -17,7 +17,7 @@
 
         public override void AddEnergy(float i_HowManyHoursToAddToBattery, string i_TypeOfEnergy)
         {
-            WorkOnCar.AddResourceToResource(ref m_StatusBattery, i_HowManyHoursToAddToBattery, m_MaximumForBattery);
+            Vehicle.AddResourceToResource(ref m_StatusBattery, i_HowManyHoursToAddToBattery, m_MaximumForBattery);
         }
 
         public override void SetMaximumEnergy(float i_MaximumEnergy)

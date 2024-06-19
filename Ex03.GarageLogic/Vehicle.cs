@@ -19,6 +19,7 @@ namespace Ex03.GarageLogic
         public abstract void AddFuelOrElectricity(float i_HowMuchFuelToAdd, string i_TypeOfEnergy);
         public abstract string GetInformationAboutCar();
         public abstract string GetAttributes();
+        public abstract float GetEnergy();
 
         public string GetLicensePlate()
         {
@@ -47,7 +48,7 @@ namespace Ex03.GarageLogic
 
         public float GetMaximumAirPressureInWheels()
         {
-            float airPressureInWheels = 0;
+            float airPressureInWheels;
 
             if (m_Wheels.Count != 0)
             {
@@ -62,7 +63,7 @@ namespace Ex03.GarageLogic
 
         public float GetAirPressureInWheels()
         {
-            float airPressureInWheels = 0;
+            float airPressureInWheels;
 
             if (m_Wheels.Count != 0)
             {
@@ -138,6 +139,16 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public abstract float GetEnergy();
+        public static void AddResourceToResource(ref float i_AddTo, float i_HowMuchToAdd, float i_MaximumAirPressureInWheel)
+        {
+            if (i_AddTo + i_HowMuchToAdd <= i_MaximumAirPressureInWheel)
+            {
+                i_AddTo += i_HowMuchToAdd;
+            }
+            else
+            {
+                throw new ValueOutOfRangeException(0, i_MaximumAirPressureInWheel);
+            }
+        }
     }
 }

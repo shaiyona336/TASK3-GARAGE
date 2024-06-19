@@ -12,21 +12,26 @@ namespace Ex03.ConsoleUI
             {
                 case 1:
                     insertVehicle(i_Garage);
+                    Console.WriteLine("The requested vehicle has entered the garage.");
                     break;
                 case 2:
                     printAllLicensesInGarage(i_Garage);
                     break;
                 case 3:
                     changeVehicleStatus(i_Garage);
+                    Console.WriteLine("Vehicle status changed");
                     break;
                 case 4:
                     addAirPressure(i_Garage);
+                    Console.WriteLine("Air pressure was added to the requested vehicle.");
                     break;
                 case 5:
                     addFuel(i_Garage);
+                    Console.WriteLine("More fuel was added to the requested vehicle.");
                     break;
                 case 6:
                     addElectricity(i_Garage);
+                    Console.WriteLine("The electric vehicle was charged.");
                     break;
                 case 7:
                     showInformationAboutCar(i_Garage);
