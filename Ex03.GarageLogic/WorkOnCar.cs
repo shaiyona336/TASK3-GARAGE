@@ -25,7 +25,7 @@ namespace Ex03.GarageLogic
             return flag;
         }
 
-        public static void AddResourceToResource(ref int i_AddTo, int i_HowMuchToAdd, int i_MaximumAirPressureInWheel)
+        public static void AddResourceToResource(ref float i_AddTo, float i_HowMuchToAdd, float i_MaximumAirPressureInWheel)
         {
             if (i_AddTo + i_HowMuchToAdd <= i_MaximumAirPressureInWheel)
             {
@@ -34,18 +34,6 @@ namespace Ex03.GarageLogic
             else
             {
                 throw new ValueOutOfRangeException(0, i_MaximumAirPressureInWheel);
-            }
-        }
-
-        public static void AddResourceToResource(ref float i_AddTo, float i_HowMuchToAdd, float i_MaximumAirPressureInWheel)
-        {
-            if (i_AddTo + i_HowMuchToAdd <= i_MaximumAirPressureInWheel)
-            {
-                i_AddTo = i_AddTo + i_HowMuchToAdd;
-            }
-            else
-            {
-                //TODO: throw exception
             }
         }
 

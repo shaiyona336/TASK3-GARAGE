@@ -104,10 +104,10 @@ namespace Ex03.GarageLogic
             return WorkOnCar.IsFuel(m_Engine);
         }
 
-        private eTypeOfLicense StringColorToEnum(string i_Color)
+        private eTypeOfLicense StringLicenseTypeToEnum(string i_LicenseType)
         {
             eTypeOfLicense i_TypeToReturn = eTypeOfLicense.A;
-            switch (i_Color)
+            switch (i_LicenseType)
             {
                 case "A":
                     i_TypeToReturn = eTypeOfLicense.A;
@@ -122,7 +122,8 @@ namespace Ex03.GarageLogic
                     i_TypeToReturn = eTypeOfLicense.B1;
                     break;
                 default: //TODO: EXCEPTION NO SUCH TYPE OF LICENSE
-                    break;
+                    throw new ArgumentException($"\"{i_LicenseType}\" is not a type of license", 
+                        nameof(i_LicenseType));
             }
             return i_TypeToReturn;
         }
@@ -138,7 +139,7 @@ namespace Ex03.GarageLogic
                     SetWheelsManufactorName(i_StringAttribute);
                     break;
                 case 4:
-                    m_TypeLicense = StringColorToEnum(i_StringAttribute);
+                    m_TypeLicense = StringLicenseTypeToEnum(i_StringAttribute);
                     break;
                 case 7:
                     (m_Engine as FuelEngine).SetTypeOfFuel(i_StringAttribute);

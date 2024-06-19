@@ -14,7 +14,7 @@ namespace Ex03.GarageLogic
         private Vehicle m_Vehicle;
         private string m_NameOfOwner;
         private string m_PhoneOfOwner;
-        private eCarStatus m_StatusCar;
+        private eCarStatus m_StatusCar = eCarStatus.InProgress;
 
         public string GetNameOwner()
         {

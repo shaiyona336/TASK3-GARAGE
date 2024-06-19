@@ -62,26 +62,28 @@ namespace Ex03.ConsoleUI
 
         private static void InsertVehicle(Garage i_Garage)
         {
-            string licenseCar;
+            string vehicleLicense;
             string withCarToEnter;
             string attributesToEnter;
             Action<string> setLastEnteredVehicle = i_Garage.SetLastEnteredVehicle;
             Func<string, string> addVehicleToGarageFunc = i_Garage.AddVehicle;
 
-            Console.WriteLine("enter license for car: ");
-            licenseCar = Console.ReadLine();
+            Console.WriteLine("Enter license for vehicle: ");
+            vehicleLicense = Console.ReadLine();
 
-            if (i_Garage.IsCarInGarage(licenseCar))
+            if (i_Garage.IsCarInGarage(vehicleLicense))
             {
-                Console.WriteLine("car already in garage, moved to status INPROGRESS");
+                Console.WriteLine("This vehicle is already in the garage, moved to status INPROGRESS");
             }
             else
             {
-                attributesToEnter = (string)ExecuteMethod("with type vehicle to enter (car/truck/motorcycle): ", addVehicleToGarageFunc);
-                ExecuteMethod("enter name of owner:", setLastEnteredVehicle);
-                ExecuteMethod("enter phone number of owner:", setLastEnteredVehicle);
-                ExecuteMethod("enter the status you want for the car (INPROGRESS/FIXED/PAYED):", setLastEnteredVehicle);
-                setLastEnteredVehicle(licenseCar);
+                attributesToEnter = (string)ExecuteMethod("Which type of vehicle to enter" +
+                    " (car/truck/motorcycle): ", addVehicleToGarageFunc);
+                ExecuteMethod("Enter name of owner:", setLastEnteredVehicle);
+                ExecuteMethod("Enter phone number of owner:", setLastEnteredVehicle);
+                ExecuteMethod("Enter the status you want for the car (INPROGRESS/FIXED/PAYED):", 
+                    setLastEnteredVehicle);
+                setLastEnteredVehicle(vehicleLicense);
 
                 ProcessVehicleAttributes(i_Garage, attributesToEnter);
             }

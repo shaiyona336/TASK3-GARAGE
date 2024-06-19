@@ -171,9 +171,6 @@ namespace Ex03.GarageLogic
                     m_VehiclesInGarage[0].SetPhoneOfOwner(i_StringAttribute);
                     break;
                 case 2:
-                    m_VehiclesInGarage[0].SetStatusCar(i_StringAttribute);
-                    break;
-                case 3:
                     m_VehiclesInGarage[0].GetVehicle().SetLicensePlate(i_StringAttribute);
                     break;
                 default:

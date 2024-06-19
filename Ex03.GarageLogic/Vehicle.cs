@@ -18,6 +18,7 @@ namespace Ex03.GarageLogic
         public abstract bool IsElectricity();
         public abstract void AddFuelOrElectricity(float i_HowMuchFuelToAdd, string i_TypeOfEnergy);
         public abstract string GetInformationAboutCar();
+        public abstract string GetAttributes();
 
         public string GetLicensePlate()
         {
@@ -120,7 +121,6 @@ namespace Ex03.GarageLogic
             m_LicensePlate = i_SetLicensePlate;
         }
 
-        public abstract string GetAttributes();
 
         public void SetInitialWheelsPressure(float i_SetMaximumAirPressure)
         {

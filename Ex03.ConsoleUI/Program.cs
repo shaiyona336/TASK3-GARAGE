@@ -89,8 +89,6 @@ namespace Ex03.ConsoleUI
 
                 askForInputAndHandleExceptions("Enter name of owner:", setLastEnteredVehicle);
                 askForInputAndHandleExceptions("Enter phone number of owner:", setLastEnteredVehicle);
-                askForInputAndHandleExceptions("Enter the status you want for the car" +
-                    " (INPROGRESS/FIXED/PAYED):", setLastEnteredVehicle);
                 setLastEnteredVehicle(vehicleLicense);
 
                 processVehicleAttributes(i_Garage, attributesToEnter);
@@ -294,12 +292,13 @@ namespace Ex03.ConsoleUI
         }
 
 
-        private static void askForInputWithTypeAndHandleExceptions(string i_RequestFromUser1, string i_TypeArgumentSendFunction, Garage i_Garage, Delegate i_Function)
+        private static void askForInputWithTypeAndHandleExceptions(string i_RequestFromUser1, 
+            string i_TypeArgumentSendFunction, Garage i_Garage, Delegate i_Function)
         {
             //object returnValue = null;
-            bool i_flag = true;
+            bool flag = true;
             
-            while (i_flag)
+            while (flag)
             {
                 Console.WriteLine(i_RequestFromUser1);
                 string inputAttribute = Console.ReadLine();
@@ -315,7 +314,7 @@ namespace Ex03.ConsoleUI
                             }
 
                             i_Garage.SetLastEnteredVehicle(intInputAttribute);
-                            i_flag = false;
+                            flag = false;
                             break;
                         case "float":
                             if (!float.TryParse(inputAttribute, out float floatInputAttribute))
@@ -323,7 +322,7 @@ namespace Ex03.ConsoleUI
                                 throw new FormatException("Cannot convert to float");
                             }
                             i_Garage.SetLastEnteredVehicle(floatInputAttribute);
-                            i_flag = false;
+                            flag = false;
                             break;
                         case "bool":
                             if (!bool.TryParse(inputAttribute, out bool boolInputAttribute))
@@ -331,15 +330,14 @@ namespace Ex03.ConsoleUI
                                 throw new FormatException("Cannot convert to bool");
                             }
                             i_Garage.SetLastEnteredVehicle(boolInputAttribute);
-                            i_flag = false;
+                            flag = false;
                             break;
                         default: // Needed to send string
                             i_Garage.SetLastEnteredVehicle(inputAttribute);
-                            i_flag = false;
+                            flag = false;
                             break;
                     }
                 }
-
 
                 catch (Exception exception)
                 {

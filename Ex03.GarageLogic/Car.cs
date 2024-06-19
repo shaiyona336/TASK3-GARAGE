@@ -12,15 +12,21 @@ namespace Ex03.GarageLogic
             Red,
             Black,
         }
+        private const int k_MaximumAirPressure = 31;
+        private const string k_FuelType = "Octan95";
+        private const float k_MaximumAmountOfFuel = 45;
+        private const float k_MaximumAmountOfElectricity = 3.5f;
+        private const int k_NumberOfWheels = 5;
+
         private eColorsOfCars m_Color;
         private int m_NumberOfDoors;
         private Engine m_Engine = new FuelEngine();
         private int m_IndexSetupAttribute = 0; //with attribute by the order of get attributes does the function need now to set
-        private const int k_NumberOfWheels = 4;
 
         public Car()
         {
             InitializeWheels(k_NumberOfWheels);
+            SetInitialWheelsPressure(k_MaximumAirPressure);
         }
 
         public override float GetEnergy()
@@ -62,7 +68,6 @@ namespace Ex03.GarageLogic
                     break;
                 default:
                     throw new ArgumentException($"\"{i_Color}\" is not a valid color", nameof(i_Color));
-                    break;
             }
             return colorToReturn;
         }
@@ -101,7 +106,7 @@ namespace Ex03.GarageLogic
         public override string GetAttributes()
         {
             m_IndexSetupAttribute = 0;
-            return ("model name::string||maximum air pressure wheels::float||air pressure in wheels::float||manufactor name of wheels::string||color(yellow,white,red,black)::string||number of doors::int||is car on fuel::bool||maximum energy::float");
+            return ("model name::string||air pressure in wheels::float||manufactor name of wheels::string||color (yellow/white/red/black)::string||number of doors::int||is car on fuel (true/false)::bool");
         }
 
         public override void SetCarInitialState(string i_StringAttribute)
@@ -111,14 +116,14 @@ namespace Ex03.GarageLogic
                 case (0):
                     this.SetModelName(i_StringAttribute);
                     break;
-                case (3):
+                case (2):
                     SetWheelsManufactorName(i_StringAttribute);
                     break;
-                case (4):
+                case (3):
                     m_Color = StringColorToEnum(i_StringAttribute);
                     break;
-                case (7):
-                    (m_Engine as FuelEngine).SetTypeOfFuel(i_StringAttribute);
+                case (6):
+                    (m_Engine as FuelEngine).SetTypeOfFuel(k_FuelType);
                     break;
                 default:
                     //TODO : SENT WRONG ATTRIBUTE
@@ -129,7 +134,7 @@ namespace Ex03.GarageLogic
 
         public override void SetCarInitialState(int i_IntAttribute)
         {
-            if (m_IndexSetupAttribute == 5)
+            if (m_IndexSetupAttribute == 4)
             {
                 m_NumberOfDoors = i_IntAttribute;
             }
@@ -146,17 +151,9 @@ namespace Ex03.GarageLogic
             {
                 m_IndexSetupAttribute++;
             }
-            if (m_IndexSetupAttribute == 1)
-            {
-                SetInitialWheelsPressure(i_FloatAttribute);
-            }
-            else if (m_IndexSetupAttribute == 2)
+            else if (m_IndexSetupAttribute == 1)
             {
                 AddWheelsPressure(i_FloatAttribute);
-            }
-            else if (m_IndexSetupAttribute == 8)
-            {
-                m_Engine.SetMaximumEnergy(i_FloatAttribute);
             }
             else
             {
@@ -167,9 +164,18 @@ namespace Ex03.GarageLogic
 
         public override void SetCarInitialState(bool i_BoolAttribute)
         {
-            if (m_IndexSetupAttribute == 6)
+            if (m_IndexSetupAttribute == 5)
             {
                 m_Engine = WorkOnCar.SetEngineByBool(i_BoolAttribute);
+                if (m_Engine is FuelEngine)
+                {
+                    m_Engine.SetMaximumEnergy(k_MaximumAmountOfFuel);
+                    (m_Engine as FuelEngine).SetTypeOfFuel(k_FuelType);
+                }
+                else if (m_Engine is ElectricEngine)
+                {
+                    m_Engine.SetMaximumEnergy(k_MaximumAmountOfElectricity);
+                }
             }
             else
             {
