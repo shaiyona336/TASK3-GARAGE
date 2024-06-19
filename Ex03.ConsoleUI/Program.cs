@@ -15,9 +15,9 @@ namespace Ex03.ConsoleUI
             {
                 InputHandler.PrintProgramOptions();
 
-                userInput = int.Parse(Console.ReadLine());
                 try
                 {
+                    userInput = int.Parse(Console.ReadLine());
                     InputHandler.HandleUserInput(garage, userInput);
                 }
                 catch (Exception ex)

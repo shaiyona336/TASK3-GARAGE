@@ -85,12 +85,12 @@ namespace Ex03.GarageLogic
             return WorkOnCar.IsFuel(m_Engine);
         }
 
-        private void SetIsTransferDangerousMaterials(bool i_IsTransferDangerousMaterials)
+        private void setIsTransferDangerousMaterials(bool i_IsTransferDangerousMaterials)
         {
             m_IsTransferDangerousMaterials = i_IsTransferDangerousMaterials;
         }
 
-        private void SetCargoVolume(float i_CargoVolume)
+        private void setCargoVolume(float i_CargoVolume)
         {
             m_CargoVolume = i_CargoVolume;
         }
@@ -124,7 +124,7 @@ namespace Ex03.GarageLogic
             }
             else if (m_IndexSetupAttribute == 4)
             {
-                SetCargoVolume(i_FloatAttribute);
+                setCargoVolume(i_FloatAttribute);
             }
             else if (m_IndexSetupAttribute == 5)
             {
@@ -141,7 +141,7 @@ namespace Ex03.GarageLogic
         {
             if (m_IndexSetupAttribute == 3)
             {
-                SetIsTransferDangerousMaterials(i_BoolAttribute);
+                setIsTransferDangerousMaterials(i_BoolAttribute);
             }
             else
             {

@@ -10,7 +10,7 @@ namespace Ex03.GarageLogic
 
         public string GetInformationCarInGarage(GarageVehicleWithInformation i_CarWithInformationWithSameLicense)
         {
-            string informationCarInGarage = "";
+            string informationCarInGarage;
 
             if (i_CarWithInformationWithSameLicense != null)
             {
@@ -32,7 +32,7 @@ namespace Ex03.GarageLogic
             string insideCarInformationAboutHimself;
             string allInformationAboutCar;
             GarageVehicleWithInformation carWithInformationWithSameLicense;
-            carWithInformationWithSameLicense = IsCarLicenseInGarage(i_LicenseCarToShowInformationAbout);
+            carWithInformationWithSameLicense = isCarLicenseInGarage(i_LicenseCarToShowInformationAbout);
 
             if (i_LicenseCarToShowInformationAbout == null)
             {
@@ -50,7 +50,7 @@ namespace Ex03.GarageLogic
 
         public void AddElectricity(string i_LicenseCarToAddAirPressureTo, float i_HowMuchElectricityToAdd)
         {
-            GarageVehicleWithInformation carWithInformationWithSameLicense = IsCarLicenseInGarage(i_LicenseCarToAddAirPressureTo);
+            GarageVehicleWithInformation carWithInformationWithSameLicense = isCarLicenseInGarage(i_LicenseCarToAddAirPressureTo);
             if (carWithInformationWithSameLicense == null)
             {
                 throw new KeyNotFoundException("No vehicle with that license was found in the garage");
@@ -67,7 +67,7 @@ namespace Ex03.GarageLogic
 
         public void AddFuel(string i_LicenseCarToAddAirPressureTo, float i_HowMuchFuelToAdd, string i_TypeOfFuel)
         {
-            GarageVehicleWithInformation carWithInformationWithSameLicense = IsCarLicenseInGarage(i_LicenseCarToAddAirPressureTo);
+            GarageVehicleWithInformation carWithInformationWithSameLicense = isCarLicenseInGarage(i_LicenseCarToAddAirPressureTo);
             if (carWithInformationWithSameLicense == null)
             {
                 throw new KeyNotFoundException("No vehicle with that license was found in the garage");
@@ -84,7 +84,7 @@ namespace Ex03.GarageLogic
 
         public void FillFullAirPressureInWheels(string i_LicenseCarToAddAirPressureTo)
         {
-            GarageVehicleWithInformation carWithInformationWithSameLicense = IsCarLicenseInGarage(i_LicenseCarToAddAirPressureTo);
+            GarageVehicleWithInformation carWithInformationWithSameLicense = isCarLicenseInGarage(i_LicenseCarToAddAirPressureTo);
             if (carWithInformationWithSameLicense == null)
             {
                 throw new KeyNotFoundException("No vehicle with that license was found in the garage");
@@ -97,7 +97,7 @@ namespace Ex03.GarageLogic
 
         public void ChangeStatusToCar(string i_LicenseCarToChangeStatusTo, string i_NewStatusOfCar)
         {
-            GarageVehicleWithInformation carWithInformationWithSameLicense = IsCarLicenseInGarage(i_LicenseCarToChangeStatusTo);
+            GarageVehicleWithInformation carWithInformationWithSameLicense = isCarLicenseInGarage(i_LicenseCarToChangeStatusTo);
             if (carWithInformationWithSameLicense == null)
             {
                 throw new ArgumentException("No vehice with that license was found in the garage",
@@ -132,7 +132,7 @@ namespace Ex03.GarageLogic
             bool isVehicleExist = false;
             GarageVehicleWithInformation carSameLicense;
             //check if license already exist
-            carSameLicense = IsCarLicenseInGarage(i_LicenseCar);
+            carSameLicense = isCarLicenseInGarage(i_LicenseCar);
             if (carSameLicense != null)
             {
                 carSameLicense.SetCarStatusInProgress();
@@ -144,7 +144,7 @@ namespace Ex03.GarageLogic
         public string AddVehicle(string i_TypeOfVehicle)
         {
             Vehicle newVehicle;
-            GarageVehicleWithInformation newCarWithInformation = null;
+            GarageVehicleWithInformation newCarWithInformation;
             string argumentsToFillToInitializeVehicle;
 
             m_IndexSetupAttribute = 0; //reset m_indexSetupAttribute to enter the new vehicle
@@ -196,7 +196,7 @@ namespace Ex03.GarageLogic
             m_VehiclesInGarage[0].GetVehicle().SetCarInitialState(i_BoolAttribute);
         }
 
-        private GarageVehicleWithInformation IsCarLicenseInGarage(string i_CarLicense) //return vehicle with information or null if not found
+        private GarageVehicleWithInformation isCarLicenseInGarage(string i_CarLicense) //return vehicle with information or null if not found
         {
             GarageVehicleWithInformation vehicleSameLicense = null;
             if (m_VehiclesInGarage != null)

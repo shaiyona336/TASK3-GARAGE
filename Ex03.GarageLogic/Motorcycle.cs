@@ -30,7 +30,7 @@ namespace Ex03.GarageLogic
             SetInitialWheelsPressure(k_MaximumAirPressure);
         }
 
-        private string GetTypeOfLicense()
+        private string getTypeOfLicense()
         {
             string typeOfLicense = "";
 
@@ -68,7 +68,7 @@ namespace Ex03.GarageLogic
                     "cargo volume: {5}\n" +
                     "how much fuel: {6}\n" +
                     "type of fuel: {7}\n" +
-                    "maximum amount of fuel: {8}\n", GetModelName(), GetAirPressureInWheels(), GetMaximumAirPressureInWheels(), GetWheeslManufactorName(), GetTypeOfLicense(), m_EngineVolume, m_Engine.GetEnergy(), (m_Engine as FuelEngine).GetTypeOfFuel(), m_Engine.GetMaximumEnergy());
+                    "maximum amount of fuel: {8}\n", GetModelName(), GetAirPressureInWheels(), GetMaximumAirPressureInWheels(), GetWheeslManufactorName(), getTypeOfLicense(), m_EngineVolume, m_Engine.GetEnergy(), (m_Engine as FuelEngine).GetTypeOfFuel(), m_Engine.GetMaximumEnergy());
             }
             else //car on electric engine
             {
@@ -81,7 +81,7 @@ namespace Ex03.GarageLogic
                     "how much hours for battery: {6}\n" +
                     "maximum amount of hours for battery: {7}\n", 
                     GetModelName(), GetAirPressureInWheels(), GetMaximumAirPressureInWheels(), 
-                    GetWheeslManufactorName(), GetTypeOfLicense(), m_EngineVolume, m_Engine.GetEnergy(), 
+                    GetWheeslManufactorName(), getTypeOfLicense(), m_EngineVolume, m_Engine.GetEnergy(), 
                     m_Engine.GetMaximumEnergy());
             }
 
@@ -120,9 +120,9 @@ namespace Ex03.GarageLogic
             return WorkOnCar.IsFuel(m_Engine);
         }
 
-        private eTypeOfLicense StringLicenseTypeToEnum(string i_LicenseType)
+        private eTypeOfLicense stringLicenseTypeToEnum(string i_LicenseType)
         {
-            eTypeOfLicense i_TypeToReturn = eTypeOfLicense.A;
+            eTypeOfLicense i_TypeToReturn;
             switch (i_LicenseType)
             {
                 case "A":
@@ -154,7 +154,7 @@ namespace Ex03.GarageLogic
                     SetWheelsManufactorName(i_StringAttribute);
                     break;
                 case 3:
-                    m_TypeLicense = StringLicenseTypeToEnum(i_StringAttribute);
+                    m_TypeLicense = stringLicenseTypeToEnum(i_StringAttribute);
                     break;
                 default:
                     throw new ArgumentException("SENT WRONG ATTRIBUTE");

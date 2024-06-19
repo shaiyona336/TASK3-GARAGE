@@ -49,9 +49,9 @@ namespace Ex03.GarageLogic
             m_Engine.AddEnergy(i_HowMuchFuelToAdd, i_TypeOfEnergy);
         }
 
-        private eColorsOfCars StringColorToEnum(string i_Color)
+        private eColorsOfCars stringColorToEnum(string i_Color)
         {
-            eColorsOfCars colorToReturn = eColorsOfCars.Black;
+            eColorsOfCars colorToReturn;
             switch (i_Color)
             {
                 case ("yellow"):
@@ -127,7 +127,7 @@ namespace Ex03.GarageLogic
                     SetWheelsManufactorName(i_StringAttribute);
                     break;
                 case (3):
-                    m_Color = StringColorToEnum(i_StringAttribute);
+                    m_Color = stringColorToEnum(i_StringAttribute);
                     break;
                 default:
                     throw new ArgumentException("SENT WRONG ATTRIBUTE");

@@ -6,7 +6,7 @@ namespace Ex03.GarageLogic
     {
         public static Vehicle GetVehicleFromString(string i_VehicleType)
         {
-            Vehicle newVehicle = null;
+            Vehicle newVehicle;
 
             switch (i_VehicleType)
             {
