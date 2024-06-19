@@ -38,7 +38,7 @@ namespace Ex03.GarageLogic
                     "cargo volume: {5}\n" +
                     "how much fuel: {6}\n" +
                     "type of fuel: {7}\n" +
-                    "maximum amount of fuel: {8}\n", GetModelName(), GetAirPressureInWheels(), GetMaximumAirPressureInWheels(), GetWheeslManufactorName(), m_IsTransferDangerousMaterials, m_CargoVolume, m_Engine.GetEnergy(), (m_Engine as FuelEngine).GetTypeOfFuel(), m_Engine.GetMaximumEnergy());
+                    "maximum amount of fuel: {8}\n", ModelName, GetAirPressureInWheels(), GetMaximumAirPressureInWheels(), GetWheeslManufactorName(), m_IsTransferDangerousMaterials, m_CargoVolume, m_Engine.GetEnergy(), (m_Engine as FuelEngine).GetTypeOfFuel(), m_Engine.GetMaximumEnergy());
             }
             else //car on electric engine
             {
@@ -49,7 +49,7 @@ namespace Ex03.GarageLogic
                      "is truck transfer dangerous materials: {4}\n" +
                      "cargo volume: {5}\n" +
                      "how much hours for battery: {6}\n" +
-                     "maximum amount of hours for battery: {7}\n", GetModelName(), GetAirPressureInWheels(), GetMaximumAirPressureInWheels(), GetWheeslManufactorName(), m_IsTransferDangerousMaterials, m_CargoVolume, m_Engine.GetEnergy(), m_Engine.GetMaximumEnergy());
+                     "maximum amount of hours for battery: {7}\n", ModelName, GetAirPressureInWheels(), GetMaximumAirPressureInWheels(), GetWheeslManufactorName(), m_IsTransferDangerousMaterials, m_CargoVolume, m_Engine.GetEnergy(), m_Engine.GetMaximumEnergy());
             }
 
             return informationAboutVehicle;
@@ -100,7 +100,7 @@ namespace Ex03.GarageLogic
             switch (m_IndexSetupAttribute)
             {
                 case 0:
-                    this.SetModelName(i_StringAttribute);
+                    ModelName = i_StringAttribute;
                     break;
                 case 2:
                     SetWheelsManufactorName(i_StringAttribute);

@@ -16,7 +16,7 @@ namespace Ex03.GarageLogic
             {
                 informationCarInGarage = String.Format("name of owner: {0}\n" +
                     "phone of owner: {1}\n" +
-                    "car status: {2}\n", i_CarWithInformationWithSameLicense.GetNameOwner(), i_CarWithInformationWithSameLicense.GetPhoneOwner(), i_CarWithInformationWithSameLicense.GetCarStatus());
+                    "car status: {2}\n", i_CarWithInformationWithSameLicense.NameOfOwner, i_CarWithInformationWithSameLicense.PhoneOwner, i_CarWithInformationWithSameLicense.GetCarStatus());
             }
             else
             {
@@ -41,7 +41,7 @@ namespace Ex03.GarageLogic
             else
             {
                 informationAboutCarInGarage = GetInformationCarInGarage(carWithInformationWithSameLicense);
-                insideCarInformationAboutHimself = carWithInformationWithSameLicense.GetVehicle().GetInformationAboutCar();
+                insideCarInformationAboutHimself = carWithInformationWithSameLicense.Vehicle.GetInformationAboutCar();
                 allInformationAboutCar = informationAboutCarInGarage + insideCarInformationAboutHimself;
             }
 
@@ -55,13 +55,13 @@ namespace Ex03.GarageLogic
             {
                 throw new KeyNotFoundException("No vehicle with that license was found in the garage");
             }
-            else if (!(carWithInformationWithSameLicense.GetVehicle().IsElectricity()))
+            else if (!(carWithInformationWithSameLicense.Vehicle.IsElectricity()))
             {
                 throw new InvalidOperationException("Vehicle does not run on electricity");
             }
             else
             {
-                carWithInformationWithSameLicense.GetVehicle().AddFuelOrElectricity(i_HowMuchElectricityToAdd, ""); //no need to send the type of fuel in electricity car
+                carWithInformationWithSameLicense.Vehicle.AddFuelOrElectricity(i_HowMuchElectricityToAdd, ""); //no need to send the type of fuel in electricity car
             }
         }
 
@@ -72,13 +72,13 @@ namespace Ex03.GarageLogic
             {
                 throw new KeyNotFoundException("No vehicle with that license was found in the garage");
             }
-            else if (!(carWithInformationWithSameLicense.GetVehicle().IsFuel()))
+            else if (!(carWithInformationWithSameLicense.Vehicle.IsFuel()))
             {
                 throw new InvalidOperationException("Vehicle does not run on electricity");
             }
             else
             {
-                carWithInformationWithSameLicense.GetVehicle().AddFuelOrElectricity(i_HowMuchFuelToAdd, i_TypeOfFuel);
+                carWithInformationWithSameLicense.Vehicle.AddFuelOrElectricity(i_HowMuchFuelToAdd, i_TypeOfFuel);
             }
         }
 
@@ -121,7 +121,7 @@ namespace Ex03.GarageLogic
             {
                 if (carWithInformation.IsCarCorrectStatusToShow(i_TypeOfCarStatusToShow))
                 {
-                    allLicensesToShow.Add(carWithInformation.GetVehicle().GetLicensePlate());
+                    allLicensesToShow.Add(carWithInformation.Vehicle.LicensePlate);
                 }
             }
             return allLicensesToShow;
@@ -150,7 +150,7 @@ namespace Ex03.GarageLogic
             m_IndexSetupAttribute = 0; //reset m_indexSetupAttribute to enter the new vehicle
             newVehicle = VehicleMaker.GetVehicleFromString(i_TypeOfVehicle);
             newCarWithInformation = new GarageVehicleWithInformation();
-            newCarWithInformation.SetVehicle(newVehicle);
+            newCarWithInformation.            Vehicle = newVehicle;
             if (m_VehiclesInGarage == null)
             {
                 m_VehiclesInGarage = new List<GarageVehicleWithInformation>();
@@ -165,16 +165,16 @@ namespace Ex03.GarageLogic
             switch (m_IndexSetupAttribute)
             {
                 case 0:
-                    m_VehiclesInGarage[0].SetNameOfOwner(i_StringAttribute);
+                    m_VehiclesInGarage[0].NameOfOwner = i_StringAttribute;
                     break;
                 case 1:
-                    m_VehiclesInGarage[0].SetPhoneOfOwner(i_StringAttribute);
+                    m_VehiclesInGarage[0].PhoneOwner = i_StringAttribute;
                     break;
                 case 2:
-                    m_VehiclesInGarage[0].GetVehicle().SetLicensePlate(i_StringAttribute);
+                    m_VehiclesInGarage[0].Vehicle.LicensePlate = i_StringAttribute;
                     break;
                 default:
-                    m_VehiclesInGarage[0].GetVehicle().SetCarInitialState(i_StringAttribute);
+                    m_VehiclesInGarage[0].Vehicle.SetCarInitialState(i_StringAttribute);
                     break;
             }
             m_IndexSetupAttribute++;
@@ -182,18 +182,18 @@ namespace Ex03.GarageLogic
 
         public void SetLastEnteredVehicle(int i_IntAttribute)
         {
-            m_VehiclesInGarage[0].GetVehicle().SetCarInitialState(i_IntAttribute);
+            m_VehiclesInGarage[0].Vehicle.SetCarInitialState(i_IntAttribute);
             //no need to increase m_indexSetupAttribute because the attributes that the function initialize is for each specific car not name/phone of owner or status car
         }
 
         public void SetLastEnteredVehicle(float i_FloatAttribute)
         {
-            m_VehiclesInGarage[0].GetVehicle().SetCarInitialState(i_FloatAttribute);
+            m_VehiclesInGarage[0].Vehicle.SetCarInitialState(i_FloatAttribute);
         }
 
         public void SetLastEnteredVehicle(bool i_BoolAttribute)
         {
-            m_VehiclesInGarage[0].GetVehicle().SetCarInitialState(i_BoolAttribute);
+            m_VehiclesInGarage[0].Vehicle.SetCarInitialState(i_BoolAttribute);
         }
 
         private GarageVehicleWithInformation isCarLicenseInGarage(string i_CarLicense) //return vehicle with information or null if not found
@@ -203,7 +203,7 @@ namespace Ex03.GarageLogic
             {
                 foreach (var vehicle in m_VehiclesInGarage)
                 {
-                    if (vehicle.GetVehicle().GetLicensePlate() == i_CarLicense)
+                    if (vehicle.Vehicle.LicensePlate == i_CarLicense)
                     {
                         vehicleSameLicense = vehicle;
                     }

@@ -2,8 +2,23 @@
 {
     sealed class ElectricEngine : Engine
     {
-        private float m_StatusBattery; //hours for battery
         private float m_MaximumForBattery; //how many hours can electric car drive by with maximum battery
+        private float m_StatusBattery; //hours for battery
+        public float StatusBattery
+        {
+            get { return m_StatusBattery; } 
+            set
+            {
+                if (value <= m_MaximumForBattery)
+                {
+                    m_StatusBattery = value;
+                }
+                else
+                {
+                    throw new ValueOutOfRangeException(0, m_MaximumForBattery);
+                }
+            }
+        }
 
         public override float GetMaximumEnergy()
         {
@@ -12,7 +27,7 @@
 
         public override float GetEnergy()
         {
-            return m_StatusBattery;
+            return StatusBattery;
         }
 
         public override void AddEnergy(float i_HowManyHoursToAddToBattery, string i_TypeOfEnergy)
@@ -27,14 +42,7 @@
 
         public override void SetEnergy(float i_HowMuchEnergy)
         {
-            if (i_HowMuchEnergy <= m_MaximumForBattery)
-            {
-                m_StatusBattery = i_HowMuchEnergy;
-            }
-            else
-            {
-                throw new ValueOutOfRangeException(0, m_MaximumForBattery);
-            }
+            StatusBattery = i_HowMuchEnergy;
         }
     }
 }

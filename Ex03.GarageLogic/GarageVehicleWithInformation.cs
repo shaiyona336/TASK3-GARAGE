@@ -11,19 +11,11 @@ namespace Ex03.GarageLogic
             Fixed,
             Payed
         }
-        private Vehicle m_Vehicle;
-        private string m_NameOfOwner;
-        private string m_PhoneOfOwner;
         private eCarStatus m_StatusCar = eCarStatus.InProgress;
+        public string NameOfOwner { get; set; }
+        public string PhoneOwner { get; set; }
+        public Vehicle Vehicle { get; set; }
 
-        public string GetNameOwner()
-        {
-            return m_NameOfOwner;
-        }
-        public string GetPhoneOwner()
-        {
-            return m_PhoneOfOwner;
-        }
         public string GetCarStatus()
         {
             string carStatus = "";
@@ -45,14 +37,10 @@ namespace Ex03.GarageLogic
 
             return carStatus;
         }
-        public Vehicle GetVehicle()
-        {
-            return m_Vehicle;
-        }
 
         public void FillWheelsPressure()
         {
-            m_Vehicle.SetAirPressureInWheelToMaximum();
+            Vehicle.SetAirPressureInWheelToMaximum();
         }
 
         public bool IsCarCorrectStatusToShow(string i_CarStatus)
@@ -106,21 +94,6 @@ namespace Ex03.GarageLogic
                     throw new ArgumentException($"There's no valid status that matches with" +
                         $" \"{i_StatusCar}\"");
             }
-        }
-
-        public void SetVehicle(Vehicle i_Vehicle)
-        {
-            m_Vehicle = i_Vehicle;
-        }
-
-        public void SetNameOfOwner(string i_NameOfOwner)
-        {
-            m_NameOfOwner = i_NameOfOwner;
-        }
-
-        public void SetPhoneOfOwner(string i_PhoneOfOwner)
-        {
-            m_PhoneOfOwner = i_PhoneOfOwner;
         }
 
         public void SetCarStatusInProgress()

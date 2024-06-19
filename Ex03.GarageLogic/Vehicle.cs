@@ -6,8 +6,8 @@ namespace Ex03.GarageLogic
 {
     public abstract class Vehicle
     {
-        private string m_ModelName;
-        private string m_LicensePlate;
+        public string LicensePlate { get; set; }
+        public string ModelName { get; set; }
         protected List<Wheel> m_Wheels;
 
         public abstract void SetCarInitialState(string i_StringAttribute);
@@ -21,15 +21,6 @@ namespace Ex03.GarageLogic
         public abstract string GetAttributes();
         public abstract float GetEnergy();
 
-        public string GetLicensePlate()
-        {
-            return m_LicensePlate;
-        }
-
-        public string GetModelName()
-        {
-            return m_ModelName;
-        }
 
         public string GetWheeslManufactorName()
         {
@@ -37,7 +28,7 @@ namespace Ex03.GarageLogic
 
             if (m_Wheels.Count != 0)
             {
-                manuFactorName = m_Wheels[0].GetManufactorName();
+                manuFactorName = m_Wheels[0].ManufactorName;
             }
             else
             {
@@ -52,7 +43,7 @@ namespace Ex03.GarageLogic
 
             if (m_Wheels.Count != 0)
             {
-                airPressureInWheels = m_Wheels[0].GetMaximumAirPressureInWheel();
+                airPressureInWheels = m_Wheels[0].MaximumAirPressureInWheel;
             }
             else
             {
@@ -67,7 +58,7 @@ namespace Ex03.GarageLogic
 
             if (m_Wheels.Count != 0)
             {
-                airPressureInWheels = m_Wheels[0].GetAirPressureInWheel();
+                airPressureInWheels = m_Wheels[0].AirPressureInWheel;
             }
             else
             {
@@ -82,7 +73,7 @@ namespace Ex03.GarageLogic
             {
                 foreach (Wheel wheel in m_Wheels)
                 {
-                    wheel.SetManufactorName(i_ManufactorName);
+                    wheel.ManufactorName = i_ManufactorName;
                 }
             }
         }
@@ -112,22 +103,11 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public void SetModelName(string i_SetModelName)
-        {
-            m_ModelName = i_SetModelName;
-        }
-
-        public void SetLicensePlate(string i_SetLicensePlate)
-        {
-            m_LicensePlate = i_SetLicensePlate;
-        }
-
-
         public void SetInitialWheelsPressure(float i_SetMaximumAirPressure)
         {
             foreach (Wheel wheel in m_Wheels)
             {
-                wheel.SetMaximumAirPressureInWheel(i_SetMaximumAirPressure);
+                wheel.MaximumAirPressureInWheel = i_SetMaximumAirPressure;
             }
         }
 

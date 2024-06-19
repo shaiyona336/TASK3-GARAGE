@@ -12,8 +12,23 @@ namespace Ex03.GarageLogic
             Octan98,
         }
         private eTypeOfFuel m_TypeFuel = eTypeOfFuel.Soler;
-        private float m_StatusFuel;
         private float m_MaximumFuel;
+        private float m_StatusFuel;
+        public float StatusFuel
+        {
+            get { return m_StatusFuel; }
+            set
+            {
+                if (value <= m_MaximumFuel)
+                {
+                    StatusFuel = value;
+                }
+                else
+                {
+                    throw new ValueOutOfRangeException(0, m_MaximumFuel);
+                }
+            }                    
+        }
 
         public override float GetMaximumEnergy()
         {
@@ -45,7 +60,7 @@ namespace Ex03.GarageLogic
 
         public override float GetEnergy()
         {
-            return m_StatusFuel;
+            return StatusFuel;
         }
 
         public void SetTypeOfFuel(string i_TypeOfFuel)
@@ -111,14 +126,7 @@ namespace Ex03.GarageLogic
 
         public override void SetEnergy(float i_HowMuchEnergy)
         {
-            if (i_HowMuchEnergy <= m_MaximumFuel)
-            {
-                m_StatusFuel = i_HowMuchEnergy;
-            }
-            else
-            {
-                throw new ValueOutOfRangeException(0, m_MaximumFuel);
-            }
+            StatusFuel = i_HowMuchEnergy;
         }
     }
 }

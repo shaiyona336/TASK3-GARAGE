@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Ex03.GarageLogic
 {
@@ -86,7 +85,7 @@ namespace Ex03.GarageLogic
                     "number of doors: {5}\n" +
                     "how much fuel: {6}\n" +
                     "type of fuel: {7}\n" +
-                    "maximum amount of fuel: {8}\n", GetModelName(), GetAirPressureInWheels(), GetMaximumAirPressureInWheels(), GetWheeslManufactorName(), m_Color, m_NumberOfDoors, m_Engine.GetEnergy(), (m_Engine as FuelEngine).GetTypeOfFuel(), m_Engine.GetMaximumEnergy());
+                    "maximum amount of fuel: {8}\n", ModelName, GetAirPressureInWheels(), GetMaximumAirPressureInWheels(), GetWheeslManufactorName(), m_Color, m_NumberOfDoors, m_Engine.GetEnergy(), (m_Engine as FuelEngine).GetTypeOfFuel(), m_Engine.GetMaximumEnergy());
             }
             else //car on electric engine
             {
@@ -97,7 +96,7 @@ namespace Ex03.GarageLogic
                     "color: {4}\n" +
                     "number of doors: {5}\n" +
                     "how much hours for battery: {6}\n" +
-                    "maximum amount of hours for battery: {7}\n", GetModelName(), GetAirPressureInWheels(), GetMaximumAirPressureInWheels(), GetWheeslManufactorName(), m_Color, m_NumberOfDoors, m_Engine.GetEnergy(), m_Engine.GetMaximumEnergy());
+                    "maximum amount of hours for battery: {7}\n", ModelName, GetAirPressureInWheels(), GetMaximumAirPressureInWheels(), GetWheeslManufactorName(), m_Color, m_NumberOfDoors, m_Engine.GetEnergy(), m_Engine.GetMaximumEnergy());
             }
 
             return informationAboutCar;
@@ -121,7 +120,7 @@ namespace Ex03.GarageLogic
             switch (m_IndexSetupAttribute)
             {
                 case (0):
-                    this.SetModelName(i_StringAttribute);
+                    this.                    ModelName = i_StringAttribute;
                     break;
                 case (2):
                     SetWheelsManufactorName(i_StringAttribute);
