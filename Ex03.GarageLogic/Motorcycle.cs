@@ -13,15 +13,21 @@ namespace Ex03.GarageLogic
             B1,
         }
 
+        private const int k_MaximumAirPressure = 33;
+        private const string k_FuelType = "Octan98";
+        private const float k_MaximumAmountOfFuel = 5.5f;
+        private const float k_MaximumAmountOfElectricity = 2.5f;
+        private const int k_NumberOfWheels = 2;
+
         private eTypeOfLicense m_TypeLicense;
         private int m_EngineVolume;
         private Engine m_Engine = new FuelEngine();
         private int m_IndexSetupAttribute = 0;
-        private const int k_NumberOfWheels = 2;
 
         public Motorcycle()
         {
             InitializeWheels(k_NumberOfWheels);
+            SetInitialWheelsPressure(k_MaximumAirPressure);
         }
 
         private string GetTypeOfLicense()
@@ -81,7 +87,14 @@ namespace Ex03.GarageLogic
 
         public override string GetAttributes()
         {
-            return "model name::string||maximum air pressure wheels::float||air pressure in wheels::float||manufactor name of wheels::string||type of license(A,A1,AA,B1)::string||engine volume::int||is car on fuel::bool||maximum energy::float";
+            return "model name::string" + //0
+                "||Enter air pressure in wheels::float" + //1
+                "||Enter manufactor name of wheels::string" + //2
+                "||Enter the type of license (A,A1,AA,B1)::string" + //3
+                "||Enter engine volume::int" + //4
+                "||Is the motorcycle on fuel? (true/false)::bool" + //5
+                $"||If the motorcycle runs of fuel, enter the amount of fuel it has (maximum is {k_MaximumAmountOfFuel})\n" +
+                $"If it runs on electricity, enter the amount of time it has left (maximum is {k_MaximumAmountOfElectricity})::float"; //6
         }
 
         public override float GetEnergy()
@@ -135,14 +148,11 @@ namespace Ex03.GarageLogic
                 case 0:
                     this.SetModelName(i_StringAttribute);
                     break;
-                case 3:
+                case 2:
                     SetWheelsManufactorName(i_StringAttribute);
                     break;
-                case 4:
+                case 3:
                     m_TypeLicense = StringLicenseTypeToEnum(i_StringAttribute);
-                    break;
-                case 7:
-                    (m_Engine as FuelEngine).SetTypeOfFuel(i_StringAttribute);
                     break;
                 default:
                     //TODO : SENT WRONG ATTRIBUTE
@@ -153,7 +163,7 @@ namespace Ex03.GarageLogic
 
         public override void SetCarInitialState(int i_IntAttribute)
         {
-            if (m_IndexSetupAttribute == 5)
+            if (m_IndexSetupAttribute == 4)
             {
                 m_EngineVolume = i_IntAttribute;
             }
@@ -166,21 +176,13 @@ namespace Ex03.GarageLogic
 
         public override void SetCarInitialState(float i_FloatAttribute)
         {
-            if (m_Engine != null && m_Engine is ElectricEngine)
-            {
-                m_IndexSetupAttribute++;
-            }
             if (m_IndexSetupAttribute == 1)
-            {
-                SetInitialWheelsPressure(i_FloatAttribute);
-            }
-            else if (m_IndexSetupAttribute == 2)
             {
                 AddWheelsPressure(i_FloatAttribute);
             }
-            else if (m_IndexSetupAttribute == 8)
+            else if (m_IndexSetupAttribute == 6)
             {
-                m_Engine.SetMaximumEnergy(i_FloatAttribute);
+                m_Engine.SetEnergy(i_FloatAttribute);
             }
             else
             {
@@ -191,9 +193,18 @@ namespace Ex03.GarageLogic
 
         public override void SetCarInitialState(bool i_BoolAttribute)
         {
-            if (m_IndexSetupAttribute == 6)
+            if (m_IndexSetupAttribute == 5)
             {
                 m_Engine = WorkOnCar.SetEngineByBool(i_BoolAttribute);
+                if (m_Engine is FuelEngine)
+                {
+                    m_Engine.SetMaximumEnergy(k_MaximumAmountOfFuel);
+                    (m_Engine as FuelEngine).SetTypeOfFuel(k_FuelType);
+                }
+                else if (m_Engine is ElectricEngine)
+                {
+                    m_Engine.SetMaximumEnergy(k_MaximumAmountOfElectricity);
+                }
             }
             else
             {
