@@ -2,7 +2,7 @@
 
 namespace Ex03.GarageLogic
 {
-    internal class MakeNewCar
+    internal class VehicleMaker
     {
         public static Vehicle GetVehicleFromString(string i_VehicleType)
         {

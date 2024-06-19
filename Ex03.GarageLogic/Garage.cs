@@ -148,7 +148,7 @@ namespace Ex03.GarageLogic
             string argumentsToFillToInitializeVehicle;
 
             m_IndexSetupAttribute = 0; //reset m_indexSetupAttribute to enter the new vehicle
-            newVehicle = MakeNewCar.GetVehicleFromString(i_TypeOfVehicle);
+            newVehicle = VehicleMaker.GetVehicleFromString(i_TypeOfVehicle);
             newCarWithInformation = new GarageVehicleWithInformation();
             newCarWithInformation.SetVehicle(newVehicle);
             if (m_VehiclesInGarage == null)
