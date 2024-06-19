@@ -93,14 +93,17 @@ namespace Ex03.GarageLogic
                     typeOfFuelCorrectFormat = eTypeOfFuel.Octan98;
                     break;
                 default:
-                    //TODO: throw exception invalid fuel
-                    break;
+                    throw new ArgumentException($"There's no such fuel type as \"{i_TypeOfEnergy}\"",
+                        nameof(i_TypeOfEnergy));
             }
             if (typeOfFuelCorrectFormat == m_TypeFuel)
             {
                 WorkOnCar.AddResourceToResource(ref m_StatusFuel, i_HowMuchFuelToAdd, m_MaximumFuel);
             }
-            //TODO: wrong fuel type tried to be added
+            else
+            {
+                throw new ArgumentException("Wrong fuel type was given", nameof(i_TypeOfEnergy));
+            }
         }
 
         public override void SetMaximumEnergy(float i_MaximumEnergy)
@@ -108,5 +111,16 @@ namespace Ex03.GarageLogic
             m_MaximumFuel = i_MaximumEnergy;
         }
 
+        public override void SetEnergy(float i_HowMuchEnergy)
+        {
+            if (i_HowMuchEnergy <= m_MaximumFuel)
+            {
+                m_StatusFuel = i_HowMuchEnergy;
+            }
+            else
+            {
+                throw new ValueOutOfRangeException(0, m_MaximumFuel);
+            }
+        }
     }
 }

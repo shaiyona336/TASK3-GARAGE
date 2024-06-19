@@ -6,5 +6,6 @@
         public abstract void SetMaximumEnergy(float i_MaximumEnergy);
         public abstract float GetMaximumEnergy();
         public abstract void AddEnergy(float i_HowMuchToAdd, string i_TypeOfEnergy);
+        public abstract void SetEnergy(float i_HowMuchEnergy);
     }
 }

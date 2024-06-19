@@ -77,12 +77,8 @@ namespace Ex03.ConsoleUI
             {
                 Console.WriteLine("car already in garage, moved to status INPROGRESS");
             }
-
             else
             {
-                //Console.WriteLine("with type vehicle to enter (car/truck/motorcycle): ");
-                //string withCarToEnter = Console.ReadLine();
-
                 attributesToEnter = (string)askForInputAndHandleExceptions("What's the type" +
                     " of the vehicle you want to enter the garage? (car/truck/motorcycle): ",
                     addVehicleToGarageFunc);
@@ -344,6 +340,8 @@ namespace Ex03.ConsoleUI
                     Console.WriteLine(exception.Message);
                 } 
             }
+
+
 
             
                 //Console.WriteLine(i_RequestFromUser1);

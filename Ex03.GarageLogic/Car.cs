@@ -106,7 +106,14 @@ namespace Ex03.GarageLogic
         public override string GetAttributes()
         {
             m_IndexSetupAttribute = 0;
-            return ("model name::string||air pressure in wheels::float||manufactor name of wheels::string||color (yellow/white/red/black)::string||number of doors::int||is car on fuel (true/false)::bool");
+            return "Enter model name::string" +
+                $"||Enter air pressure in wheels (maximum is {k_MaximumAirPressure})::float" +
+                "||Enter the manufactor name of the car's wheels::string" +
+                "||Enter the color of the car (yellow/white/red/black)::string" +
+                "||Enter the number of doors in the car::int" +
+                "||Is the car on fuel? (true/false)::bool" +
+                $"||If the car runs of fuel, enter the amount of fuel it has (maximum is {k_MaximumAmountOfFuel})\n" +
+                $"If it runs on electricity, enter the amount of time it has left (maximum is {k_MaximumAmountOfElectricity})::float";
         }
 
         public override void SetCarInitialState(string i_StringAttribute)
@@ -121,9 +128,6 @@ namespace Ex03.GarageLogic
                     break;
                 case (3):
                     m_Color = StringColorToEnum(i_StringAttribute);
-                    break;
-                case (6):
-                    (m_Engine as FuelEngine).SetTypeOfFuel(k_FuelType);
                     break;
                 default:
                     //TODO : SENT WRONG ATTRIBUTE
@@ -147,13 +151,13 @@ namespace Ex03.GarageLogic
 
         public override void SetCarInitialState(float i_FloatAttribute)
         {
-            if (m_Engine != null && m_Engine is ElectricEngine) //electric engine do not need to get type of fuel, so the index of set maximum energy is one less and need to add one
-            {
-                m_IndexSetupAttribute++;
-            }
-            else if (m_IndexSetupAttribute == 1)
+            if (m_IndexSetupAttribute == 1)
             {
                 AddWheelsPressure(i_FloatAttribute);
+            }
+            else if (m_IndexSetupAttribute == 6)
+            {
+                m_Engine.SetEnergy(i_FloatAttribute);             
             }
             else
             {

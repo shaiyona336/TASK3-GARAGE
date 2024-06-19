@@ -24,5 +24,17 @@
         {
             m_MaximumForBattery = i_MaximumEnergy;
         }
+
+        public override void SetEnergy(float i_HowMuchEnergy)
+        {
+            if (i_HowMuchEnergy <= m_MaximumForBattery)
+            {
+                m_StatusBattery = i_HowMuchEnergy;
+            }
+            else
+            {
+                throw new ValueOutOfRangeException(0, m_MaximumForBattery);
+            }
+        }
     }
 }

@@ -3,9 +3,7 @@ insert
 car
 shai
 052
-FIXED
 abc
-6
 5
 hfg
 white
