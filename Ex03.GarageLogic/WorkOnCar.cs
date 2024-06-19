@@ -45,7 +45,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                //TODO: throw exception
+                throw new ArgumentException("CANT ADD MORE THAN MAXIMUM");
             }
         }
 

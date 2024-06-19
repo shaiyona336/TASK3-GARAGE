@@ -81,7 +81,7 @@ namespace Ex03.GarageLogic
 
         public override string GetAttributes()
         {
-            return "model name::string||maximum air pressure wheels::float||air pressure in wheels::float||manufactor name of wheels::string||type of license(A,A1,AA,B1)::string||engine volume::int||is car on fuel::bool||maximum energy::float";
+            return "model name::string||maximum air pressure wheels::float||air pressure in wheels::float||manufactor name of wheels::string||type of license(A,A1,AA,B1)::string||engine volume::int||is car on fuel(true/false)::bool||maximum energy::float";
         }
 
         public override float GetEnergy()
@@ -121,7 +121,8 @@ namespace Ex03.GarageLogic
                 case "B1":
                     i_TypeToReturn = eTypeOfLicense.B1;
                     break;
-                default: //TODO: EXCEPTION NO SUCH TYPE OF LICENSE
+                default:
+                    throw new ArgumentException("NO SUCH TYPE OF LICENSE");
                     break;
             }
             return i_TypeToReturn;
@@ -144,7 +145,7 @@ namespace Ex03.GarageLogic
                     (m_Engine as FuelEngine).SetTypeOfFuel(i_StringAttribute);
                     break;
                 default:
-                    //TODO : SENT WRONG ATTRIBUTE
+                    throw new ArgumentException("SENT WRONG ATTRIBUTE");
                     break;
             }
             m_IndexSetupAttribute++;
@@ -158,7 +159,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                //TODO : SENT WRONG ATTRIBUTE
+                throw new ArgumentException("SENT WRONG ATTRIBUTE");
             }
             m_IndexSetupAttribute++;
         }
@@ -183,7 +184,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                //TODO : SENT WRONG ATTRIBUTE
+                throw new ArgumentException("SENT WRONG ATTRIBUTE");
             }
             m_IndexSetupAttribute++;
         }
@@ -196,7 +197,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                //TODO : SENT WRONG ATTRIBUTE
+                throw new ArgumentException("SENT WRONG ATTRIBUTE");
             }
             m_IndexSetupAttribute++;
         }

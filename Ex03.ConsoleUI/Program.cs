@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Runtime.ConstrainedExecution;
 using Ex03.GarageLogic;
 
 namespace Ex03.ConsoleUI
@@ -14,7 +15,7 @@ namespace Ex03.ConsoleUI
 
             while (userInput != "Q")
             {
-                Console.WriteLine("enter: insert(insert new vehicle), show all licenses, change vehicle status, add air pressure, add fuel to car, charge electricity, show information car"); //TODO : fix message
+                Console.WriteLine("enter: insert(insert new vehicle), show all licenses, change vehicle status, add air pressure, add fuel to car, charge electricity, show information car, Q to leave");
                 userInput = Console.ReadLine();
                 try
                 {
@@ -214,17 +215,20 @@ namespace Ex03.ConsoleUI
         {
             //object returnValue = null;
             bool i_flag = true;
-            
+            string i_typeOfFuel;
+            string i_inputAttribute;
+
+
             while (i_flag)
             {
                 Console.WriteLine(i_RequestFromUser1);
-                string inputAttribute = Console.ReadLine();
+                i_inputAttribute = Console.ReadLine();
                 try
                 {
                     switch (i_TypeArgumentSendFunction)
                     {
                         case "int":
-                            if (!int.TryParse(inputAttribute, out int intInputAttribute))
+                            if (!int.TryParse(i_inputAttribute, out int intInputAttribute))
                             {
                                 Console.WriteLine("Cannot convert to int");
                                 break;
@@ -234,7 +238,7 @@ namespace Ex03.ConsoleUI
                             i_flag = false;
                             break;
                         case "float":
-                            if (!float.TryParse(inputAttribute, out float floatInputAttribute))
+                            if (!float.TryParse(i_inputAttribute, out float floatInputAttribute))
                             {
                                 throw new FormatException("Cannot convert to float");
                             }
@@ -242,7 +246,7 @@ namespace Ex03.ConsoleUI
                             i_flag = false;
                             break;
                         case "bool":
-                            if (!bool.TryParse(inputAttribute, out bool boolInputAttribute))
+                            if (!bool.TryParse(i_inputAttribute, out bool boolInputAttribute))
                             {
                                 throw new FormatException("Cannot convert to bool");
                             }
@@ -250,9 +254,30 @@ namespace Ex03.ConsoleUI
                             i_flag = false;
                             break;
                         default: // Needed to send string
-                            i_Garage.SetLastEnteredVehicle(inputAttribute);
+                            i_Garage.SetLastEnteredVehicle(i_inputAttribute);
                             i_flag = false;
                             break;
+                    }
+
+                    if (i_RequestFromUser1 == "is car on fuel(true/false)" && bool.Parse(i_inputAttribute))
+                    {
+                        i_flag = true;
+                        while (true)
+                        {
+                            Console.WriteLine("enter type of fuel for car: ");
+                            i_typeOfFuel = Console.ReadLine();
+                            try
+                            {
+                                i_Garage.SetLastEnteredVehicle(i_typeOfFuel);
+                                i_flag = false;
+                                break;
+                            }
+                            catch (Exception exception)
+                            {
+                                Console.WriteLine(exception.Message);
+                            }
+                        }
+                        //executeMethod("enter type of fuel for car:", (Action<string>)i_Garage.setLastEnteredVehicle);
                     }
                 }
                 catch (Exception exception)

@@ -50,7 +50,7 @@ namespace Ex03.GarageLogic
 
         public override string GetAttributes()
         {
-            return "model name::string||maximum air pressure wheels::float||air pressure in wheels::float||manufactor name of wheels::string||is the truck transfer dangerous materials::bool||cargo volume::float||is car on fuel::bool||maximum energy::float";
+            return "model name::string||maximum air pressure wheels::float||air pressure in wheels::float||manufactor name of wheels::string||is the truck transfer dangerous materials::bool||cargo volume::float||is car on fuel(true/false)::bool||maximum energy::float";
         }
 
         public override float GetEnergy()
@@ -97,7 +97,7 @@ namespace Ex03.GarageLogic
                     (m_Engine as FuelEngine).SetTypeOfFuel(i_StringAttribute);
                     break;
                 default:
-                    //TODO : SENT WRONG ATTRIBUTE
+                    throw new ArgumentException("SENT WRONG ATTRIBUTE");
                     break;
             }
             m_IndexSetupAttribute++;
@@ -105,7 +105,7 @@ namespace Ex03.GarageLogic
 
         public override void SetCarInitialState(int i_IntAttribute)
         {
-            //TODO : SENT WRONG ATTRIBUTE
+            throw new ArgumentException("SENT WRONG ATTRIBUTE");
             m_IndexSetupAttribute++;
         }
 
@@ -133,7 +133,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                //TODO : SENT WRONG ATTRIBUTE
+                throw new ArgumentException("SENT WRONG ATTRIBUTE");
             }
             m_IndexSetupAttribute++;
         }
@@ -150,7 +150,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                //TODO : SENT WRONG ATTRIBUTE
+                throw new ArgumentException("SENT WRONG ATTRIBUTE");
             }
             m_IndexSetupAttribute++;
         }

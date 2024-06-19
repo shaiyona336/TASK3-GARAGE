@@ -62,7 +62,6 @@ namespace Ex03.GarageLogic
                     break;
                 default:
                     throw new ArgumentException($"\"{i_Color}\" is not a valid color", nameof(i_Color));
-                    break;
             }
             return colorToReturn;
         }
@@ -101,7 +100,7 @@ namespace Ex03.GarageLogic
         public override string GetAttributes()
         {
             m_IndexSetupAttribute = 0;
-            return ("model name::string||maximum air pressure wheels::float||air pressure in wheels::float||manufactor name of wheels::string||color(yellow,white,red,black)::string||number of doors::int||is car on fuel::bool||maximum energy::float");
+            return ("model name::string||maximum air pressure wheels::float||air pressure in wheels::float||manufactor name of wheels::string||color(yellow,white,red,black)::string||number of doors::int||is car on fuel(true/false)::bool||maximum energy::float");
         }
 
         public override void SetCarInitialState(string i_StringAttribute)
@@ -121,8 +120,7 @@ namespace Ex03.GarageLogic
                     (m_Engine as FuelEngine).SetTypeOfFuel(i_StringAttribute);
                     break;
                 default:
-                    //TODO : SENT WRONG ATTRIBUTE
-                    break;
+                    throw new ArgumentException("SENT WRONG ATTRIBUTE");
             }
             m_IndexSetupAttribute++;
         }
@@ -135,7 +133,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                //TODO : SENT WRONG ATTRIBUTE
+                throw new ArgumentException("SENT WRONG ATTRIBUTE");
             }
             m_IndexSetupAttribute++;
         }
@@ -160,7 +158,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                //TODO : SENT WRONG ATTRIBUTE
+                throw new ArgumentException("SENT WRONG ATTRIBUTE");
             }
             m_IndexSetupAttribute++;
         }
@@ -173,7 +171,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                //TODO : SENT WRONG ATTRIBUTE
+                throw new ArgumentException("SENT WRONG ATTRIBUTE");
             }
             m_IndexSetupAttribute++;
         }
