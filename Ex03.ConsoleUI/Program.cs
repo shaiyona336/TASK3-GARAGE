@@ -129,6 +129,8 @@ namespace Ex03.ConsoleUI
        
         private static void processVehicleAttributes(Garage i_Garage, string i_AttributesToEnter)
         {
+            Action<string> SetLastEnteredVehicle = i_Garage.SetLastEnteredVehicle;
+
             string[] attributesArray = i_AttributesToEnter.Split(new string[] { "||" }, 
                 StringSplitOptions.None);
 
@@ -139,36 +141,40 @@ namespace Ex03.ConsoleUI
                 string typeOfAttribute = attribute.Split(new string[] { "::" },
                     StringSplitOptions.None)[1];
 
-                Console.WriteLine(messageWithAttributeToEnter);
-                string inputAttribute = Console.ReadLine();
 
-                switch (typeOfAttribute)
-                {
-                    case "int":
-                        if (!int.TryParse(inputAttribute, out int intInputAttribute))
-                        {
-                            throw new FormatException("Cannot convert to int");
-                        }
-                        i_Garage.SetLastEnteredVehicle(intInputAttribute);
-                        break;
-                    case "float":
-                        if (!float.TryParse(inputAttribute, out float floatInputAttribute))
-                        {
-                            throw new FormatException("Cannot convert to float");
-                        }
-                        i_Garage.SetLastEnteredVehicle(floatInputAttribute);
-                        break;
-                    case "bool":
-                        if (!bool.TryParse(inputAttribute, out bool boolInputAttribute))
-                        {
-                            throw new FormatException("Cannot convert to bool");
-                        }
-                        i_Garage.SetLastEnteredVehicle(boolInputAttribute);
-                        break;
-                    default: // Needed to send string
-                        i_Garage.SetLastEnteredVehicle(inputAttribute);
-                        break;
-                }
+             askForInputWithTypeAndHandleExceptions(messageWithAttributeToEnter, typeOfAttribute, i_Garage, SetLastEnteredVehicle);
+               
+
+                //Console.WriteLine(messageWithAttributeToEnter);
+                //string inputAttribute = Console.ReadLine();
+
+                //switch (typeOfAttribute)
+                //{
+                //    case "int":
+                //        if (!int.TryParse(inputAttribute, out int intInputAttribute))
+                //        {
+                //            throw new FormatException("Cannot convert to int");
+                //        }
+                //        i_Garage.SetLastEnteredVehicle(intInputAttribute);
+                //        break;
+                //    case "float":
+                //        if (!float.TryParse(inputAttribute, out float floatInputAttribute))
+                //        {
+                //            throw new FormatException("Cannot convert to float");
+                //        }
+                //        i_Garage.SetLastEnteredVehicle(floatInputAttribute);
+                //        break;
+                //    case "bool":
+                //        if (!bool.TryParse(inputAttribute, out bool boolInputAttribute))
+                //        {
+                //            throw new FormatException("Cannot convert to bool");
+                //        }
+                //        i_Garage.SetLastEnteredVehicle(boolInputAttribute);
+                //        break;
+                //    default: // Needed to send string
+                //        i_Garage.SetLastEnteredVehicle(inputAttribute);
+                //        break;
+                //}
                 //try
                 //{
                 //    i_Garage.setLastEnteredVehicle(parsedValue);
@@ -179,11 +185,11 @@ namespace Ex03.ConsoleUI
                 //    //TODO: Exception here is not enough. Still need to handle it
                 //}
 
-                if (messageWithAttributeToEnter == "is car on fuel" && bool.Parse(inputAttribute))
-                {
-                    askForInputAndHandleExceptions("enter type of fuel for car:",
-                        (Action<string>)i_Garage.SetLastEnteredVehicle);
-                }
+                //if (messageWithAttributeToEnter == "is car on fuel" && bool.Parse(inputAttribute))
+                //{
+                //    askForInputAndHandleExceptions("enter type of fuel for car:",
+                //        (Action<string>)i_Garage.SetLastEnteredVehicle);
+                //}
             }
         }
 
@@ -285,6 +291,85 @@ namespace Ex03.ConsoleUI
 
             string informationAboutCar = (string)askForInputAndHandleExceptions(askForCarLicenseMessage, showInformationAboutCarFunc);
             Console.WriteLine(informationAboutCar);
+        }
+
+
+        private static void askForInputWithTypeAndHandleExceptions(string i_RequestFromUser1, string i_TypeArgumentSendFunction, Garage i_Garage, Delegate i_Function)
+        {
+            //object returnValue = null;
+            bool i_flag = true;
+            
+            while (i_flag)
+            {
+                Console.WriteLine(i_RequestFromUser1);
+                string inputAttribute = Console.ReadLine();
+                try
+                {
+                    switch (i_TypeArgumentSendFunction)
+                    {
+                        case "int":
+                            if (!int.TryParse(inputAttribute, out int intInputAttribute))
+                            {
+                                Console.WriteLine("Cannot convert to int");
+                                break;
+                            }
+
+                            i_Garage.SetLastEnteredVehicle(intInputAttribute);
+                            i_flag = false;
+                            break;
+                        case "float":
+                            if (!float.TryParse(inputAttribute, out float floatInputAttribute))
+                            {
+                                throw new FormatException("Cannot convert to float");
+                            }
+                            i_Garage.SetLastEnteredVehicle(floatInputAttribute);
+                            i_flag = false;
+                            break;
+                        case "bool":
+                            if (!bool.TryParse(inputAttribute, out bool boolInputAttribute))
+                            {
+                                throw new FormatException("Cannot convert to bool");
+                            }
+                            i_Garage.SetLastEnteredVehicle(boolInputAttribute);
+                            i_flag = false;
+                            break;
+                        default: // Needed to send string
+                            i_Garage.SetLastEnteredVehicle(inputAttribute);
+                            i_flag = false;
+                            break;
+                    }
+                }
+
+
+                catch (Exception exception)
+                {
+                    Console.WriteLine(exception.Message);
+                } 
+            }
+
+            
+                //Console.WriteLine(i_RequestFromUser1);
+                //string userInput = Console.ReadLine();
+
+                //try
+                //{
+                //    if (i_Function is Func<string, object> nonVoidMethod)
+                //    {
+                //        returnValue = nonVoidMethod(inputAttribute);
+                //    }
+                //    else if (i_Function is Action<string> voidMethod)
+                //    {
+                //        voidMethod(inputAttribute);
+                //    }
+
+                //    break;
+                //}
+                //catch (Exception exception)
+                //{
+                //    Console.WriteLine(exception.Message);
+                //}
+            
+            //return returnValue;
         }
 
         private static object askForInputAndHandleExceptions(string i_RequestFromUser1, Delegate i_Function)
