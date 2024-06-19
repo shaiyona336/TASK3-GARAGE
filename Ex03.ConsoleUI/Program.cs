@@ -11,12 +11,22 @@ namespace Ex03.ConsoleUI
         public static void Main()
         {
             Garage garage = new Garage();
-            string userInput = null;
+            int userInput = 0;
+            Console.WriteLine("Welcome to Garage program!");
 
-            while (userInput != "Q")
+            while (userInput != 8)
             {
-                Console.WriteLine("enter: insert(insert new vehicle), show all licenses, change vehicle status, add air pressure, add fuel to car, charge electricity, show information car"); //TODO : fix message
-                userInput = Console.ReadLine();
+                Console.WriteLine("Enter one of the options below:");
+                Console.WriteLine("1. insert (insert a new vehicle into the garage)");
+                Console.WriteLine("2. show all licenses");
+                Console.WriteLine("3. change vehicle status");
+                Console.WriteLine("4. add air pressure");
+                Console.WriteLine("5. add fuel to car");
+                Console.WriteLine("6. charge electricity");
+                Console.WriteLine("7. show information car");
+                Console.WriteLine("8. Quit the program");
+
+                userInput = int.Parse(Console.ReadLine());
                 try
                 {
                     handleUserInput(garage, userInput);
@@ -28,41 +38,41 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        private static void handleUserInput(Garage i_Garage, string i_UserInput)
+        private static void handleUserInput(Garage i_Garage, int i_UserInput)
         {
             switch (i_UserInput)
             {
-                case "insert":
+                case 1:
                     insertVehicle(i_Garage);
                     break;
-                case "show all licenses":
+                case 2:
                     printAllLicensesInGarage(i_Garage);
                     break;
-                case "change vehicle status":
+                case 3:
                     changeVehicleStatus(i_Garage);
                     break;
-                case "add air pressure":
+                case 4:
                     addAirPressure(i_Garage);
                     break;
-                case "add fuel to car":
+                case 5:
                     addFuel(i_Garage);
                     break;
-                case "charge electricity":
+                case 6:
                     addElectricity(i_Garage);
                     break;
-                case "show information car":
+                case 7:
                     showInformationAboutCar(i_Garage);
                     break;
-                default:
-                    Console.WriteLine("Invalid input. Please try again.");
+                case 8:
                     break;
+                default:
+                    throw new ValueOutOfRangeException(1, 8);
             }
         }
 
         private static void insertVehicle(Garage i_Garage)
         {
             string vehicleLicense;
-            string vehicleTypeToEnterGarage;
             string attributesToEnter;
             Action<string> setLastEnteredVehicle = i_Garage.SetLastEnteredVehicle;
             Func<string, string> addVehicleToGarageFunc = i_Garage.AddVehicle;

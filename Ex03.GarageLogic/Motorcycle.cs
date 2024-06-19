@@ -159,7 +159,6 @@ namespace Ex03.GarageLogic
                     break;
                 default:
                     throw new ArgumentException("SENT WRONG ATTRIBUTE");
-                    break;
             }
             m_IndexSetupAttribute++;
         }
