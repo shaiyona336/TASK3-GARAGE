@@ -50,7 +50,7 @@ namespace Ex03.GarageLogic
 
         public override string GetAttributes()
         {
-            return "model name::string||maximum air pressure wheels::float||air pressure in wheels::float||manufactor name of wheels::string||is the truck transfer dangerous materials::bool||cargo volume::float||is car on fuel(true/false)::bool||maximum energy::float";
+            return "model name::string||maximum air pressure wheels::float||air pressure in wheels::float||manufactor name of wheels::string||is the truck transfer dangerous materials(true/false)::bool||cargo volume::float||is car on fuel(true/false)::bool||maximum energy::float";
         }
 
         public override float GetEnergy()
