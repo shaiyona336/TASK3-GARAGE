@@ -67,8 +67,7 @@ namespace Ex03.GarageLogic
                     typeOfFuelRightFormat = eTypeOfFuel.Octan98;
                     break;
                 default:
-                    //TODO : wrong type of fuel
-                    break;
+                    throw new ArgumentException("WRONG TYPE OF FUEL");
             }
 
             m_TypeFuel = typeOfFuelRightFormat;

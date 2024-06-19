@@ -130,8 +130,7 @@ namespace Ex03.GarageLogic
                     m_Color = StringColorToEnum(i_StringAttribute);
                     break;
                 default:
-                    //TODO : SENT WRONG ATTRIBUTE
-                    break;
+                    throw new ArgumentException("SENT WRONG ATTRIBUTE");
             }
             m_IndexSetupAttribute++;
         }
@@ -144,7 +143,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                //TODO : SENT WRONG ATTRIBUTE
+                throw new ArgumentException("SENT WRONG ATTRIBUTE");
             }
             m_IndexSetupAttribute++;
         }
@@ -161,7 +160,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                //TODO : SENT WRONG ATTRIBUTE
+                throw new ArgumentException("SENT WRONG ATTRIBUTE");
             }
             m_IndexSetupAttribute++;
         }
@@ -183,7 +182,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                //TODO : SENT WRONG ATTRIBUTE
+                throw new ArgumentException("SENT WRONG ATTRIBUTE");
             }
             m_IndexSetupAttribute++;
         }

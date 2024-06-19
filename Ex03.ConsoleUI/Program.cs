@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Runtime.ConstrainedExecution;
 using Ex03.GarageLogic;
 
 namespace Ex03.ConsoleUI
@@ -58,9 +59,6 @@ namespace Ex03.ConsoleUI
             }
         }
 
-
-        ////////////////////shai - insert
-
         private static void insertVehicle(Garage i_Garage)
         {
             string vehicleLicense;
@@ -92,35 +90,7 @@ namespace Ex03.ConsoleUI
             //addVehicle
 
         }
-        //////////////////////////////////////////
-
-
-            ///////////////////////////alon - insert
-        //private static void insertVehicle(Garage i_Garage)
-        //{
-        //    string requestToUser1 = "enter license for car:";
-        //    string requestToUser2 = "with type vehicle to enter (car/truck/motorcycle):";
-        //    Func<string, string, string> addVehicleToGarageFunc = i_Garage.addVehicleToGarage;
-        //    string attributesToEnter = (string)executeMethod(requestToUser1, requestToUser2, addVehicleToGarageFunc,
-        //        out string licenseCar);
-
-        //    if (attributesToEnter == "car already in garage, moved to status: in-progress")
-        //    {
-        //        Console.WriteLine(attributesToEnter);
-        //        return;
-        //    }
-
-        //    // Send data basic about car to garage
-        //    Action<string> setLastEnteredVehicle = i_Garage.setLastEnteredVehicle;
-        //    executeMethod("enter name of owner:", setLastEnteredVehicle);
-        //    executeMethod("enter phone number of owner:", setLastEnteredVehicle);
-        //    executeMethod("enter the status you want for the car (INPROGRESS/FIXED/PAYED):", setLastEnteredVehicle);
-        //    setLastEnteredVehicle(licenseCar);
-
-        //    processVehicleAttributes(i_Garage, attributesToEnter);
-        //}
-        /////////////////////////////////////
-       
+   
         private static void processVehicleAttributes(Garage i_Garage, string i_AttributesToEnter)
         {
             Action<string> SetLastEnteredVehicle = i_Garage.SetLastEnteredVehicle;
@@ -135,55 +105,8 @@ namespace Ex03.ConsoleUI
                 string typeOfAttribute = attribute.Split(new string[] { "::" },
                     StringSplitOptions.None)[1];
 
-
              askForInputWithTypeAndHandleExceptions(messageWithAttributeToEnter, typeOfAttribute, i_Garage, SetLastEnteredVehicle);
-               
-
-                //Console.WriteLine(messageWithAttributeToEnter);
-                //string inputAttribute = Console.ReadLine();
-
-                //switch (typeOfAttribute)
-                //{
-                //    case "int":
-                //        if (!int.TryParse(inputAttribute, out int intInputAttribute))
-                //        {
-                //            throw new FormatException("Cannot convert to int");
-                //        }
-                //        i_Garage.SetLastEnteredVehicle(intInputAttribute);
-                //        break;
-                //    case "float":
-                //        if (!float.TryParse(inputAttribute, out float floatInputAttribute))
-                //        {
-                //            throw new FormatException("Cannot convert to float");
-                //        }
-                //        i_Garage.SetLastEnteredVehicle(floatInputAttribute);
-                //        break;
-                //    case "bool":
-                //        if (!bool.TryParse(inputAttribute, out bool boolInputAttribute))
-                //        {
-                //            throw new FormatException("Cannot convert to bool");
-                //        }
-                //        i_Garage.SetLastEnteredVehicle(boolInputAttribute);
-                //        break;
-                //    default: // Needed to send string
-                //        i_Garage.SetLastEnteredVehicle(inputAttribute);
-                //        break;
-                //}
-                //try
-                //{
-                //    i_Garage.setLastEnteredVehicle(parsedValue);
-                //}
-                //catch (Exception exception)
-                //{
-                //    Console.WriteLine(exception.Message);
-                //    //TODO: Exception here is not enough. Still need to handle it
-                //}
-
-                //if (messageWithAttributeToEnter == "is car on fuel" && bool.Parse(inputAttribute))
-                //{
-                //    askForInputAndHandleExceptions("enter type of fuel for car:",
-                //        (Action<string>)i_Garage.SetLastEnteredVehicle);
-                //}
+             
             }
         }
 
@@ -293,17 +216,20 @@ namespace Ex03.ConsoleUI
         {
             //object returnValue = null;
             bool flag = true;
-            
+            string i_typeOfFuel;
+            string i_inputAttribute;
+
+
             while (flag)
             {
                 Console.WriteLine(i_RequestFromUser1);
-                string inputAttribute = Console.ReadLine();
+                i_inputAttribute = Console.ReadLine();
                 try
                 {
                     switch (i_TypeArgumentSendFunction)
                     {
                         case "int":
-                            if (!int.TryParse(inputAttribute, out int intInputAttribute))
+                            if (!int.TryParse(i_inputAttribute, out int intInputAttribute))
                             {
                                 Console.WriteLine("Cannot convert to int");
                                 break;
@@ -313,7 +239,7 @@ namespace Ex03.ConsoleUI
                             flag = false;
                             break;
                         case "float":
-                            if (!float.TryParse(inputAttribute, out float floatInputAttribute))
+                            if (!float.TryParse(i_inputAttribute, out float floatInputAttribute))
                             {
                                 throw new FormatException("Cannot convert to float");
                             }
@@ -321,7 +247,7 @@ namespace Ex03.ConsoleUI
                             flag = false;
                             break;
                         case "bool":
-                            if (!bool.TryParse(inputAttribute, out bool boolInputAttribute))
+                            if (!bool.TryParse(i_inputAttribute, out bool boolInputAttribute))
                             {
                                 throw new FormatException("Cannot convert to bool");
                             }
@@ -329,43 +255,16 @@ namespace Ex03.ConsoleUI
                             flag = false;
                             break;
                         default: // Needed to send string
-                            i_Garage.SetLastEnteredVehicle(inputAttribute);
+                            i_Garage.SetLastEnteredVehicle(i_inputAttribute);
                             flag = false;
                             break;
                     }
                 }
-
                 catch (Exception exception)
                 {
                     Console.WriteLine(exception.Message);
                 } 
             }
-
-
-
-            
-                //Console.WriteLine(i_RequestFromUser1);
-                //string userInput = Console.ReadLine();
-
-                //try
-                //{
-                //    if (i_Function is Func<string, object> nonVoidMethod)
-                //    {
-                //        returnValue = nonVoidMethod(inputAttribute);
-                //    }
-                //    else if (i_Function is Action<string> voidMethod)
-                //    {
-                //        voidMethod(inputAttribute);
-                //    }
-
-                //    break;
-                //}
-                //catch (Exception exception)
-                //{
-                //    Console.WriteLine(exception.Message);
-                //}
-            
-            //return returnValue;
         }
 
         private static object askForInputAndHandleExceptions(string i_RequestFromUser1, Delegate i_Function)

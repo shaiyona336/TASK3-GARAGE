@@ -137,7 +137,7 @@ namespace Ex03.GarageLogic
                 case "B1":
                     i_TypeToReturn = eTypeOfLicense.B1;
                     break;
-                default: //TODO: EXCEPTION NO SUCH TYPE OF LICENSE
+                default:
                     throw new ArgumentException($"\"{i_LicenseType}\" is not a type of license", 
                         nameof(i_LicenseType));
             }
@@ -158,7 +158,7 @@ namespace Ex03.GarageLogic
                     m_TypeLicense = StringLicenseTypeToEnum(i_StringAttribute);
                     break;
                 default:
-                    //TODO : SENT WRONG ATTRIBUTE
+                    throw new ArgumentException("SENT WRONG ATTRIBUTE");
                     break;
             }
             m_IndexSetupAttribute++;
@@ -172,7 +172,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                //TODO : SENT WRONG ATTRIBUTE
+                throw new ArgumentException("SENT WRONG ATTRIBUTE");
             }
             m_IndexSetupAttribute++;
         }
@@ -189,7 +189,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                //TODO : SENT WRONG ATTRIBUTE
+                throw new ArgumentException("SENT WRONG ATTRIBUTE");
             }
             m_IndexSetupAttribute++;
         }
@@ -211,7 +211,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                //TODO : SENT WRONG ATTRIBUTE
+                throw new ArgumentException("SENT WRONG ATTRIBUTE");
             }
             m_IndexSetupAttribute++;
         }

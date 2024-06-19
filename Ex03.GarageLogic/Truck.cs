@@ -106,7 +106,7 @@ namespace Ex03.GarageLogic
                     SetWheelsManufactorName(i_StringAttribute);
                     break;
                 default:
-                    //TODO : SENT WRONG ATTRIBUTE
+                    throw new ArgumentException("SENT WRONG ATTRIBUTE");
                     break;
             }
             m_IndexSetupAttribute++;
@@ -114,7 +114,7 @@ namespace Ex03.GarageLogic
 
         public override void SetCarInitialState(int i_IntAttribute)
         {
-            //TODO : SENT WRONG ATTRIBUTE
+            throw new ArgumentException("SENT WRONG ATTRIBUTE");
             m_IndexSetupAttribute++;
         }
 
@@ -134,7 +134,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                //TODO : SENT WRONG ATTRIBUTE
+                throw new ArgumentException("SENT WRONG ATTRIBUTE");
             }
             m_IndexSetupAttribute++;
         }
@@ -147,7 +147,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                //TODO : SENT WRONG ATTRIBUTE
+                throw new ArgumentException("SENT WRONG ATTRIBUTE");
             }
             m_IndexSetupAttribute++;
         }

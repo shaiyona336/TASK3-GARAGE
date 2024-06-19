@@ -55,7 +55,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                //TODO : no wheels
+                throw new ArgumentException("CANNON GET MAXIMUM AIR PRESSURE FROM WHEELS IN VEHICLE WITHOUT WHEELS");
             }
             return airPressureInWheels;
         }
@@ -70,7 +70,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                //TODO : no wheels
+                throw new ArgumentException("CANNOT GET AIR PRESUSRE IN WHEELS IN VEHICLE THAT HAS NO WHEELS");
             }
             return airPressureInWheels;
         }
@@ -97,7 +97,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                //TODO : exception no wheels in vehicle
+                throw new ArgumentException("CANNON SET MAXIMUM AIR PRESUSRE IN WHEELS FOR VEHICLE WITHOUT WHEELS");
             }
         }
 
