@@ -10,11 +10,12 @@ namespace Ex03.ConsoleUI
     {
         public static void Main()
         {
-            Garage garage = new Garage();
-            int userInput = 0;
+            Garage i_garage = new Garage();
+            string i_userInputLatters;
+            int i_userInput = 0;
             Console.WriteLine("Welcome to Garage program!");
 
-            while (userInput != 8)
+            while (i_userInput != 8)
             {
                 Console.WriteLine("Enter one of the options below:");
                 Console.WriteLine("1. insert (insert a new vehicle into the garage)");
@@ -25,11 +26,22 @@ namespace Ex03.ConsoleUI
                 Console.WriteLine("6. charge electricity");
                 Console.WriteLine("7. show information car");
                 Console.WriteLine("8. Quit the program");
-
-                userInput = int.Parse(Console.ReadLine());
+                while (true)
+                {
+                    i_userInputLatters = Console.ReadLine();
+                    try
+                    {
+                        i_userInput = int.Parse(i_userInputLatters);
+                        break;
+                    }
+                    catch (FormatException)
+                    {
+                        Console.WriteLine("not a number");
+                    }
+                }
                 try
                 {
-                    handleUserInput(garage, userInput);
+                    handleUserInput(i_garage, i_userInput);
                 }
                 catch (Exception ex)
                 {
@@ -226,7 +238,6 @@ namespace Ex03.ConsoleUI
         {
             //object returnValue = null;
             bool flag = true;
-            string i_typeOfFuel;
             string i_inputAttribute;
 
 

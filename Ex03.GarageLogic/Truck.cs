@@ -114,7 +114,6 @@ namespace Ex03.GarageLogic
         public override void SetCarInitialState(int i_IntAttribute)
         {
             throw new ArgumentException("SENT WRONG ATTRIBUTE");
-            m_IndexSetupAttribute++;
         }
 
         public override void SetCarInitialState(float i_FloatAttribute)
