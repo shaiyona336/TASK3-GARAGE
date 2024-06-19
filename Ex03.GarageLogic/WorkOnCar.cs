@@ -34,7 +34,6 @@ namespace Ex03.GarageLogic
             else
             {
                 throw new ValueOutOfRangeException(0, i_MaximumAirPressureInWheel);
-                throw new ArgumentException("CANT ADD MORE THAN MAXIMUM");
             }
         }
 

@@ -132,7 +132,7 @@ namespace Ex03.ConsoleUI
 
             if (!parsers.ContainsKey(i_TypeOfAttribute))
             {
-                throw new ArgumentException($"Unsupported attribute type: {i_TypeOfAttribute}", i_TypeOfAttribute);
+                throw new ArgumentException($"Unsupported attribute type: {i_TypeOfAttribute}");
             }
 
             return parsers[i_TypeOfAttribute](i_InputAttribute);

@@ -38,7 +38,7 @@ namespace Ex03.GarageLogic
                     typeOfFuel = "Octan98";
                     break;
                 default:
-                    throw new ArgumentException($"{typeOfFuel} is not a valid fuel type", nameof(typeOfFuel));
+                    throw new ArgumentException($"{typeOfFuel} is not a valid fuel type");
             }
             return typeOfFuel;
         }
@@ -92,8 +92,7 @@ namespace Ex03.GarageLogic
                     typeOfFuelCorrectFormat = eTypeOfFuel.Octan98;
                     break;
                 default:
-                    throw new ArgumentException($"There's no such fuel type as \"{i_TypeOfEnergy}\"",
-                        nameof(i_TypeOfEnergy));
+                    throw new ArgumentException($"There's no such fuel type as \"{i_TypeOfEnergy}\"");
             }
             if (typeOfFuelCorrectFormat == m_TypeFuel)
             {
@@ -101,7 +100,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                throw new ArgumentException("Wrong fuel type was given", nameof(i_TypeOfEnergy));
+                throw new ArgumentException("Wrong fuel type was given");
             }
         }
 

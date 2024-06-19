@@ -138,8 +138,7 @@ namespace Ex03.GarageLogic
                     i_TypeToReturn = eTypeOfLicense.B1;
                     break;
                 default:
-                    throw new ArgumentException($"\"{i_LicenseType}\" is not a type of license", 
-                        nameof(i_LicenseType));
+                    throw new ArgumentException($"\"{i_LicenseType}\" is not a type of license");
             }
             return i_TypeToReturn;
         }

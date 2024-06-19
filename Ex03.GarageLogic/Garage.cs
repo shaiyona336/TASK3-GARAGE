@@ -20,7 +20,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                throw new ArgumentException("No Vehicle to get information from", nameof(i_CarWithInformationWithSameLicense));
+                throw new ArgumentException("No Vehicle to get information from");
             }
 
             return informationCarInGarage;

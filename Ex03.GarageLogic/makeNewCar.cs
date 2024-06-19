@@ -20,7 +20,8 @@ namespace Ex03.GarageLogic
                     newVehicle = new Motorcycle();
                     break;
                 default:
-                    throw new ArgumentException($"There's no type of vehicle that matches with \"{i_VehicleType}\"", nameof(i_VehicleType));
+                    throw new ArgumentException("There's no type of vehicle that matches with" +
+                        $" \"{i_VehicleType}\"");
             }
             return newVehicle;
         }
